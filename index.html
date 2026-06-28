@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>Naville Handwerk GmbH – Kurzfristige Hilfe bei akutem Personalengpass</title>
+<meta name="description" content="Eric Naville, Elektroinstallateur EFZ – kurzfristige, verlässliche Aushilfe für Elektro- und Handwerksbetriebe im Raum Bern.">
+<style>
+:root{
+  --blau:#1F4E79;--blau2:#2E5496;--akzent:#B9772E;
+  --creme:#FAF6EF;--creme2:#FFFDF8;--karte:#FFFFFF;
+  --text:#33302B;--grau:#6b6357;--linie:#e7ddcf;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Segoe UI",Arial,Helvetica,sans-serif;color:var(--text);line-height:1.65;background:var(--creme)}
+a{color:var(--blau)}
+header.nav{position:sticky;top:0;z-index:10;background:rgba(250,246,239,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--linie)}
+.nav-inner{max-width:980px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font-weight:bold;color:var(--blau);font-size:1.05em}
+.nav-links a{margin-left:18px;text-decoration:none;color:var(--grau);font-size:.95em}
+.nav-links a:hover{color:var(--akzent)}
+/* HERO */
+.hero{padding:56px 20px 40px}
+.hero-inner{max-width:980px;margin:0 auto;display:flex;gap:40px;align-items:center;flex-wrap:wrap}
+.hero-text{flex:1 1 340px}
+.kicker{text-transform:uppercase;letter-spacing:2px;font-size:.76em;color:var(--akzent);font-weight:bold;margin-bottom:12px}
+.hero-text h1{font-size:2.1em;line-height:1.18;margin:0 0 14px;color:var(--blau)}
+.hero-text p{font-size:1.12em;color:var(--text);margin:0 0 16px;max-width:520px}
+.slogan{font-style:italic;color:var(--akzent);font-weight:bold;font-size:1.08em;margin:0 0 22px}
+.btn{display:inline-block;background:var(--blau);color:#fff;text-decoration:none;font-weight:bold;padding:13px 22px;border-radius:10px;margin:6px 10px 6px 0}
+.btn.alt{background:transparent;color:var(--blau);border:1.5px solid var(--blau)}
+.btn:hover{opacity:.9}
+/* PORTRAIT / PLATZHALTER */
+.portrait{flex:0 0 230px;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle at 50% 38%,#f3ece0,#e9ddca);border:6px solid #fff;box-shadow:0 10px 30px rgba(80,60,30,.15);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#a99a82;text-align:center;margin:0 auto}
+.portrait svg{opacity:.55}
+.ph-label{font-size:.78em;margin-top:8px;padding:0 16px}
+.hero-side{flex:0 0 230px;width:230px;display:flex;flex-direction:column;align-items:center;gap:18px;margin:0 auto}
+.hero-side .portrait{margin:0}
+.logo-circle{width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 50% 40%,#eef2f8,#dbe5f1);border:6px solid #fff;box-shadow:0 8px 22px rgba(40,60,90,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#7e93ad;text-align:center}
+.logo-circle svg{opacity:.5}
+.photo-ph{background:linear-gradient(135deg,#f1eadd,#ece1cf);border:1px dashed #cbb99c;border-radius:16px;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#a2937a;text-align:center;padding:20px}
+/* SECTIONS */
+section{padding:52px 20px}
+.wrap{max-width:900px;margin:0 auto}
+section h2{color:var(--blau);font-size:1.5em;margin:0 0 14px}
+section.alt{background:var(--creme2);border-top:1px solid var(--linie);border-bottom:1px solid var(--linie)}
+.lead{font-size:1.06em}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:24px}
+.card{background:var(--karte);border:1px solid var(--linie);border-radius:14px;padding:18px 20px;box-shadow:0 4px 14px rgba(80,60,30,.05)}
+.card h3{margin:0 0 6px;color:var(--akzent);font-size:1.02em}
+.card p{margin:0;color:var(--grau);font-size:.92em}
+/* ÜBER MICH zweispaltig */
+.ueber{display:flex;gap:34px;align-items:flex-start;flex-wrap:wrap}
+.ueber .txt{flex:1 1 340px}
+.ueber .pic{flex:0 0 280px;width:280px}
+.sig{font-family:"Segoe Script","Brush Script MT","Comic Sans MS",cursive;font-size:1.7em;color:var(--blau);margin-top:14px}
+.ehrlich{background:#fbf3e7;border-left:4px solid var(--akzent);border-radius:10px;padding:16px 20px;margin-top:24px;color:#473f31}
+.ehrlich strong{color:var(--akzent)}
+.tagline{font-style:italic;color:var(--grau);margin-top:18px}
+.contact-box{background:var(--karte);border:1px solid var(--linie);border-radius:16px;padding:26px;text-align:center;margin-top:22px;box-shadow:0 6px 20px rgba(80,60,30,.06)}
+.contact-box .mail{display:inline-block;background:var(--blau);color:#fff;text-decoration:none;font-weight:bold;font-size:1.1em;padding:13px 26px;border-radius:10px;margin:10px 0}
+.contact-box .mail:hover{background:var(--blau2)}
+.muted{color:var(--grau);font-size:.9em}
+footer{background:#2b2620;color:#d8cdbb;text-align:center;padding:28px 20px;font-size:.9em;margin-top:10px}
+footer a{color:#fff}
+@media(max-width:600px){.hero-text h1{font-size:1.65em}.hero-inner{gap:26px}.portrait{flex-basis:180px;width:180px;height:180px}.nav-links a{margin-left:12px;font-size:.9em}}
+</style>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Naville Handwerk GmbH">
+<meta property="og:locale" content="de_CH">
+<meta property="og:title" content="Naville Handwerk GmbH – Kurzfristige Hilfe bei akutem Personalengpass">
+<meta property="og:description" content="Eric Naville, Elektroinstallateur EFZ – kurzfristige, verlässliche Aushilfe für Elektro- und Handwerksbetriebe im Raum Bern.">
+<meta property="og:url" content="https://naville-handwerk.ch/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Naville Handwerk GmbH – Kurzfristige Hilfe bei akutem Personalengpass">
+<meta name="twitter:description" content="Eric Naville, Elektroinstallateur EFZ – kurzfristige, verlässliche Aushilfe für Elektro- und Handwerksbetriebe im Raum Bern.">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">Naville Handwerk GmbH</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="leistungen.html">Was du von mir hast</a>
+      <a href="preisrechner.html">Preisrechner</a>
+      <a href="faq.html">FAQ</a>
+      <a href="philosophie.html">Philosophie</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="kicker">Personalverleih im Handwerk · Raum Bern</div>
+      <h1>Grüesdi! Ich bin Eric Naville.</h1>
+      <p>Gelernter Elektroinstallateur EFZ. Wenn dir kurzfristig eine Fachkraft fehlt, springe ich ein – top ausgerüstet, flexibel, ordentlich und zuverlässig.</p>
+      <p class="slogan">Der Notstromer für deine Elektrofirma.</p>
+      <a class="btn" href="#kontakt">Schreib mir</a>
+      <a class="btn alt" href="#wann">Wann ich helfe</a>
+    </div>
+    <div class="hero-side">
+      <div class="portrait">
+        <svg width="74" height="74" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4 0-8 2-8 5v1h16v-1c0-3-4-5-8-5Z"/></svg>
+        <div class="ph-label">Porträt von mir<br>(Foto einsetzen)</div>
+      </div>
+      <div class="logo-circle">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M3 21V9l9-6 9 6v12h-6v-7h-6v7Z"/></svg>
+        <div class="ph-label">Firmenlogo<br>(einsetzen)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="wann">
+  <div class="wrap">
+    <h2>Wann ich einspringe</h2>
+    <p class="lead">Ob deine Offerten angenommen werden, kannst du nur beeinflussen – nicht steuern. Die Auftragslage kann von einer Woche zur nächsten von Unterauslastung zu Überkapazität kippen, während Mitarbeitende in den Ferien, krank oder verunfallt sind oder in reduzierten Pensen arbeiten. Genau dann springe ich für dich ein: kurzfristig, als zusätzliche Fachkraft in deinem Team, nur so lange die Knappheit herrscht. Normalisiert sich die Lage, ziehe ich weiter – und bin beim nächsten Engpass gerne wieder da.</p>
+    <p>Setz mich genau so kurz ein, wie du mich brauchst – steht dein Team wieder, lass mich ohne schlechtes Gewissen gehen. Kurze Einsätze sind kein Makel, sondern der Sinn der Sache.</p>
+    <div class="cards">
+      <div class="card"><h3>Auftragsspitzen</h3><p>Mehr Arbeit als Hände, Termindruck.</p></div>
+      <div class="card"><h3>Ausfälle</h3><p>Ferien, Krankheit, Unfall.</p></div>
+      <div class="card"><h3>Reduzierte Pensen</h3><p>Teilzeit-Lücken überbrücken.</p></div>
+      <div class="card"><h3>Kurzfristig</h3><p>Schnelle, unkomplizierte Aushilfe.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="ueber" class="alt">
+  <div class="wrap ueber">
+    <div class="txt">
+      <h2>Über mich</h2>
+      <p>Ich bin gelernter Elektroinstallateur EFZ. Mein Weg: ein Jahr als Hilfselektriker, die Lehre, sechs Jahre im Beruf und drei Jahre als Zimmermann. Diese Mischung aus Elektroinstallationen und konstruktivem Bau macht mich vielseitig einsetzbar.</p>
+      <p>Ich habe keine Zusatzausbildung als Teamleiter oder Sicherheitsberater. Ich bin die zuverlässige Fachkraft fürs Handwerk vor Ort – ich arbeite in deinem Team und unter deiner Installationsbewilligung, sauber und normgerecht (NIV).</p>
+      <div class="sig">Eric Naville</div>
+    </div>
+    <div class="pic">
+      <div class="photo-ph">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor"><path d="M9 3 7.2 5H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.2L15 3Zm3 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>
+        <div class="ph-label">Arbeitsfoto folgt<br>(z. B. bei der Arbeit auf der Baustelle)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="arbeit">
+  <div class="wrap">
+    <h2>Wie ich arbeite</h2>
+    <p class="lead">Mir ist eine faire Zusammenarbeit wichtiger als der schnelle Abschluss von Verträgen und die Vollauslastung. Ich bin nicht der billigste Elektriker – dafür kannst du dich auf saubere Arbeit, Pünktlichkeit und klare Absprachen verlassen. Du zahlst genau die Stunden, die ich leiste, und vermeidest nicht nur die langfristige, bürokratische Verpflichtung einer Anstellung, sondern auch die Kosten von Temporärbüros. Und wenn es einmal nicht passt – beim Preis oder beim Termin – sage ich es dir und versuche, dir jemand anderen zu vermitteln.</p>
+    <div class="ehrlich">
+      <strong>Ich bin direkt</strong> und sage, was Sache ist – nie respektlos gemeint, sondern klar und unkompliziert. Am besten arbeite ich mit Betrieben zusammen, die klare Abmachungen schätzen. Sauberkeit, korrekte Zeiterfassung und sorgfältiges Arbeiten sind mir wichtig – und ich bringe keine zusätzliche Unruhe in ohnehin stressige Zeiten (die Zeiten, in denen du meine Hilfe brauchst).
+    </div>
+    <p class="tagline">Ich wähle meine Einsätze bewusst – Qualität und Zusammenarbeit zählen.</p>
+  </div>
+</section>
+
+<!-- Platzhalter: Abschnitt "Partner" erst nach vereinbarter Zusammenarbeit + schriftlicher Logo-Freigabe einfügen. -->
+
+<section id="kontakt" class="alt">
+  <div class="wrap">
+    <h2>Kontakt</h2>
+    <p class="lead">Kurzfristig eine verlässliche Fachkraft nötig? Schreib mir, was du brauchst – ich sage dir, ob und wann ich kann, oder an wen du dich stattdessen richten kannst.</p>
+    <div class="contact-box">
+      <a class="mail" href="mailto:info@naville-handwerk.ch">info@naville-handwerk.ch</a>
+      <div class="muted">Telefon: folgt</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Naville Handwerk GmbH · 3005 Bern · <a href="mailto:info@naville-handwerk.ch">info@naville-handwerk.ch</a><br>
+  Personalverleih im Handwerk · Raum Bern · <a href="impressum.html" style="color:#d8cdbb">Impressum</a>
+</footer>
+
+</body>
+</html>

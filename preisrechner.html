@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>Stundenansatz-Rechner Personalverleih (Schweiz)</title>
+<style>
+:root{--blau:#1F4E79;--blau2:#2E5496;--akzent:#B9772E;--creme:#FAF6EF;--creme2:#FFFDF8;--karte:#FFFFFF;--text:#33302B;--grau:#6b6357;--linie:#e7ddcf;--edit:#fbf3e7;--editbd:#e7d3b3}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:"Segoe UI",Arial,Helvetica,sans-serif;color:var(--text);line-height:1.55;background:var(--creme)}
+a{color:var(--blau)}
+header.nav{position:sticky;top:0;z-index:10;background:rgba(250,246,239,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--linie)}
+.nav-inner{max-width:980px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font-weight:bold;color:var(--blau);font-size:1.05em;text-decoration:none}
+.nav-links a{margin-left:18px;text-decoration:none;color:var(--grau);font-size:.95em}
+.nav-links a:hover{color:var(--akzent)}
+.head{padding:46px 20px 4px}
+.head-inner{max-width:820px;margin:0 auto}
+.kicker{text-transform:uppercase;letter-spacing:2px;font-size:.76em;color:var(--akzent);font-weight:bold;margin-bottom:12px}
+.head h1{color:var(--blau);font-size:1.8em;margin:0;border:none;padding:0}
+section{padding:14px 20px 8px}
+.wrap{max-width:820px;margin:0 auto}
+h2{color:var(--blau);font-size:1.05em;margin:1.3em 0 .4em;border-bottom:1px solid var(--linie);padding-bottom:3px}
+.row{display:flex;align-items:center;gap:8px;padding:3px 0}
+.row label{flex:1}
+.row small{color:var(--grau);display:block;font-size:.78em}
+sup.fn{color:var(--akzent);font-weight:bold;font-size:.72em}
+sup.fn a{color:var(--akzent);text-decoration:none}
+input,select{width:170px;padding:6px 8px;border:1px solid var(--editbd);border-radius:6px;background:var(--edit);color:var(--text);font-size:1em;flex:none}
+input[type=number]{width:96px;text-align:right}
+.unit{flex:none;width:54px;text-align:left;color:var(--grau);font-size:.85em;font-weight:bold}
+.auto{background:#eef2e6;border-color:#cdd9bd}
+.gavbox{background:var(--creme2);border:1px solid var(--linie);border-radius:10px;padding:10px 14px;font-size:.85em;margin:6px 0;display:none}
+.gavbox b{color:var(--blau)}
+.out{background:var(--karte);border:1px solid var(--linie);border-radius:10px;padding:9px 14px;margin:5px 0;display:flex;justify-content:space-between}
+.out span:last-child{color:var(--blau);font-weight:bold}
+.big{background:var(--blau);color:#fff;border-color:var(--blau)}.big span:last-child{color:#fff}
+.hint{color:#6b5a2a;background:#fbf3e7;border:1px solid var(--editbd);border-radius:8px;padding:6px 12px;font-size:.82em;margin:4px 0}
+.note{color:var(--grau);font-size:.8em;margin-top:1.2em;border-top:1px solid var(--linie);padding-top:10px}
+ol.refs{font-size:.8em;color:#444;padding-left:22px}
+ol.refs li{margin-bottom:6px}ol.refs b{color:var(--blau)}
+button{background:var(--blau);color:#fff;border:none;border-radius:10px;padding:13px 22px;font-size:1.05em;font-weight:bold;cursor:pointer;margin:14px 0}
+button:hover{background:var(--blau2)}
+.disc{background:#fbf3e7;border:1px solid var(--editbd);border-radius:8px;padding:8px 12px;font-size:.82em;color:#6b5a2a;margin:6px 0}
+footer.site{background:#2b2620;color:#d8cdbb;text-align:center;padding:28px 20px;font-size:.9em;margin-top:24px}
+footer.site a{color:#fff}
+@media(max-width:600px){.head h1{font-size:1.45em}.nav-links a{margin-left:12px;font-size:.9em}}
+.calc-section{padding-top:4px}
+.calc-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:30px;align-items:start;max-width:1180px;margin:0 auto}
+.calc-main{min-width:0}
+.calc-side{position:sticky;top:70px;display:flex;flex-direction:column;gap:16px}
+.side-box{background:var(--creme2);border:1px solid var(--linie);border-radius:12px;padding:14px 16px}
+.side-box h3{margin:0 0 8px;color:var(--blau);font-size:1.02em}
+.side-box p{margin:0 0 8px;font-size:.84em;color:var(--text);line-height:1.5}
+.side-box p.muted{color:var(--grau)}
+dl.abbr{margin:0;font-size:.84em}
+dl.abbr dt{font-weight:bold;color:var(--akzent)}
+dl.abbr dd{margin:0 0 7px;color:var(--text);line-height:1.45}
+.calc-side ol.refs{margin:0;max-height:360px;overflow:auto;padding-left:20px}
+@media(max-width:900px){.calc-layout{grid-template-columns:1fr;max-width:820px}.calc-side{position:static}.calc-side ol.refs{max-height:none}}
+</style>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Naville Handwerk GmbH">
+<meta property="og:locale" content="de_CH">
+<meta property="og:title" content="Stundenansatz-Rechner Personalverleih (Schweiz)">
+<meta property="og:description" content="Naville Handwerk GmbH – Personalverleih im Handwerk, Raum Bern.">
+<meta property="og:url" content="https://naville-handwerk.ch/preisrechner.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stundenansatz-Rechner Personalverleih (Schweiz)">
+<meta name="twitter:description" content="Naville Handwerk GmbH – Personalverleih im Handwerk, Raum Bern.">
+</head>
+<body>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Naville Handwerk GmbH</a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="leistungen.html">Was du von mir hast</a>
+      <a href="preisrechner.html">Preisrechner</a>
+      <a href="faq.html">FAQ</a>
+      <a href="philosophie.html">Philosophie</a>
+    </nav>
+  </div>
+</header>
+
+<div class="head">
+  <div class="head-inner">
+    <div class="kicker">Preisrechner</div>
+    <h1>Stundenansatz-Rechner Personalverleih (Schweiz)</h1>
+  </div>
+</div>
+
+<section>
+<div class="wrap">
+<div style="background:#fbf3e7;border-left:4px solid #B9772E;border-radius:8px;padding:12px 16px;margin:10px 0 14px;color:#473f31">
+<strong style="color:#B9772E;font-size:1.05em">Extreme Preistransparenz.</strong> Jeder andere zeigt nur den Endpreis. Ich zeige dir die komplette Zusammenstellung der Rechnung – damit du siehst, wofür du zahlst und dass mein Ansatz fair kalkuliert ist. Du erkennst sofort: Der grösste Teil sind echte Kosten (Lohn, Sozialabgaben, Betriebskosten), meine Marge ist überschaubar.
+</div>
+<div style="font-size:.9em;color:#444;background:#eef2f8;border-radius:8px;padding:10px 14px;margin:0 0 14px">
+Diesen Rechner habe ich selbst erstellt – bewusst <strong>berufsneutral</strong>, sodass ihn jede und jeder nutzen kann. <strong>Alle Felder sind frei editierbar:</strong> Trag deine eigenen Werte ein, um deine Preise zu berechnen. Bei korrekt eingetragenen Sätzen erstellt das Tool zudem auf Knopfdruck eine <strong>unterschriftsreife Vereinbarung als PDF</strong>, die vor Ort ausgedruckt und von beiden Parteien unterschrieben werden kann.
+</div>
+<p style="color:#595959;font-size:.9em">Für Ein-Personen-GmbH im Personalverleih – berufsneutral, für alle Branchen. Eidgenössische Werte sind fix, kantonale (FAK) und altersabhängige (BVG, Ferien) werden automatisch gesetzt – alle hervorgehobenen Felder bleiben anpassbar. Die Berufs-/GAV-Auswahl zeigt den GAV-Mindestlohn als Referenz.</p>
+
+</div>
+</section>
+
+<section class="calc-section">
+<div class="calc-layout">
+<div class="calc-main">
+<h2>A · Angaben</h2>
+<div class="row"><label>Name der GmbH (Verleiher)</label><input id="gmbh" type="text" value=""></div>
+<div class="row"><label>Eigener Name (verliehene Person)</label><input id="owner" type="text" value=""></div>
+<div class="row"><label>Einsatzbetrieb / Auftraggeber</label><input id="einsatz" type="text" value=""></div>
+<div class="row"><label>Kanton<sup class="fn"><a href="#r10">10</a></sup><small>setzt den FAK-Richtwert</small></label><select id="kanton"></select></div>
+<div class="row"><label>Gemeinde</label><input id="gemeinde" type="text" value=""></div>
+<div class="row"><label>Zivilstand<sup class="fn"><a href="#r25">25</a></sup></label><select id="zivil"><option value="ledig">ledig</option><option value="verheiratet">verheiratet</option><option value="eingetragen">eingetragene Partnerschaft</option></select></div>
+<div class="row"><label>Anzahl Kinder<sup class="fn"><a href="#r25">25</a></sup></label><input id="kinder" type="number" value="0"><span class="unit">Kinder</span></div>
+<div class="row"><label>Alter<sup class="fn"><a href="#r13">13</a></sup><small>setzt BVG-Altersgutschrift und Ferienanspruch</small></label><input id="alter" type="number" value="34"><span class="unit">Jahre</span></div>
+<div class="row"><label>Berufserfahrung</label><input id="erf" type="number" value="10"><span class="unit">Jahre</span></div>
+<div class="row"><label>Branche (GAV-Referenz)<sup class="fn"><a href="#r26">26</a></sup><small>blendet den GAV-Mindestlohn als Hinweis ein</small></label><select id="branche"></select></div>
+<div class="row"><label>Beruf / Stufe</label><select id="beruf"></select></div>
+<div id="gavbox" class="gavbox"></div>
+<button id="gavtake" type="button" style="font-size:.9em;padding:8px 14px;margin:4px 0">GAV-Mindestlohn als Referenzlohn übernehmen</button>
+
+<h2>B · Lohn &amp; Spesen</h2>
+<div class="row"><label>Referenz-Monatslohn fest, brutto<sup class="fn"><a href="#r1">1</a></sup><small>Ziellohn bei Festanstellung</small></label><input id="lohn" type="number" value="6000"><span class="unit">CHF/Mt</span></div>
+<div class="row"><label>Wochenarbeitszeit<sup class="fn"><a href="#r2">2</a></sup></label><input id="wstd" type="number" value="42"><span class="unit">Std/Wo</span></div>
+<div class="row"><label>Wochen pro Jahr<sup class="fn"><a href="#r3">3</a></sup></label><input id="wj" type="number" value="52"><span class="unit">Wo</span></div>
+<div class="row"><label>Essensspesen<sup class="fn"><a href="#r4">4</a></sup><small>steuer-/abgabenfrei, separat zum Lohn</small></label><input id="spesen" type="number" step="0.5" value="2"><span class="unit">CHF/h</span></div>
+
+<h2>C · Zuschläge temporär</h2>
+<div class="row"><label>Ferien<sup class="fn"><a href="#r5">5</a></sup><small>auto nach Alter: 20–49 J. = 8,33 % | unter 20 / ab 50 J. = 10,60 %</small></label><input id="ferien" class="auto" type="number" step="0.01" value="8.33"><span class="unit">%</span></div>
+<div class="row"><label>Feiertage<sup class="fn"><a href="#r6">6</a></sup><small>kantonal leicht unterschiedlich, GAV-Richtwert</small></label><input id="feier" type="number" step="0.01" value="3.20"><span class="unit">%</span></div>
+<div class="row"><label>13. Monatslohn<sup class="fn"><a href="#r7">7</a></sup></label><input id="ml13" type="number" step="0.01" value="8.33"><span class="unit">%</span></div>
+
+<h2>D · Arbeitgeberkosten GmbH</h2>
+<div class="row"><label>AHV/IV/EO (AG)<sup class="fn"><a href="#r8">8</a></sup><small>eidgenössisch</small></label><input id="ahv" type="number" step="0.01" value="5.30"><span class="unit">%</span></div>
+<div class="row"><label>ALV (AG)<sup class="fn"><a href="#r9">9</a></sup><small>eidgenössisch, bis CHF 148'200</small></label><input id="alv" type="number" step="0.01" value="1.10"><span class="unit">%</span></div>
+<div class="row"><label>FAK (Familienausgleichskasse)<sup class="fn"><a href="#r10">10</a></sup><small>kantonaler Richtwert (auto), exakt von der Kasse abhängig – auch ohne Kinder</small></label><input id="fak" class="auto" type="number" step="0.01" value="1.60"><span class="unit">%</span></div>
+<div class="row"><label>UVG Berufsunfall (BU)<sup class="fn"><a href="#r11">11</a></sup><small>AG zahlt; NBU via SUVA (Lohnabzug AN)</small></label><input id="uvg" type="number" step="0.01" value="0.50"><span class="unit">%</span></div>
+<div class="row"><label>Verwaltungskosten<sup class="fn"><a href="#r12">12</a></sup><small>max. 5 % der AHV-Beiträge</small></label><input id="vwk" type="number" step="0.01" value="0.30"><span class="unit">%</span></div>
+<div class="row"><label>BVG / Pensionskasse (AG)<sup class="fn"><a href="#r13">13</a></sup><small>nur AG-Anteil (mind. die Hälfte); auto nach Alter (Altersgutschrift-Stufe); Richtwert, exakt von Pensionskasse</small></label><input id="bvg" class="auto" type="number" step="0.01" value="4.00"><span class="unit">%</span></div>
+
+<h2>E · Betriebskosten (pro Jahr)</h2>
+<div class="row"><label>Werkzeug &amp; Messgeräte – Abschreibung<sup class="fn"><a href="#r14">14</a></sup></label><input id="wz_afa" type="number" value="2000"><span class="unit">CHF</span></div>
+<div class="row"><label>Werkzeug/Messgeräte – Unterhalt &amp; Reparatur<sup class="fn"><a href="#r15">15</a></sup></label><input id="wz_unt" type="number" value="800"><span class="unit">CHF</span></div>
+<div class="row"><label>Transportgeräte / Fahrzeug<sup class="fn"><a href="#r16">16</a></sup></label><input id="transport" type="number" value="600"><span class="unit">CHF</span></div>
+<div class="row"><label>Weiterbildung / Kurse (pro Halbjahr)<sup class="fn"><a href="#r17">17</a></sup><small>×2 = pro Jahr</small></label><input id="wb_hj" type="number" value="1200"><span class="unit">CHF/HJ</span></div>
+<div class="row"><label>Betriebshaftpflicht &amp; Versicherungen<sup class="fn"><a href="#r18">18</a></sup></label><input id="vers" type="number" value="800"><span class="unit">CHF</span></div>
+<div class="row"><label>Treuhand / Buchhaltung / Admin<sup class="fn"><a href="#r19">19</a></sup></label><input id="treu" type="number" value="1500"><span class="unit">CHF</span></div>
+<div class="row"><label>Berufskleidung / Diverses<sup class="fn"><a href="#r20">20</a></sup></label><input id="div" type="number" value="500"><span class="unit">CHF</span></div>
+
+<h2>F · Auslastung, Preise &amp; MWST</h2>
+<div class="row"><label>Verrechenbare Stunden pro Jahr<sup class="fn"><a href="#r21">21</a></sup></label><input id="vstd" type="number" value="1800"><span class="unit">Std</span></div>
+<div class="row"><label>Ansatz an den Einsatzbetrieb, netto<sup class="fn"><a href="#r22">22</a></sup><small>Marktband Temporär-Einkauf ~70–90</small></label><input id="ansatz" type="number" step="0.5" value="80"><span class="unit">CHF/h</span></div>
+<div class="row"><label>Endkundensatz des Einsatzbetriebs<sup class="fn"><a href="#r23">23</a></sup><small>Marktband ~95–145</small></label><input id="endk" type="number" step="0.5" value="110"><span class="unit">CHF/h</span></div>
+<div class="row"><label>MWST-Satz<sup class="fn"><a href="#r24">24</a></sup><small>Normalsatz 8,1 %; Pflicht ab CHF 100'000</small></label><input id="mwst" type="number" step="0.1" value="8.1"><span class="unit">%</span></div>
+
+<h2>Ergebnis</h2>
+<div class="out"><span>Brutto-Stundenlohn (Lohn der verliehenen Person)</span><span id="r_brutto"></span></div>
+<div class="out"><span>Lohnkosten je Std (inkl. AG-Kosten)</span><span id="r_lohnk"></span></div>
+<div class="out"><span>Betriebskosten je Std (gesamt/Jahr in Klammer)</span><span id="r_gkstd"></span></div>
+<div class="out big"><span>Selbstkosten je Std</span><span id="r_selbst"></span></div>
+<div class="out"><span>Ansatz an den Einsatzbetrieb (netto)</span><span id="r_ansatz"></span></div>
+<div class="out big"><span>Deckungsbeitrag (CHF / %)</span><span id="r_marge"></span></div>
+<div class="out"><span>Deckungsbeitrag pro Jahr (vor Steuern/Risiko)</span><span id="r_gewinn"></span></div>
+<div class="out"><span>Jahres-Bruttolohn</span><span id="r_jahrlohn"></span></div>
+<div class="out"><span>Rechnungsbetrag inkl. MWST / Std</span><span id="r_mwsth"></span></div>
+<div class="out"><span>Spanne des Einsatzbetriebs (Endkunde − Ansatz)</span><span id="r_spanne"></span></div>
+<div id="warn"></div>
+
+<button id="pdfbtn" type="button">📄 Vereinbarung als PDF erstellen</button>
+<div class="disc">Die PDF ist eine Stundenansatz-Vereinbarung zwischen GmbH (Verleiher) und Einsatzbetrieb. Zweifach ausdrucken, beide unterschreiben – je ein Exemplar pro Partei. GAV-Mindestlöhne sind Referenzwerte (Stand 2025/2026); FAK-, BVG-, Feiertagswerte sind Richtwerte. Kein Rechts-/Steuerrat.</div>
+
+</div><!-- /calc-main -->
+
+<aside class="calc-side">
+
+<div class="side-box">
+<h3>Abkürzungen</h3>
+<dl class="abbr">
+<dt>AG</dt><dd>Arbeitgeber – trägt die Arbeitgeber-Sozialbeiträge</dd>
+<dt>AN</dt><dd>Arbeitnehmer</dd>
+<dt>AHV/IV/EO</dt><dd>Alters-, Invaliden- &amp; Erwerbsersatz (10,60 %, paritätisch)</dd>
+<dt>ALV</dt><dd>Arbeitslosenversicherung</dd>
+<dt>BVG</dt><dd>berufliche Vorsorge / Pensionskasse – Beiträge geteilt, AG trägt mind. die Hälfte (Art. 66 BVG)</dd>
+<dt>UVG</dt><dd>Unfallversicherung; BU = Berufsunfall (AG), NBU = Nichtberufsunfall (AN)</dd>
+<dt>FAK</dt><dd>Familienausgleichskasse (kantonal)</dd>
+<dt>GAV</dt><dd>Gesamtarbeitsvertrag (branchenweite Lohn-/Arbeitsbedingungen)</dd>
+<dt>AVE</dt><dd>allgemeinverbindlich erklärt – gilt für die ganze Branche</dd>
+<dt>MWST</dt><dd>Mehrwertsteuer (Personalverleih 8,1 %)</dd>
+<dt>EFZ</dt><dd>Eidg. Fähigkeitszeugnis</dd>
+<dt>DB</dt><dd>Deckungsbeitrag – Aufschlag auf die Selbstkosten</dd>
+</dl>
+</div>
+
+<div class="side-box">
+<h3>Erklärungen</h3>
+<p><b>Selbstkosten vs. Marge:</b> Selbstkosten = Bruttolohn (inkl. Temporär-Zuschläge) + Arbeitgeberkosten + anteilige Betriebskosten. Der <b>Deckungsbeitrag</b> ist der Aufschlag darauf – kein reiner Gewinn (davon gehen noch Gewinnsteuer, unternehmerisches Risiko und Reserven ab).</p>
+<p><b>MWST</b> kommt oben drauf und ist marge-neutral – der Einsatzbetrieb zieht sie als Vorsteuer wieder ab.</p>
+<p><b>GAV-Bezug:</b> Für eine bewilligungsfreie Ein-Personen-GmbH (Art. 28 Abs. 2 AVV) gilt der GAV Personalverleih vermutlich nicht; bei Verleih in einen Betrieb mit AVE-Branchen-GAV greift Equal-Pay. Die Berufs-/GAV-Auswahl zeigt den Mindestlohn nur als Referenz.</p>
+<p class="muted">Alle Werte sind Richtwerte – kein Rechts- oder Steuerrat.</p>
+</div>
+
+<div class="side-box">
+<h3>Quellen &amp; Referenzen</h3>
+<ol class="refs">
+<li id="r1"><b>Referenzlohn &amp; Qualifikation:</b> Lohnstatistik (lohnanalyse.ch, lohncheck.ch). Der GAV Personalverleih unterscheidet Lohnkategorien je Lohnregion; siehe auch Branche-/GAV-Auswahl. <a href="https://gav-service.ch/gav/815001" target="_blank">gav-service.ch/gav/815001</a></li>
+<li id="r2"><b>Wochenarbeitszeit:</b> branchenüblich 40–44 Std, je nach Branchen-GAV. <a href="https://www.gav-service.ch" target="_blank">www.gav-service.ch</a></li>
+<li id="r3"><b>Wochen/Jahr:</b> Rechengrösse zur Umrechnung Monats- ↔ Stundenlohn. <i>(betriebswirtschaftlicher Wert, keine Rechtsgrundlage)</i></li>
+<li id="r4"><b>Essensspesen:</b> steuer-/AHV-frei bei echtem Spesenersatz; ESTV-Wegleitung Lohnausweis + kantonales Spesenreglement. <a href="https://www.estv.admin.ch" target="_blank">www.estv.admin.ch</a></li>
+<li id="r5"><b>Ferien:</b> GAV Personalverleih – altersabhängig: 20–49 J. = 8,33 % (4 Wo.), unter 20 / ab 50 J. = 10,60 % (5 Wo.). swissstaffing.ch. <a href="https://gav-service.ch/gav/815001" target="_blank">gav-service.ch/gav/815001</a></li>
+<li id="r6"><b>Feiertage:</b> GAV Personalverleih (~3,2 %); Anzahl Feiertage kantonal unterschiedlich (Art. 20a ArG + kant. Recht). <a href="https://gav-service.ch/gav/815001" target="_blank">gav-service.ch/gav/815001</a></li>
+<li id="r7"><b>13. Monatslohn:</b> 1/12 = 8,33 %; GAV Personalverleih. <a href="https://gav-service.ch/gav/815001" target="_blank">gav-service.ch/gav/815001</a></li>
+<li id="r8"><b>AHV/IV/EO 5,30 % (AG):</b> AHVG/IVG/EOG, Total 10,60 % paritätisch. ahv-iv.ch 2.01. <a href="https://www.ahv-iv.ch/p/2.01.d" target="_blank">www.ahv-iv.ch/p/2.01.d</a></li>
+<li id="r9"><b>ALV 1,10 % (AG):</b> AVIG, Total 2,2 % je hälftig bis CHF 148'200/J. SECO, ahv-iv.ch 2.08. <a href="https://www.ahv-iv.ch/p/2.08.d" target="_blank">www.ahv-iv.ch/p/2.08.d</a></li>
+<li id="r10"><b>FAK (kantonal):</b> FamZG + kant. Recht; reiner Arbeitgeberbeitrag, auch ohne Kinder geschuldet. Satz je Kanton/Kasse unterschiedlich – Richtwerte. BSV, kant. Ausgleichskassen. <a href="https://www.ahv-iv.ch/p/6.08.d" target="_blank">www.ahv-iv.ch/p/6.08.d</a></li>
+<li id="r11"><b>UVG Berufsunfall (AG):</b> UVG; Bau/Elektro/Personalverleih obligatorisch SUVA (Art. 66 UVG). NBU trägt AN (≥ 8 Std/Wo). suva.ch. <a href="https://www.ahv-iv.ch/p/6.05.d" target="_blank">www.ahv-iv.ch/p/6.05.d</a></li>
+<li id="r12"><b>Verwaltungskosten:</b> AHVG Art. 69, max. 5 % der AHV/IV/EO-Beiträge (≈ 0,1–0,5 % der Lohnsumme). <a href="https://www.ahv-iv.ch/p/2.01.d" target="_blank">www.ahv-iv.ch/p/2.01.d</a></li>
+<li id="r13"><b>BVG (altersabhängig):</b> Altersgutschrift Art. 16 BVG: 25–34 = 7 %, 35–44 = 10 %, 45–54 = 15 %, 55–65 = 18 % des koord. Lohns; AG mind. die Hälfte. Eintrittsschwelle CHF 22'680. BSV. <a href="https://www.bsv.admin.ch/de/altersvorsorge-beruflichen-vorsorge" target="_blank">www.bsv.admin.ch/de/altersvorsorge-beruflichen-vorsorge</a></li>
+<li id="r14"><b>Werkzeug-Abschreibung:</b> Anschaffung verteilt auf Nutzungsdauer (ESTV-Abschreibungssätze). <i>(betriebswirtschaftlicher Wert, keine Rechtsgrundlage)</i></li>
+<li id="r15"><b>Werkzeug-Unterhalt:</b> Betriebsaufwand. <i>(betriebswirtschaftlicher Wert, keine Rechtsgrundlage)</i></li>
+<li id="r16"><b>Transport/Fahrzeug:</b> Abschreibung &amp; Unterhalt. <i>(betriebswirtschaftlicher Wert, keine Rechtsgrundlage)</i></li>
+<li id="r17"><b>Weiterbildung:</b> Geschäftsaufwand; teils branchenüblich oder normativ verlangte Kurse/Zertifikate. <i>(betriebswirtschaftlicher Wert, keine Rechtsgrundlage)</i></li>
+<li id="r18"><b>Betriebshaftpflicht:</b> freiwillig; Unfall bereits über SUVA. <i>(betriebswirtschaftlicher Wert, keine Rechtsgrundlage)</i></li>
+<li id="r19"><b>Treuhand/Buchhaltung:</b> Buchführungspflicht der GmbH (Art. 957 ff. OR). <a href="https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_957" target="_blank">www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_957</a></li>
+<li id="r20"><b>Berufskleidung/Diverses:</b> Geschäftsaufwand. <i>(betriebswirtschaftlicher Wert, keine Rechtsgrundlage)</i></li>
+<li id="r21"><b>Verrechenbare Stunden:</b> Erfahrungswert ~1'600–1'800. <i>(betriebswirtschaftlicher Wert, keine Rechtsgrundlage)</i></li>
+<li id="r22"><b>Ansatz an Einsatzbetrieb:</b> Marktwert; Koeffizient ~1,5–1,8 × Bruttostundenlohn. SECO. <a href="https://www.seco.admin.ch/seco/de/home/Arbeit/Personenfreizugigkeit_Arbeitsbeziehungen/Private_Arbeitsvermittlung_und_Personalverleih.html" target="_blank">www.seco.admin.ch/seco/de/home/Arbeit/Personenfreizugigkeit_Arbeitsbeziehungen/Private_Arbeitsvermittlung_und_Personalverleih.html</a></li>
+<li id="r23"><b>Endkundensatz:</b> branchenüblicher Stundenansatz, den der Einsatzbetrieb seinem Endkunden verrechnet – je nach Beruf und Region (Richtwert, keine gesetzliche Grösse). <i>(Marktwert, keine Rechtsgrundlage)</i></li>
+<li id="r24"><b>MWST 8,1 %:</b> MWSTG Art. 25; Pflicht ab CHF 100'000 (Art. 10); Saldosteuersatz 6,8 % (Art. 37). <a href="https://www.fedlex.admin.ch/eli/cc/2009/615/de#art_25" target="_blank">www.fedlex.admin.ch/eli/cc/2009/615/de#art_25</a></li>
+<li id="r25"><b>Zivilstand &amp; Kinder:</b> beeinflussen persönliche Einkommenssteuer/Kinderzulagen, nicht den Stundenansatz. FAK bleibt auch ohne Kinder geschuldet. <a href="https://www.ahv-iv.ch/p/6.08.d" target="_blank">www.ahv-iv.ch/p/6.08.d</a></li>
+<li id="r26"><b>Beruf-/GAV-Referenz:</b> Mindestlöhne aus offiziellen GAV (gav-service.ch, servizio-ccl.ch, swissstaffing) – nur Referenz, nicht verbindlich übernommen. Equal-Pay: bei Verleih in einen Betrieb mit allgemeinverbindlichem Branchen-GAV gelten dessen Lohnbedingungen. Stand 2025/2026; bei region-/erfahrungsabhängigen Stufen sind mehrere Werte angegeben (übernommen wird der erste/höchste). <a href="https://www.gav-service.ch" target="_blank">www.gav-service.ch</a></li>
+<li id="r27"><b>Deckungsbeitrag (Aufschlag auf die Selbstkosten):</b> die Differenz zwischen deinem Ansatz und den Selbstkosten je Stunde. <i>Kein</i> reiner Gewinn – davon gehen noch Gewinnsteuer, unternehmerisches Risiko (Leerzeiten, Krankheit) und Reserven ab. Nicht vergleichbar mit der Netto-Marge eines Temporärbüros.</li>
+</ol>
+</div><!-- /side-box -->
+</aside>
+
+</div><!-- /calc-layout -->
+</section>
+
+<script src="vendor/jspdf.umd.min.js"></script>
+<script>
+var GAVDATA=[
+{b:"Personalverleih (Auffang-GAV)",e:"Ungelernt",w:"21.22 (Normal) / 22.39 (Hoch) / 18.92 (TI) CHF/h",g:"GAV Personalverleih 2024–2027",ave:true,y:2026,r:"Hochlohngebiet = Agglo Bern, Arc lémanique, BS, BL, ZH, GE",src:"https://gav-service.ch/gav/815001"},
+{b:"Personalverleih (Auffang-GAV)",e:"Angelernt (mit Berufserfahrung)",w:"22.76 / 24.30 / 21.15 CHF/h (Normal/Hoch/TI)",g:"GAV Personalverleih 2024–2027",ave:true,y:2026,r:"Normal/Hoch/Tessin",src:"https://gav-service.ch/gav/815001"},
+{b:"Personalverleih (Auffang-GAV)",e:"Gelernt (EFZ)",w:"25.86 / 27.62 / 24.03 CHF/h (Normal/Hoch/TI)",g:"GAV Personalverleih 2024–2027",ave:true,y:2026,r:"Normal/Hoch/Tessin",src:"https://gav-service.ch/gav/815001"},
+{b:"Elektro & Telekom (EIT.swiss)",e:"Elektroinstallateur EFZ",w:"CHF 4'500/Mt",g:"GAV Elektrobranche 2026–2029",ave:true,y:2026,r:"CH (exkl. GE/VS Mindestlohn)",src:"https://gav-service.ch/gav/300001"},
+{b:"Elektro & Telekom (EIT.swiss)",e:"Elektroinstallateur EFZ + 1 J. Erfahrung",w:"CHF 5'000/Mt",g:"GAV Elektrobranche 2026–2029",ave:true,y:2026,r:"CH",src:"https://gav-service.ch/gav/300001"},
+{b:"Elektro & Telekom (EIT.swiss)",e:"Montage-Elektriker EFZ",w:"CHF 4'300/Mt",g:"GAV Elektrobranche 2026–2029",ave:true,y:2026,r:"CH",src:"https://gav-service.ch/gav/300001"},
+{b:"Elektro & Telekom (EIT.swiss)",e:"Montage-Elektriker EFZ + 1 J.",w:"CHF 4'700/Mt",g:"GAV Elektrobranche 2026–2029",ave:true,y:2026,r:"CH",src:"https://gav-service.ch/gav/300001"},
+{b:"Elektro & Telekom (EIT.swiss)",e:"Gebäudeinformatiker/Telematiker EFZ",w:"CHF 4'770/Mt",g:"GAV Elektrobranche 2026–2029",ave:true,y:2026,r:"CH",src:"https://gav-service.ch/gav/300001"},
+{b:"Elektro & Telekom (EIT.swiss)",e:"Ohne Berufsausbildung",w:"CHF 4'200/Mt",g:"GAV Elektrobranche 2026–2029",ave:true,y:2026,r:"CH",src:"https://gav-service.ch/gav/300001"},
+{b:"Elektro & Telekom (EIT.swiss)",e:"Ohne Ausbildung, nach 2 J. Erfahrung",w:"CHF 4'500/Mt",g:"GAV Elektrobranche 2026–2029",ave:true,y:2026,r:"CH",src:"https://gav-service.ch/gav/300001"},
+{b:"Elektro & Telekom (EIT.swiss)",e:"Teamleiter (Zertifikat EIT)",w:"CHF 5'600/Mt",g:"GAV Elektrobranche 2026–2029",ave:true,y:2026,r:"CH",src:"https://gav-service.ch/gav/300001"},
+{b:"Gebäudetechnik (suissetec)",e:"Installateur EFZ (ab Lehrabschluss)",w:"CHF 4'600/Mt (26.54/h)",g:"GAV Gebäudetechnik 2025–2028",ave:true,y:2026,r:"Sanitär/Heizung/Spengler/Lüftung; exkl. GE/VD/VS",src:"https://service-cct.ch/gav/305001"},
+{b:"Gebäudetechnik (suissetec)",e:"Installateur EFZ ab 3. Jahr",w:"CHF 5'100/Mt",g:"GAV Gebäudetechnik 2025–2028",ave:true,y:2026,r:"CH (exkl. GE/VD/VS)",src:"https://service-cct.ch/gav/305001"},
+{b:"Gebäudetechnik (suissetec)",e:"Installateur EFZ ab 5. Jahr",w:"CHF 5'300/Mt",g:"GAV Gebäudetechnik 2025–2028",ave:true,y:2026,r:"CH",src:"https://service-cct.ch/gav/305001"},
+{b:"Gebäudetechnik (suissetec)",e:"EBA / handwerkl. Lehre",w:"CHF 4'100/Mt",g:"GAV Gebäudetechnik 2025–2028",ave:true,y:2026,r:"CH",src:"https://service-cct.ch/gav/305001"},
+{b:"Gebäudetechnik (suissetec)",e:"Ohne Ausbildung (ab 20 J.), 1. Jahr",w:"CHF 4'000/Mt",g:"GAV Gebäudetechnik 2025–2028",ave:true,y:2026,r:"CH",src:"https://service-cct.ch/gav/305001"},
+{b:"Bauhauptgewerbe (LMV)",e:"Klasse C – ohne Fachkenntnisse",w:"4'885 / 4'813 / 4'747 CHF/Mt (Rot/Blau/Grün)",g:"LMV Bauhauptgewerbe",ave:true,y:2025,r:"Lohnzonen Rot/Blau/Grün",src:"https://gav-service.ch/gav/100001"},
+{b:"Bauhauptgewerbe (LMV)",e:"Klasse B – mit Fachkenntnissen",w:"5'458 / 5'322 / 5'184 CHF/Mt (Rot/Blau/Grün)",g:"LMV Bauhauptgewerbe",ave:true,y:2025,r:"Lohnzonen",src:"https://gav-service.ch/gav/100001"},
+{b:"Bauhauptgewerbe (LMV)",e:"Klasse A – Facharbeiter",w:"5'776 / 5'698 / 5'621 CHF/Mt (Rot/Blau/Grün)",g:"LMV Bauhauptgewerbe",ave:true,y:2025,r:"Lohnzonen",src:"https://gav-service.ch/gav/100001"},
+{b:"Bauhauptgewerbe (LMV)",e:"Klasse Q – gelernt (EFZ)",w:"5'988 / 5'906 / 5'830 CHF/Mt (Rot/Blau/Grün)",g:"LMV Bauhauptgewerbe",ave:true,y:2025,r:"Lohnzonen",src:"https://gav-service.ch/gav/100001"},
+{b:"Bauhauptgewerbe (LMV)",e:"Vorarbeiter (V)",w:"6'702 / 6'442 / 6'179 CHF/Mt (Rot/Blau/Grün)",g:"LMV Bauhauptgewerbe",ave:true,y:2025,r:"Lohnzonen",src:"https://gav-service.ch/gav/100001"},
+{b:"Holzbau / Zimmerei",e:"Holzbau-Arbeiter (Hilfskraft) 0/5/10 J.",w:"4'163 / 4'913 / 5'286 CHF/Mt",g:"GAV Holzbau",ave:true,y:2025,r:"DE-CH (Ausnahmen FR/VD/VS/NE/GE/JU)",src:"https://gav-service.ch/gav/381001"},
+{b:"Holzbau / Zimmerei",e:"Zimmermann/-in EFZ 0/5/10 J.",w:"4'747 / 5'496 / 5'870 CHF/Mt",g:"GAV Holzbau",ave:true,y:2025,r:"DE-CH",src:"https://gav-service.ch/gav/381001"},
+{b:"Holzbau / Zimmerei",e:"Holzbau-Polier 0/5/10 J.",w:"5'942 / 6'691 / 7'066 CHF/Mt",g:"GAV Holzbau",ave:true,y:2025,r:"DE-CH",src:"https://gav-service.ch/gav/381001"},
+{b:"Holzbau / Zimmerei",e:"Holzbau-Meister 0/5/10 J.",w:"7'122 / 7'871 / 8'244 CHF/Mt",g:"GAV Holzbau",ave:true,y:2025,r:"DE-CH",src:"https://gav-service.ch/gav/381001"},
+{b:"Schreinergewerbe",e:"Hilfskraft (ungelernt)",w:"CHF 4'292/Mt",g:"GAV Schreinergewerbe",ave:true,y:2026,r:"DE-CH + TI",src:"https://gav-service.ch/gav/380001"},
+{b:"Schreinergewerbe",e:"Schreinerpraktiker EBA",w:"CHF 3'793/Mt",g:"GAV Schreinergewerbe",ave:true,y:2026,r:"DE-CH + TI",src:"https://gav-service.ch/gav/380001"},
+{b:"Schreinergewerbe",e:"Berufsarbeiter EFZ (1. Jahr)",w:"CHF 4'623/Mt",g:"GAV Schreinergewerbe",ave:true,y:2026,r:"DE-CH + TI",src:"https://gav-service.ch/gav/380001"},
+{b:"Schreinergewerbe",e:"Berufsarbeiter EFZ (ab 4. Jahr)",w:"CHF 5'447/Mt",g:"GAV Schreinergewerbe",ave:true,y:2026,r:"DE-CH + TI",src:"https://gav-service.ch/gav/380001"},
+{b:"Schreinergewerbe",e:"Monteur",w:"CHF 5'605/Mt",g:"GAV Schreinergewerbe",ave:true,y:2026,r:"DE-CH + TI",src:"https://gav-service.ch/gav/380001"},
+{b:"Maler- & Gipsergewerbe",e:"Branchenfremd/ungelernt (D)",w:"4'147 (Maler) / 4'258 (Gipser) CHF/Mt",g:"GAV Maler-/Gipsergewerbe",ave:true,y:2025,r:"DE-CH + TI, keine Zonen",src:"https://gav-service.ch/gav/355001"},
+{b:"Maler- & Gipsergewerbe",e:"Angelernt (C)",w:"4'429 / 4'590 CHF/Mt (Maler/Gipser)",g:"GAV Maler-/Gipsergewerbe",ave:true,y:2025,r:"DE-CH + TI",src:"https://gav-service.ch/gav/355001"},
+{b:"Maler- & Gipsergewerbe",e:"Gelernt EFZ (A)",w:"5'051 / 5'267 CHF/Mt (Maler/Gipser)",g:"GAV Maler-/Gipsergewerbe",ave:true,y:2025,r:"DE-CH + TI",src:"https://gav-service.ch/gav/355001"},
+{b:"Maler- & Gipsergewerbe",e:"Vorarbeiter (V)",w:"5'744 / 5'956 CHF/Mt (Maler/Gipser)",g:"GAV Maler-/Gipsergewerbe",ave:true,y:2025,r:"DE-CH + TI",src:"https://gav-service.ch/gav/355001"},
+{b:"Plattenleger",e:"Hilfsarbeiter / EBA (C)",w:"CHF 4'295/Mt",g:"LGAV Platten-/Ofengewerbe",ave:true,y:2025,r:"DE-CH (Ausnahmen)",src:"https://gav-service.ch/gav/365008"},
+{b:"Plattenleger",e:"Angelernt (B)",w:"CHF 4'770/Mt",g:"LGAV Platten-/Ofengewerbe",ave:true,y:2025,r:"DE-CH",src:"https://gav-service.ch/gav/365008"},
+{b:"Plattenleger",e:"Gelernt EFZ (A)",w:"CHF 5'270/Mt",g:"LGAV Platten-/Ofengewerbe",ave:true,y:2025,r:"DE-CH",src:"https://gav-service.ch/gav/365008"},
+{b:"Bodenbelagsbranche",e:"Montagepersonal ungelernt",w:"CHF 3'750/Mt (20.40/h)",g:"GAV Bodenbelagsbranche",ave:true,y:2025,r:"ohne 13. ML; AVE seit 1.9.2025",src:"https://gavboden.ch/gav-boden/mindestloehne/"},
+{b:"Bodenbelagsbranche",e:"Angelernt (ab 4 J.)",w:"CHF 4'000/Mt",g:"GAV Bodenbelagsbranche",ave:true,y:2025,r:"ohne 13. ML",src:"https://gavboden.ch/gav-boden/mindestloehne/"},
+{b:"Bodenbelagsbranche",e:"Boden-/Parkettleger EFZ",w:"CHF 4'500/Mt",g:"GAV Bodenbelagsbranche",ave:true,y:2025,r:"ohne 13. ML",src:"https://gavboden.ch/gav-boden/mindestloehne/"},
+{b:"Bodenbelagsbranche",e:"Chefbodenleger (Fachausweis)",w:"CHF 5'400/Mt",g:"GAV Bodenbelagsbranche",ave:true,y:2025,r:"ohne 13. ML",src:"https://gavboden.ch/gav-boden/mindestloehne/"},
+{b:"Gebäudehülle (Dachdecker/Spengler)",e:"Ungelernt (≤12 / >60 Mt Erfahrung)",w:"4'206 / 5'231 CHF/Mt",g:"GAV Gebäudehülle",ave:true,y:2026,r:"Erfahrungsstufen",src:"https://gav-service.ch/gav/310001"},
+{b:"Gebäudehülle (Dachdecker/Spengler)",e:"Angelernt EBA",w:"4'404 / 5'231 CHF/Mt",g:"GAV Gebäudehülle",ave:true,y:2026,r:"Erfahrungsstufen",src:"https://gav-service.ch/gav/310001"},
+{b:"Gebäudehülle (Dachdecker/Spengler)",e:"Facharbeiter EFZ",w:"4'767 / 5'790 CHF/Mt",g:"GAV Gebäudehülle",ave:true,y:2026,r:"Erfahrungsstufen",src:"https://gav-service.ch/gav/310001"},
+{b:"Gerüstbau",e:"Hilfskraft (C)",w:"CHF 4'487/Mt",g:"GAV Gerüstbau",ave:true,y:2025,r:"ganze CH",src:"https://gav-service.ch/gav/140001"},
+{b:"Gerüstbau",e:"Gerüstmonteur EBA (B2)",w:"CHF 4'628/Mt",g:"GAV Gerüstbau",ave:true,y:2025,r:"ganze CH",src:"https://gav-service.ch/gav/140001"},
+{b:"Gerüstbau",e:"Gerüstbauer EFZ (B1)",w:"CHF 5'030/Mt",g:"GAV Gerüstbau",ave:true,y:2025,r:"ganze CH",src:"https://gav-service.ch/gav/140001"},
+{b:"Gerüstbau",e:"Gruppenleiter (A)",w:"CHF 5'382/Mt",g:"GAV Gerüstbau",ave:true,y:2025,r:"ganze CH",src:"https://gav-service.ch/gav/140001"},
+{b:"Gerüstbau",e:"Objektleiter (Q)",w:"CHF 5'593/Mt",g:"GAV Gerüstbau",ave:true,y:2025,r:"ganze CH",src:"https://gav-service.ch/gav/140001"},
+{b:"Metallgewerbe / Metallbau",e:"Angelernt (1–2 / ab 5 J.)",w:"3'700 / 4'000 CHF/Mt",g:"LGAV Metallgewerbe",ave:true,y:2025,r:"inkl. Storen/Sonnenschutz; exkl. BS/BL u.a.",src:"https://gav-service.ch/gav/320001"},
+{b:"Metallgewerbe / Metallbau",e:"Metallbaupraktiker EBA",w:"4'000 / 4'200 CHF/Mt",g:"LGAV Metallgewerbe",ave:true,y:2025,r:"Erfahrungsstufen",src:"https://gav-service.ch/gav/320001"},
+{b:"Metallgewerbe / Metallbau",e:"Metallbauer EFZ (1–2 / ab 5 J.)",w:"4'500 / 4'900 CHF/Mt",g:"LGAV Metallgewerbe",ave:true,y:2025,r:"Erfahrungsstufen",src:"https://gav-service.ch/gav/320001"},
+{b:"Naturstein (Marmor/Granit)",e:"Hilfsarbeiter (C)",w:"CHF 4'375/Mt (24.25/h)",g:"GAV Naturstein",ave:true,y:2026,r:"",src:"https://servizio-ccl.ch/gav/335001"},
+{b:"Naturstein (Marmor/Granit)",e:"Facharbeiter angelernt (B)",w:"CHF 4'964/Mt",g:"GAV Naturstein",ave:true,y:2026,r:"",src:"https://servizio-ccl.ch/gav/335001"},
+{b:"Naturstein (Marmor/Granit)",e:"Berufsarbeiter EFZ (A)",w:"CHF 5'205/Mt",g:"GAV Naturstein",ave:true,y:2026,r:"",src:"https://servizio-ccl.ch/gav/335001"},
+{b:"Naturstein (Marmor/Granit)",e:"Vorarbeiter (V)",w:"CHF 5'699/Mt",g:"GAV Naturstein",ave:true,y:2026,r:"",src:"https://servizio-ccl.ch/gav/335001"},
+{b:"Isoliergewerbe",e:"Isoleur EFZ (1./5./10. Jahr)",w:"4'609 / 5'010 / 5'611 CHF/Mt",g:"GAV Isoliergewerbe 2026",ave:true,y:2026,r:"Kat A",src:"https://servizio-ccl.ch/gav/360001"},
+{b:"Isoliergewerbe",e:"Ohne EFZ (Kat B, altersabh. 20/30/41 J.)",w:"4'218 / 5'270 / 5'321 CHF/Mt",g:"GAV Isoliergewerbe 2026",ave:true,y:2026,r:"altersabhängig",src:"https://servizio-ccl.ch/gav/360001"},
+{b:"Gastgewerbe (L-GAV)",e:"Ohne Berufslehre (Ia)",w:"CHF 3'713/Mt",g:"L-GAV Gastgewerbe",ave:true,y:2026,r:"ganze CH",src:"https://l-gav.ch"},
+{b:"Gastgewerbe (L-GAV)",e:"EBA (II)",w:"CHF 4'070/Mt",g:"L-GAV Gastgewerbe",ave:true,y:2026,r:"ganze CH",src:"https://l-gav.ch"},
+{b:"Gastgewerbe (L-GAV)",e:"EFZ (IIIa)",w:"CHF 4'528/Mt",g:"L-GAV Gastgewerbe",ave:true,y:2026,r:"ganze CH",src:"https://l-gav.ch"},
+{b:"Gastgewerbe (L-GAV)",e:"Mit Berufsprüfung (IV)",w:"CHF 5'293/Mt",g:"L-GAV Gastgewerbe",ave:true,y:2026,r:"ganze CH",src:"https://l-gav.ch"},
+{b:"Reinigung Deutschschweiz",e:"Unterhaltsreinigung (ohne Qualifikation)",w:"CHF 21.40/h",g:"GAV Reinigung DE-CH 2026–2029",ave:true,y:2026,r:"Betriebe ab 6 MA",src:"https://gav-service.ch/gav/185001"},
+{b:"Reinigung Deutschschweiz",e:"Spezialreinigung",w:"CHF 23.40/h",g:"GAV Reinigung DE-CH 2026–2029",ave:true,y:2026,r:"DE-CH",src:"https://gav-service.ch/gav/185001"},
+{b:"Reinigung Deutschschweiz",e:"Reinigungsfachkraft EBA",w:"CHF 4'200/Mt",g:"GAV Reinigung DE-CH 2026–2029",ave:true,y:2026,r:"DE-CH",src:"https://gav-service.ch/gav/185001"},
+{b:"Reinigung Deutschschweiz",e:"Reinigungsfachkraft EFZ",w:"CHF 4'700/Mt",g:"GAV Reinigung DE-CH 2026–2029",ave:true,y:2026,r:"DE-CH",src:"https://gav-service.ch/gav/185001"},
+{b:"Private Sicherheit (VSSU)",e:"Sicherheitsangestellte/r Kat. A (1. DJ)",w:"CHF 4'522/Mt (54'270/J.)",g:"GAV Sicherheitsdienstleistungen",ave:true,y:2026,r:"ganze CH",src:"https://gav-service.ch"},
+{b:"Private Sicherheit (VSSU)",e:"Kat. A ab 13. Dienstjahr",w:"CHF 5'229/Mt",g:"GAV Sicherheitsdienstleistungen",ave:true,y:2026,r:"ganze CH",src:"https://gav-service.ch"},
+{b:"Coiffeurgewerbe",e:"Ungelernt (1. Jahr)",w:"CHF 3'780/Mt",g:"GAV Coiffeurgewerbe",ave:true,y:2026,r:"ganze CH",src:"https://gav-service.ch"},
+{b:"Coiffeurgewerbe",e:"EBA",w:"CHF 3'880/Mt",g:"GAV Coiffeurgewerbe",ave:true,y:2026,r:"ganze CH",src:"https://gav-service.ch"},
+{b:"Coiffeurgewerbe",e:"EFZ (1–2 Jahre)",w:"CHF 4'160/Mt",g:"GAV Coiffeurgewerbe",ave:true,y:2026,r:"ganze CH",src:"https://gav-service.ch"},
+{b:"Coiffeurgewerbe",e:"EFZ ab 3. Jahr",w:"CHF 4'360/Mt",g:"GAV Coiffeurgewerbe",ave:true,y:2026,r:"ganze CH",src:"https://gav-service.ch"},
+{b:"Bäckerei / Confiserie",e:"Ungelernt",w:"CHF 3'670/Mt",g:"Bäcker-Confiseur-GAV",ave:true,y:2025,r:"ganze CH",src:"https://gav-service.ch"},
+{b:"Bäckerei / Confiserie",e:"EBA",w:"CHF 3'900/Mt",g:"Bäcker-Confiseur-GAV",ave:true,y:2025,r:"ganze CH",src:"https://gav-service.ch"},
+{b:"Bäckerei / Confiserie",e:"EFZ",w:"CHF 4'400/Mt",g:"Bäcker-Confiseur-GAV",ave:true,y:2025,r:"ganze CH",src:"https://gav-service.ch"},
+{b:"Bäckerei / Confiserie",e:"Leiter (Berufsprüfung)",w:"CHF 5'350/Mt",g:"Bäcker-Confiseur-GAV",ave:true,y:2025,r:"ganze CH",src:"https://gav-service.ch"},
+{b:"Carrosserie",e:"Carrossier EFZ (erste 2 Jahre)",w:"CHF 4'625/Mt",g:"Carrosserie-GAV",ave:true,y:2026,r:"CH (o. GE/TI/JU)",src:"https://servizio-ccl.ch"},
+{b:"Carrosserie",e:"Carrossier EFZ (ab 2 Jahre)",w:"CHF 4'825/Mt",g:"Carrosserie-GAV",ave:true,y:2026,r:"CH (o. GE/TI/JU)",src:"https://servizio-ccl.ch"},
+{b:"Carrosserie",e:"EBA (erste 2 Jahre)",w:"CHF 4'175/Mt",g:"Carrosserie-GAV",ave:true,y:2026,r:"CH (o. GE/TI/JU)",src:"https://servizio-ccl.ch"},
+{b:"Carrosserie",e:"Hilfskraft ohne Lehre",w:"CHF 4'200/Mt",g:"Carrosserie-GAV",ave:true,y:2026,r:"CH (o. GE/TI/JU)",src:"https://servizio-ccl.ch"},
+{b:"MEM / Maschinenindustrie",e:"Un-/angelernt (Region A/B/C)",w:"4'163 / 3'892 / 3'728 CHF/Mt",g:"GAV MEM 2023 (nicht AVE)",ave:false,y:2026,r:"nur Swissmem-Mitglieder; A=ZH/GE.., C=Jura/NE/TI",src:"https://swissmem.ch"},
+{b:"MEM / Maschinenindustrie",e:"Qualifizierte (+CHF 300)",w:"4'463 / 4'192 / 4'028 CHF/Mt",g:"GAV MEM 2023 (nicht AVE)",ave:false,y:2026,r:"nur Mitglieder",src:"https://swissmem.ch"},
+{b:"Garten- & Landschaftsbau",e:"Ungelernt",w:"CHF 3'550/Mt",g:"GAV Grüne Branche (nicht AVE)",ave:false,y:2025,r:"nur Mitglieder",src:"https://jardinsuisse.ch"},
+{b:"Garten- & Landschaftsbau",e:"EBA",w:"CHF 3'700/Mt",g:"GAV Grüne Branche (nicht AVE)",ave:false,y:2025,r:"nur Mitglieder",src:"https://jardinsuisse.ch"},
+{b:"Garten- & Landschaftsbau",e:"EFZ + 3 Jahre",w:"CHF 4'750/Mt",g:"GAV Grüne Branche (nicht AVE)",ave:false,y:2025,r:"nur Mitglieder",src:"https://jardinsuisse.ch"},
+{b:"Ohne verbindlichen GAV-Mindestlohn",e:"Detailhandel (allgemein)",w:"kein AVE-GAV – nur Firmen-GAV (Coop ~4'300/Mt) oder kant. Mindestlöhne (GE/BS/NE/TI)",g:"–",ave:false,y:2026,r:"",src:"https://gav-service.ch"},
+{b:"Ohne verbindlichen GAV-Mindestlohn",e:"Transport / Chauffeur (Camionnage)",w:"kein nationaler Lohn-GAV; nur kantonal",g:"ASTAG / Les Routiers",ave:false,y:2026,r:"",src:"https://astag.ch"},
+{b:"Ohne verbindlichen GAV-Mindestlohn",e:"Landwirtschaft",w:"kein GAV; kant. NAV / Richtlohn ~3'450/Mt",g:"NAV / Richtlohn",ave:false,y:2025,r:"",src:"https://agrimpuls.ch"},
+{b:"Ohne verbindlichen GAV-Mindestlohn",e:"Bestattung / Floristik",w:"kein Branchen-GAV; marktbasiert",g:"–",ave:false,y:2026,r:"",src:"https://gav-service.ch"}
+];
+var KANTONE={ZH:["Zürich",1.20],BE:["Bern",1.60],LU:["Luzern",1.60],UR:["Uri",1.70],SZ:["Schwyz",1.60],OW:["Obwalden",1.60],NW:["Nidwalden",1.50],GL:["Glarus",1.90],ZG:["Zug",1.60],FR:["Freiburg",2.50],SO:["Solothurn",1.70],BS:["Basel-Stadt",1.50],BL:["Basel-Landschaft",1.50],SH:["Schaffhausen",1.50],AR:["Appenzell A.Rh.",1.60],AI:["Appenzell I.Rh.",1.60],SG:["St. Gallen",1.60],GR:["Graubünden",1.70],AG:["Aargau",1.70],TG:["Thurgau",1.50],TI:["Tessin",1.90],VD:["Waadt",2.45],VS:["Wallis",3.00],NE:["Neuenburg",2.60],GE:["Genf",2.45],JU:["Jura",3.00]};
+var selK=document.getElementById('kanton');
+for(var k in KANTONE){var o=document.createElement('option');o.value=k;o.textContent=KANTONE[k][0]+" ("+k+")";if(k==='BE')o.selected=true;selK.appendChild(o);}
+var selB=document.getElementById('branche'),selBer=document.getElementById('beruf'),branchen=[];
+GAVDATA.forEach(function(d){if(branchen.indexOf(d.b)<0)branchen.push(d.b);});
+branchen.forEach(function(b){var o=document.createElement('option');o.value=b;o.textContent=b;selB.appendChild(o);});
+function fillBerufe(){selBer.innerHTML='';GAVDATA.filter(function(d){return d.b===selB.value;}).forEach(function(d,i){var o=document.createElement('option');o.value=d.e;o.textContent=d.e;selBer.appendChild(o);});showGav();}
+function currentGav(){return GAVDATA.filter(function(d){return d.b===selB.value&&d.e===selBer.value;})[0];}
+var BRANCHEXPL={"Personalverleih (Auffang-GAV)": "Mindestlohn nach Qualifikation (ungelernt < angelernt < gelernt EFZ) und Lohnregion (Hochlohngebiet höher als Normallohn, Tessin tiefer). Gilt nur, wenn kein allgemeinverbindlicher Branchen-GAV greift – sonst Equal-Pay.", "Elektro & Telekom (EIT.swiss)": "Gestaffelt nach Abschluss und Erfahrung nach der Lehre: der Grundlohn gilt direkt nach dem EFZ, „+1 Jahr Erfahrung“ nach einem Jahr Branchentätigkeit und liegt höher. Montage-Elektriker (3-jährige Lehre) liegt unter Elektroinstallateur (4-jährige Lehre); Teamleiter mit EIT-Zertifikat am höchsten.", "Gebäudetechnik (suissetec)": "Gestaffelt nach Jahren nach Lehrabschluss (ab Lehrabschluss / ab 3. / ab 5. Jahr). EBA und handwerkliche Lehren tiefer als EFZ; ohne Ausbildung am tiefsten.", "Bauhauptgewerbe (LMV)": "Lohnklassen C < B < A < Q < V nach Qualifikation, zusätzlich drei Lohnzonen (Rot = höchste, Blau, Grün) je nach Region/Kanton. Q = gelernt (EFZ), V = Vorarbeiter. Übernommen wird der höchste (Rot)-Wert.", "Holzbau / Zimmerei": "Drei Erfahrungsstufen (0 / 5 / 10 Jahre); Polier und Meister deutlich höher als Zimmermann EFZ.", "Schreinergewerbe": "Praktiker (EBA) < Berufsarbeiter (EFZ, nach Erfahrungsjahren steigend) < Monteur. Hilfskraft separat.", "Maler- & Gipsergewerbe": "Klassen D (branchenfremd) < C (angelernt) < A (gelernt EFZ) < V (Vorarbeiter). Gipser-Sätze leicht höher als Maler; keine Lohnzonen.", "Plattenleger": "C (Hilfskraft/EBA) < B (angelernt) < A (gelernt EFZ).", "Bodenbelagsbranche": "ungelernt < angelernt < EFZ < Chefbodenleger (Fachausweis). Werte ohne 13. Monatslohn – dieser kommt zusätzlich dazu.", "Gebäudehülle (Dachdecker/Spengler)": "Zwei Erfahrungsstufen (bis 12 Monate / über 60 Monate). EBA und EFZ höher als ungelernt.", "Gerüstbau": "C (Hilfskraft) < B2 (EBA) < B1 (EFZ) < A (Gruppenleiter) < Q (Objektleiter). Schweizweit, keine Zonen.", "Metallgewerbe / Metallbau": "Erfahrungsstufen (1.–2. Jahr / ab 5. Jahr); angelernt < EBA < EFZ. Umfasst auch Storen/Sonnenschutz (kein eigener GAV).", "Naturstein (Marmor/Granit)": "C (Hilfsarbeiter) < B (angelernt) < A (Berufsarbeiter EFZ) < V (Vorarbeiter).", "Isoliergewerbe": "Kat. A (EFZ) gestaffelt nach Jahren nach Lehrabschluss; Kat. B (ohne EFZ) altersabhängig (20. / 30. / ab 41. Altersjahr).", "Gastgewerbe (L-GAV)": "Kategorien nach Ausbildung: ohne Lehre (Ia) < EBA (II) < EFZ (IIIa) < mit Berufsprüfung (IV).", "Reinigung Deutschschweiz": "Unterhalts- vs. Spezialreinigung (Stundenlöhne); Reinigungsfachkraft EBA/EFZ als Monatslohn höher.", "Private Sicherheit (VSSU)": "Nach Dienstjahren gestaffelt (1. Dienstjahr bis ab 13. Dienstjahr); eidg. Fachausweis mit Zuschlag.", "Coiffeurgewerbe": "ungelernt < EBA < EFZ (nach Berufsjahren steigend); Fachausweis/Diplom mit Zuschlag.", "Bäckerei / Confiserie": "ungelernt < EBA < EFZ < Leiter (Berufsprüfung) < Kader.", "Carrosserie": "EBA < EFZ; innerhalb EFZ nach Jahren nach Lehrabschluss steigend; Hilfskräfte separat.", "MEM / Maschinenindustrie": "Nicht allgemeinverbindlich (gilt nur für Swissmem-Mitgliedsbetriebe). Regionale Mindestlöhne A/B/C; Qualifizierte +CHF 300.", "Garten- & Landschaftsbau": "Nicht allgemeinverbindlich (nur Verbandsmitglieder). ungelernt < EBA < EFZ (mit Erfahrung).", "Ohne verbindlichen GAV-Mindestlohn": "Für diese Branchen gibt es keinen allgemeinverbindlichen GAV-Mindestlohn – massgebend sind Firmen-GAV, kantonale Mindestlöhne oder der freie Markt. Bitte den Lohn selbst recherchieren."};
+function showGav(){var d=currentGav();var box=document.getElementById('gavbox');if(!d){box.style.display='none';return;}
+ box.style.display='block';
+ box.innerHTML=(BRANCHEXPL[d.b]?('<b>Stufen-Erklärung:</b> '+BRANCHEXPL[d.b]+'<br>'):'')+'<b>GAV-Mindestlohn (Referenz):</b> '+d.w+'<br><b>GAV:</b> '+d.g+' &nbsp;·&nbsp; <b>AVE:</b> '+(d.ave?'ja (allgemeinverbindlich)':'nein (nur Mitglieder/firmenspezifisch)')+' &nbsp;·&nbsp; <b>Stand:</b> '+d.y+(d.r?'<br><b>Region/Hinweis:</b> '+d.r:'')+'<br><a href="'+d.src+'" target="_blank">Quelle</a>';
+}
+function v(id){return parseFloat(document.getElementById(id).value)||0;}
+function val(id){return document.getElementById(id).value;}
+function chf(x){return x.toLocaleString('de-CH',{minimumFractionDigits:2,maximumFractionDigits:2})+' CHF';}
+function chf0(x){return Math.round(x).toLocaleString('de-CH')+' CHF';}
+function applyCanton(){var k=val('kanton');if(KANTONE[k])document.getElementById('fak').value=KANTONE[k][1].toFixed(2);}
+function applyAge(){var a=v('alter');document.getElementById('ferien').value=(a<20||a>=50)?"10.60":"8.33";var bvg=4.0;if(a<25)bvg=1.5;else if(a<35)bvg=4.0;else if(a<45)bvg=6.0;else if(a<55)bvg=8.0;else bvg=9.5;document.getElementById('bvg').value=bvg.toFixed(2);}
+function takeGav(){var d=currentGav();if(!d){return;}var w=d.w;if(/kein/i.test(w)){alert('Für diese Auswahl gibt es keinen verbindlichen GAV-Mindestlohn – bitte den Lohn manuell eintragen.');return;}
+ if(/\/h/.test(w)&&!/Mt/.test(w)){alert('Dieser GAV-Wert ist ein Stundenlohn. Bitte als Monatslohn umrechnen und manuell eintragen (Referenz: '+w+').');return;}
+ var m=w.match(/([0-9][0-9'’\.]{2,})/);if(!m){alert('Kein Monatslohn erkannt.');return;}
+ var num=parseFloat(m[1].replace(/['’\.]/g,''));document.getElementById('lohn').value=Math.round(num);calc();}
+var LAST={};
+function calc(){
+ var mstd=v('wstd')*v('wj')/12;var basis=mstd?v('lohn')/mstd:0;
+ var brutto=basis*(1+(v('ferien')+v('feier')+v('ml13'))/100);
+ var ag=(v('ahv')+v('alv')+v('fak')+v('uvg')+v('vwk')+v('bvg'))/100;
+ var lohnk=brutto*(1+ag);
+ var gkjahr=v('wz_afa')+v('wz_unt')+v('transport')+v('wb_hj')*2+v('vers')+v('treu')+v('div');
+ var vstd=v('vstd');var gkstd=vstd?gkjahr/vstd:0;
+ var selbst=lohnk+v('spesen')+gkstd;var ansatz=v('ansatz');
+ var marge=ansatz-selbst;var margep=selbst?marge/selbst*100:0;var umsatz=ansatz*vstd;
+ document.getElementById('r_brutto').textContent=chf(brutto);
+ document.getElementById('r_lohnk').textContent=chf(lohnk);
+ document.getElementById('r_gkstd').textContent=chf(gkstd)+' ('+chf0(gkjahr)+'/J.)';
+ document.getElementById('r_selbst').textContent=chf(selbst);
+ document.getElementById('r_ansatz').textContent=chf(ansatz);
+ document.getElementById('r_marge').textContent=chf(marge)+'  ('+margep.toLocaleString('de-CH',{maximumFractionDigits:0})+'%)';
+ document.getElementById('r_gewinn').textContent=chf0(marge*vstd);
+ document.getElementById('r_jahrlohn').textContent=chf0(brutto*vstd);
+ document.getElementById('r_mwsth').textContent=chf(ansatz*(1+v('mwst')/100));
+ document.getElementById('r_spanne').textContent=chf(v('endk')-ansatz)+' /h';
+ var w=document.getElementById('warn');
+ if(marge<0){w.className='hint';w.textContent='Achtung: Der Ansatz liegt unter den Selbstkosten – die GmbH zahlt drauf.';}
+ else if(ansatz>v('endk')){w.className='hint';w.textContent='Hinweis: Der Ansatz liegt über dem Endkundensatz – dem Einsatzbetrieb bleibt keine Spanne.';}
+ else if(umsatz>100000){w.className='hint';w.textContent='Über CHF 100’000 Umsatz: MWST-Pflicht (8,1 %); Saldosteuersatz-Methode (6,8 %) prüfen.';}
+ else{w.className='';w.textContent='';}
+ LAST={brutto:brutto,selbst:selbst,ansatz:ansatz,mwsth:ansatz*(1+v('mwst')/100),mwst:v('mwst')};
+}
+function makePDF(){
+ calc();
+ var gmbh=val('gmbh')||'________________';var owner=val('owner')||'________________';var einsatz=val('einsatz')||'________________';
+ var kn=KANTONE[val('kanton')]?KANTONE[val('kanton')][0]:val('kanton');var gem=val('gemeinde')||'';
+ var today=new Date().toLocaleDateString('de-CH');
+ var mstd=v('wstd')*v('wj')/12;var basis=mstd?v('lohn')/mstd:0;var zu=v('ferien')+v('feier')+v('ml13');
+ var brutto=basis*(1+zu/100);var agp=v('ahv')+v('alv')+v('fak')+v('uvg')+v('vwk')+v('bvg');
+ var lohnk=brutto*(1+agp/100);
+ var gkjahr=v('wz_afa')+v('wz_unt')+v('transport')+v('wb_hj')*2+v('vers')+v('treu')+v('div');
+ var vstd=v('vstd');var gkstd=vstd?gkjahr/vstd:0;var spesen=v('spesen');
+ var selbst=lohnk+spesen+gkstd;var ansatz=v('ansatz');var marge=ansatz-selbst;var margep=selbst?marge/selbst*100:0;
+ var mwst=v('mwst');var mwsth=ansatz*(1+mwst/100);var d2=currentGav();
+ try{
+  var jsPDF=window.jspdf.jsPDF;var d=new jsPDF({unit:'mm',format:'a4'});
+  var x=20,right=190,PH=297,y=22;
+  function head(t){d.setFont('helvetica','bold');d.setFontSize(14);d.setTextColor(31,78,121);d.text(t,x,y);y+=7;d.setDrawColor(31,78,121);d.line(x,y,right,y);y+=7;d.setFontSize(10);d.setTextColor(40,40,40);d.setFont('helvetica','normal');}
+  function line(l,val2,bold){if(y>PH-24){d.addPage();y=22;}d.setFont('helvetica',bold?'bold':'normal');d.text(String(l),x,y);if(val2!==undefined&&val2!==null)d.text(String(val2),right,y,{align:'right'});y+=5.5;}
+  function gap(mm){y+=(mm||3);}
+  head('Stundenansatz-Vereinbarung – Personalverleih');
+  line((gem?gem+', ':'')+kn+', '+today);gap(2);
+  d.setFont('helvetica','bold');d.text('Übereinkunft',x,y);y+=6;d.setFont('helvetica','normal');
+  var intro='Die nachstehenden Parteien vereinbaren den Einsatz der verliehenen Person im Rahmen des Personalverleihs nach AVG/AVV. Der Verleiher bleibt rechtlicher Arbeitgeber und schuldet sämtliche Sozialversicherungsbeiträge; der Einsatzbetrieb entrichtet das vereinbarte Honorar (Stundenansatz). Die MWST wird zusätzlich in Rechnung gestellt.';
+  d.text(d.splitTextToSize(intro,170),x,y);y+=19;
+  line('Verleiher (Arbeitgeber):',gmbh,true);
+  line('Verliehene Person:',owner);
+  line('Einsatzbetrieb / Auftraggeber:',einsatz);
+  line('Profil:',v('alter')+' J., Berufserfahrung '+v('erf')+' J.'+(d2?', '+d2.b:''));
+  gap(4);d.setFontSize(12);
+  line('Vereinbarter Stundenansatz (netto):',chf(ansatz),true);
+  line('inkl. MWST '+mwst.toLocaleString('de-CH')+' %:',chf(mwsth),true);
+  d.setFontSize(10);gap(3);
+  var bem='Diese Vereinbarung hält den für den Einsatz vereinbarten Stundenansatz fest und ersetzt keinen Einsatz-/Rahmenvertrag. Die detaillierte Kostenaufstellung (Grundlage des Ansatzes) folgt auf den nächsten Seiten; die Unterschriften befinden sich am Schluss des Dokuments.';
+  d.text(d.splitTextToSize(bem,170),x,y);y+=16;
+  if(d2){d.setFontSize(8.5);d.setTextColor(90,90,90);d.text(d.splitTextToSize('GAV-Referenz: '+d2.b+' – '+d2.e+': '+d2.w+' ('+(d2.ave?'allgemeinverbindlich':'nicht allgemeinverbindlich')+', Stand '+d2.y+')',170),x,y);d.setTextColor(40,40,40);d.setFontSize(10);}
+  d.addPage();y=22;head('Kostenaufstellung (Grundlage des Stundenansatzes)');
+  d.setFont('helvetica','bold');d.text('1 · Lohn',x,y);y+=6;d.setFont('helvetica','normal');
+  line('Referenz-Monatslohn (brutto)',chf0(v('lohn')));
+  line('Wochenarbeitszeit / Monatsstunden',v('wstd')+' Std/Wo  ·  '+mstd.toFixed(1)+' Std/Mt');
+  line('Basis-Stundenlohn',chf(basis));
+  line('Zuschläge (Ferien '+v('ferien')+'% + Feiertage '+v('feier')+'% + 13. ML '+v('ml13')+'%)',zu.toFixed(2)+' %');
+  line('Brutto-Stundenlohn',chf(brutto),true);
+  line('Essensspesen',chf(spesen));
+  gap(2);d.setFont('helvetica','bold');d.text('2 · Arbeitgeberkosten',x,y);y+=6;d.setFont('helvetica','normal');
+  line('AHV/IV/EO (AG)',v('ahv')+' %');line('ALV (AG)',v('alv')+' %');line('FAK',v('fak')+' %');
+  line('UVG Berufsunfall (BU)',v('uvg')+' %');line('Verwaltungskosten',v('vwk')+' %');line('BVG / Pensionskasse (AG)',v('bvg')+' %');
+  line('Summe Arbeitgeberkosten',agp.toFixed(2)+' %',true);
+  line('Lohnkosten je Std (inkl. AG-Kosten)',chf(lohnk),true);
+  gap(2);d.setFont('helvetica','bold');d.text('3 · Betriebskosten (pro Jahr)',x,y);y+=6;d.setFont('helvetica','normal');
+  line('Werkzeug/Geräte – Abschreibung',chf0(v('wz_afa')));
+  line('Werkzeug/Geräte – Unterhalt',chf0(v('wz_unt')));
+  line('Transport / Fahrzeug',chf0(v('transport')));
+  line('Weiterbildung (×2 Halbjahr)',chf0(v('wb_hj')*2));
+  line('Betriebshaftpflicht & Versicherungen',chf0(v('vers')));
+  line('Treuhand / Buchhaltung / Admin',chf0(v('treu')));
+  line('Berufskleidung / Diverses',chf0(v('div')));
+  line('Total Betriebskosten / Jahr',chf0(gkjahr),true);
+  line('Betriebskosten je Std (bei '+vstd+' verr. Std)',chf(gkstd));
+  gap(2);d.setFont('helvetica','bold');d.text('4 · Ergebnis',x,y);y+=6;d.setFont('helvetica','normal');
+  line('Selbstkosten je Std',chf(selbst),true);
+  line('Ansatz an den Einsatzbetrieb (netto)',chf(ansatz),true);
+  line('Deckungsbeitrag je Std',chf(marge)+'  ('+margep.toLocaleString('de-CH',{maximumFractionDigits:0})+' %)');
+  line('Rechnungsbetrag inkl. MWST je Std',chf(mwsth));
+  line('Jahres-Bruttolohn (verliehene Person)',chf0(brutto*vstd));
+  line('Umsatz GmbH / Jahr (netto)',chf0(ansatz*vstd));
+  gap(2);d.setFontSize(8);d.setTextColor(120,120,120);
+  d.text(d.splitTextToSize('Alle Werte sind Richtwerte; FAK/BVG/Feiertage kassen- bzw. kantonsabhängig. Kein Rechts-/Steuerrat.',170),x,y);d.setTextColor(40,40,40);d.setFontSize(10);
+  if(y>PH-72){d.addPage();y=22;}else{y=Math.max(y+12,PH-72);}
+  d.setFont('helvetica','bold');d.setFontSize(12);d.setTextColor(31,78,121);d.text('Unterschriften',x,y);y+=4;d.setDrawColor(31,78,121);d.line(x,y,right,y);y+=14;
+  d.setTextColor(40,40,40);d.setFontSize(11);d.setFont('helvetica','bold');
+  d.text(gmbh,x,y);d.text(einsatz,110,y);y+=2;d.setDrawColor(120,120,120);d.line(x,y,90,y);d.line(110,y,180,y);y+=5;
+  d.setFont('helvetica','normal');d.setFontSize(8.5);d.setTextColor(90,90,90);
+  d.text(d.splitTextToSize('Verleiher (GmbH), vertreten durch '+owner,80),x,y);d.text('Einsatzbetrieb / Auftraggeber',110,y);y+=18;
+  d.setFontSize(11);d.setTextColor(40,40,40);
+  d.line(x,y,90,y);d.line(110,y,180,y);y+=5;d.setFontSize(8.5);d.setTextColor(90,90,90);
+  d.text('Unterschrift  ·  Ort / Datum',x,y);d.text('Unterschrift  ·  Ort / Datum',110,y);y+=13;
+  d.setFontSize(9);d.setTextColor(40,40,40);
+  d.text(d.splitTextToSize('Bitte zweifach ausdrucken, beide Parteien unterschreiben – je ein Exemplar pro Partei.',170),x,y);
+  var n=d.getNumberOfPages();
+  for(var i=1;i<=n;i++){d.setPage(i);d.setFont('helvetica','normal');d.setFontSize(8);d.setTextColor(120,120,120);
+   d.setDrawColor(200,200,200);d.line(x,PH-13,right,PH-13);
+   d.text('Stundenansatz-Vereinbarung'+(val('gmbh')?' – '+val('gmbh'):'')+'  ·  Dokument umfasst '+n+' Seite(n)',x,PH-9);
+   d.text('Seite '+i+' von '+n,right,PH-9,{align:'right'});}
+  d.save((gmbh.replace(/[^A-Za-z0-9]/g,'_')||'Vereinbarung')+'_Stundenansatz_Vereinbarung.pdf');
+ }catch(e){alert('PDF-Bibliothek nicht geladen (Internet nötig). Es öffnet sich die Druckansicht – dort "Als PDF speichern" wählen.');window.print();}
+}
+document.querySelectorAll('input,select').forEach(function(e){e.addEventListener('input',calc);});
+selK.addEventListener('change',function(){applyCanton();calc();});
+document.getElementById('alter').addEventListener('input',function(){applyAge();calc();});
+selB.addEventListener('change',fillBerufe);
+selBer.addEventListener('change',showGav);
+document.getElementById('gavtake').addEventListener('click',takeGav);
+document.getElementById('pdfbtn').addEventListener('click',makePDF);
+applyCanton();applyAge();fillBerufe();calc();
+</script>
+<footer class="site">
+Naville Handwerk GmbH &middot; 3005 Bern &middot; <a href="mailto:info@naville-handwerk.ch">info@naville-handwerk.ch</a> &middot; <a href="impressum.html">Impressum</a>
+</footer>
+</body>
+</html>
