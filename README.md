@@ -9,7 +9,6 @@ Reines HTML/CSS/JS, kein Server nötig.
 - `leistungen.html` — Was du von mir hast (✓/✗)
 - `preisrechner.html` — Stundenansatz-Rechner (erzeugt eine PDF-Vereinbarung; jsPDF lokal in `vendor/`)
 - `faq.html` — Häufige Fragen
-- `philosophie.html` — Firmenphilosophie
 - `impressum.html` — Impressum / Datenschutz
 - `favicon.svg`, `404.html`, `robots.txt`, `sitemap.xml`, `CNAME`
 
