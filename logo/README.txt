@@ -1,34 +1,38 @@
-Naville Handwerk – Grosses Logo (Emblem), website-/druckfertig
-==============================================================
+Naville Handwerk – Grosses Logo (Emblem + Claim-Lockups)
+========================================================
 
-Stand: 2026-07-12. Korrigierte Fassung: Blech-Schild mit echten gekappten
-Ecken (oben-rechts / unten-links, 45°), Anhänger-Rad näher am Velo.
+Stand: 2026-07-12. Blech-Schild mit echten gekappten Ecken (45° o.r./u.l.),
+alle drei Räder auf gleicher Bodenlinie, Veloständer steht auf, Anhänger-Rad
+näher am Velo.
 
-Die vier Fassungen (je 1500×700)
---------------------------------
-- emblem-rot-weiss-umrandet-auf-rot.png
-      Alles Rot, weiss umrandet, auf rotem Hintergrund.
-- emblem-schwarzrot-auf-rot.png
-      Rot-Schwarz, weiss umrandet, auf rotem Hintergrund.
-- emblem-schwarzrot-auf-creme.png
-      Rot-Schwarz auf Creme (#FAF6EF) – = Website-Hintergrund.
-- emblem-rot-auf-creme.png
-      Alles Rot auf Creme (#FAF6EF).
+Farben:  Rot #C1121C  ·  Schwarz #000000  ·  Anthrazit #23252B  ·  Creme #FAF6EF
+Claim:   „Der Notstromer für Berner Elektrofirmen" ("Notstromer" in Rot)
 
-Farben
-------
-Rot (Schild/Velo): #C1121C   ·   Schwarz: #000000   ·   Creme: #FAF6EF
+Emblem – nur Velo + Anhänger (je 1500×700 bzw. transparent beschnitten)
+----------------------------------------------------------------------
+- emblem-schwarzrot-auf-creme.png      Rot-Schwarz auf Creme (= Website-BG)
+- emblem-rot-auf-creme.png             Alles Rot auf Creme
+- emblem-schwarzrot-auf-rot.png        Rot-Schwarz auf Rot, weiss umrandet
+- emblem-rot-weiss-umrandet-auf-rot.png  Alles Rot, weiss umrandet, auf Rot
+- emblem-schwarzrot-transparent.png    Rot-Schwarz, transparent (für helle Flächen)
+- emblem-rot-transparent.png           Alles Rot, transparent
+
+Lockups – Emblem + Claim rechts
+-------------------------------
+- lockup-logo-auf-creme.png / lockup-logo-transparent.png
+      ganzes Logo (Velo + Anhänger) + Claim
+- lockup-emblem-auf-creme.png / lockup-emblem-transparent.png
+      nur das Schild (ohne Velo/Anhänger) + Claim
 
 Verwendung
 ----------
-- Website (Creme-Hintergrund): die "…-auf-creme"-Fassungen fügen sich nahtlos ein.
-- Rote Flächen (Fahrzeug, Anhänger, Decals): die "…-auf-rot"-Fassungen; die weisse
+- Website (Creme-Hintergrund): die „…-auf-creme"- oder „…-transparent"-Dateien.
+- Rote Flächen (Fahrzeug, Anhänger, Decals): die „…-auf-rot"-Dateien; die weisse
   Umrandung grenzt das Emblem auf gleich-roter Fläche ab.
 
 Einbau (Beispiel Website):
-<img src="logo/emblem-schwarzrot-auf-creme.png"
+<img src="logo/lockup-logo-transparent.png"
      alt="Naville Handwerk – Der Notstromer für Berner Elektrofirmen"
      style="max-width:100%;height:auto">
 
-Hinweis: Noch nicht in die HTML eingebunden – die Dateien liegen nur bereit.
-Transparente Fassungen oder die Rot/Anthrazit-Variante liefere ich auf Wunsch.
+Hinweis: Noch nicht in die HTML eingebunden – die Dateien liegen bereit.
