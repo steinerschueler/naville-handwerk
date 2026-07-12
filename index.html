@@ -63,7 +63,9 @@ a{color:inherit}
 .probcol{flex:1;display:flex;flex-direction:column;gap:14px}
 .solcol{flex:1;display:flex}
 .solcol .card{width:100%}
-.card.sol{border:1.6px solid var(--red)}
+.probcol .card{border:1.6px solid var(--red)}
+.card.sol{border:1.6px solid var(--grn)}
+.card.sol .t{color:var(--grn)}
 .psarrow{flex:none;display:flex;align-items:center}
 .psarrow svg{width:clamp(38px,5vw,60px);height:auto;display:block}
 @media(max-width:720px){.probsol{flex-direction:column;align-items:stretch}.psarrow{transform:rotate(90deg);align-self:center;margin:2px 0}.psarrow svg{width:42px}.probsol-head{gap:10px}.ph-prob,.ph-sol{flex:none}.ph-arrow{width:auto}}
