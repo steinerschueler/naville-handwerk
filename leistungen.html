@@ -1,131 +1,178 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html><html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <title>Was du von mir hast – Naville Handwerk GmbH</title>
+<meta name="description" content="Was du von mir als Aushilfe im Handwerk hast – und was nicht. Transparent aufgelistet: Vorteile für deinen Betrieb und ehrliche Grenzen.">
 <style>
-:root{--blau:#1F4E79;--blau2:#2E5496;--akzent:#B9772E;--creme:#FAF6EF;--creme2:#FFFDF8;--karte:#FFFFFF;--text:#33302B;--grau:#6b6357;--linie:#e7ddcf;--ja:#2f8f4e;--nein:#b3402f}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;font-family:"Segoe UI",Arial,Helvetica,sans-serif;color:var(--text);line-height:1.65;background:var(--creme)}
-a{color:var(--blau)}
-header.nav{position:sticky;top:0;z-index:10;background:rgba(250,246,239,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--linie)}
-.nav-inner{max-width:980px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.brand{font-weight:bold;color:var(--blau);font-size:1.05em;text-decoration:none}
-.nav-links a{margin-left:18px;text-decoration:none;color:var(--grau);font-size:.95em}
-.nav-links a:hover{color:var(--akzent)}
-.head{padding:48px 20px 10px}
-.head-inner{max-width:820px;margin:0 auto}
-.kicker{text-transform:uppercase;letter-spacing:2px;font-size:.76em;color:var(--akzent);font-weight:bold;margin-bottom:12px}
-h1{color:var(--blau);font-size:1.9em;margin:0 0 12px}
-.intro{font-size:1.08em;max-width:680px}
-section{padding:24px 20px}
-.wrap{max-width:820px;margin:0 auto}
-.block{background:var(--karte);border:1px solid var(--linie);border-radius:14px;padding:18px 22px;margin:18px 0;box-shadow:0 4px 14px rgba(80,60,30,.05)}
-.block h2{font-size:1.2em;margin:0 0 6px}
-.block.ja h2{color:var(--ja)}
-.block.nein h2{color:var(--nein)}
-.block .sub{color:var(--grau);font-size:.9em;margin:0 0 8px}
-.tlist{list-style:none;padding:0;margin:8px 0 0}
-.tlist li{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--linie)}
+@font-face{font-family:'Archivo';font-weight:600;font-display:swap;src:url(fonts/archivo-600.woff2) format('woff2');}
+:root{--ink:#22242A;--ink2:#43423C;--paper:#EFEEE8;--red:#C1121C;--grey:#6E6B64;--line:#DCD6CB;--card:#fff;--org:#EA8C1B;--grn:#3E9E4E;}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:"Segoe UI",system-ui,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(24px,5vw,52px)}
+.disp{font-family:'Archivo',sans-serif;font-weight:600;letter-spacing:-.02em}
+.mono{font-family:ui-monospace,'DejaVu Sans Mono',Consolas,monospace;font-weight:600;font-size:12px;line-height:1.4;letter-spacing:2px;text-transform:uppercase}
+.kick,.eyebrow,.step .n{font-size:14px;letter-spacing:2.6px}
+.red{color:var(--red)}
+a{color:inherit}
+.wire{height:4px;background:var(--red)}
+.nav{position:sticky;top:0;z-index:20;background:rgba(239,238,232,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:20px;flex-wrap:wrap}
+.brand{font-family:'Archivo';font-weight:600;font-size:21px;letter-spacing:-.4px;text-transform:lowercase;text-decoration:none;color:var(--ink)}
+.nav-links a{margin-left:26px;color:var(--grey);text-decoration:none;font-size:14.5px}
+.nav-links a:hover{color:var(--red)}
+.nav-links a.on{color:var(--ink)}
+/* page head */
+.phead{padding-block:60px 8px}
+.kick{color:var(--red);margin-bottom:16px}
+.phead h1{font-size:clamp(30px,4.6vw,48px);line-height:1.05;margin:0 0 18px}
+.phead .lead{font-size:18px;color:var(--ink2);max-width:64ch}
+.legend b.g{color:var(--grn)} .legend b.r{color:var(--red)}
+/* generic section */
+.sec{padding-block:56px;border-top:1px solid var(--line)}
+.sec.tight{padding-block:46px}
+.eyebrow{color:var(--red);margin-bottom:10px}
+.sec h2{font-size:clamp(24px,3.2vw,34px);line-height:1.1;margin-bottom:8px}
+.sec .sub{color:var(--grey);max-width:60ch;margin-bottom:38px}
+/* cycle (aus index.html) */
+.cycle{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.step{text-align:center;padding:0 6px}
+.step svg{width:56px;height:56px;margin-bottom:14px}
+.step .n{color:var(--red);margin-bottom:7px}
+.step h3{font-family:'Archivo';font-weight:600;font-size:18px;margin-bottom:6px}
+.step p{color:var(--ink2);font-size:14px}
+/* transparenz-blöcke */
+.tsec{max-width:880px;margin:0 auto}
+.tblock{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 24px 24px;margin:22px 0;box-shadow:0 6px 18px rgba(34,36,42,.05)}
+.tblock.ja{border-top:4px solid var(--grn)}
+.tblock.nein{border-top:4px solid var(--red)}
+.th{display:flex;align-items:center;gap:13px;margin-bottom:2px}
+.tchip{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:700;flex:none}
+.tblock.ja .tchip{background:var(--grn)}
+.tblock.nein .tchip{background:var(--red)}
+.th h2{font-family:'Archivo';font-weight:600;font-size:21px;line-height:1.1;margin:0}
+.tblock.ja .th h2{color:var(--grn)}
+.tblock.nein .th h2{color:var(--red)}
+.tsub{color:var(--grey);font-size:12.5px;letter-spacing:.4px;text-transform:uppercase;margin:8px 0 4px}
+.tlist{list-style:none;padding:0;margin:6px 0 0}
+.tlist li{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}
 .tlist li:first-child{border-top:none}
-.ic{flex:0 0 20px;font-weight:bold;font-size:1.15em;line-height:1.5}
-.ic.ja{color:var(--ja)}.ic.nein{color:var(--nein)}
-.tlist b{color:var(--text)}
-.tlist span.txt{color:var(--text)}
-.tlist small{display:block;color:var(--grau);font-size:.86em}
-.tlist .befugnisse{display:block;color:var(--grau);font-size:.82em;line-height:1.55;margin-top:2px}
-.tlist .befugnisse .erkl{display:block;font-size:.92em;opacity:.8;padding-left:12px;margin:1px 0 4px;line-height:1.5}
-.cta{background:var(--creme2);border-top:1px solid var(--linie);text-align:center;padding:36px 20px;margin-top:18px}
-.cta a{display:inline-block;background:var(--blau);color:#fff;text-decoration:none;font-weight:bold;padding:13px 24px;border-radius:10px;margin-top:8px}
-footer{background:#2b2620;color:#d8cdbb;text-align:center;padding:28px 20px;font-size:.9em;margin-top:10px}
-footer a{color:#fff}
-@media(max-width:600px){h1{font-size:1.5em}.nav-links a{margin-left:12px;font-size:.9em}}
+.mk{flex:none;font-weight:700;font-size:15px;line-height:1.55}
+.tblock.ja .mk{color:var(--grn)}
+.tblock.nein .mk{color:var(--red)}
+.tx{color:var(--ink2);font-size:15px}
+.tx b{color:var(--ink)}
+.detail{display:block;color:var(--grey);font-size:12.5px;line-height:1.55;margin-top:6px;padding-left:13px;border-left:2px solid var(--line)}
+.detail .erkl{display:block;opacity:.85;font-size:.94em;padding-left:10px;margin:1px 0 5px}
+/* cta */
+.cta{text-align:center;padding-block:50px 6px}
+.cta p{font-size:19px;margin-bottom:16px}
+.cta .mail{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:15px 28px;border-radius:3px}
+/* footer */
+.fbrand{background:#F6F4EE;border-top:1px solid var(--line);text-align:center;padding:46px 20px 40px;margin-top:44px}
+.fbrand img{width:100%;max-width:380px;margin:0 auto;display:block}
+.fbrand .fc{margin-top:16px;font-family:'Archivo';font-weight:600;font-size:20px;color:var(--ink)}
+.foot{background:#22242A;color:#b9b3a7;text-align:center;padding:24px 20px;font-size:14px}
+.foot a{color:#eee}
+@media(max-width:820px){.cycle{grid-template-columns:1fr 1fr;gap:34px 24px}.nav-links{display:none}}
+@media(max-width:520px){.cycle{grid-template-columns:1fr 1fr}}
 </style>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<meta name="theme-color" content="#FAF6EF">
+<meta name="theme-color" content="#EFEEE8">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Naville Handwerk GmbH">
 <meta property="og:locale" content="de_CH">
 <meta property="og:title" content="Was du von mir hast – Naville Handwerk GmbH">
-<meta property="og:description" content="Naville Handwerk GmbH – Personalverleih im Handwerk, Raum Bern.">
+<meta property="og:description" content="Was du von mir als Aushilfe im Handwerk hast – und was nicht. Transparent aufgelistet.">
 <meta property="og:url" content="https://naville-handwerk.ch/leistungen.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Was du von mir hast – Naville Handwerk GmbH">
-<meta name="twitter:description" content="Naville Handwerk GmbH – Personalverleih im Handwerk, Raum Bern.">
+<meta name="twitter:description" content="Was du von mir als Aushilfe im Handwerk hast – und was nicht. Transparent aufgelistet.">
+<!-- Icons: Font Awesome Free (CC BY 4.0, fontawesome.com) · Bootstrap Icons (MIT) · Material Symbols (Apache-2.0). Schrift: Archivo (SIL OFL 1.1). -->
 </head>
 <body>
+<div class="wire"></div>
+<header class="nav"><div class="wrap nav-in">
+  <a class="brand" href="index.html">naville <span class="red">handwerk</span></a>
+  <nav class="nav-links"><a href="index.html#wann">Wann ich helfe</a><a class="on" href="leistungen.html">Was du von mir hast</a><a href="preisrechner.html">Preisrechner</a><a href="faq.html">FAQ</a></nav>
+</div></header>
 
-<header class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="index.html">Naville Handwerk GmbH</a>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="leistungen.html">Was du von mir hast</a>
-      <a href="preisrechner.html">Preisrechner</a>
-      <a href="faq.html">FAQ</a>
-    </nav>
+<section class="wrap phead">
+  <div class="kick mono">Transparenz</div>
+  <h1 class="disp">Was du von mir hast <span class="red">— und was nicht</span></h1>
+  <p class="lead legend">Damit du weisst, woran du bist: <b class="g">Grün</b> heisst, es kommt dir als Einsatzbetrieb zugute. <b class="r">Rot</b> heisst, es nützt eher mir oder ist eine Grenze – damit es keine Enttäuschungen oder Überraschungen gibt.</p>
+</section>
+
+<section class="wrap sec" id="wie">
+  <div class="eyebrow mono">Wie ein Notstromaggregat</div>
+  <h2 class="disp">Zugeschaltet, wenn's eng wird — abgeschaltet, wenn's läuft.</h2>
+  <p class="sub">Kein Dauerzustand, sondern ein sauberer Zyklus: abrufbar, wenn du mich brauchst; weg, sobald dein Team wieder steht.</p>
+  <div class="cycle">
+    <div class="step">
+      <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="42" r="16" fill="#26282E" stroke="#EA8C1B" stroke-width="3"/><g stroke="#EA8C1B" stroke-width="2.8" stroke-linecap="round"><path d="M32 34 V42.5"/><path d="M27.6 38 A7 7 0 1 0 36.4 38"/></g></svg>
+      <div class="n mono">01 · Standby</div><p>Wie die Reserve im Aggregat — verfügbar, wenn's bei dir eng wird.</p>
+    </div>
+    <div class="step">
+      <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="46" r="14" fill="#26282E" stroke="#EA8C1B" stroke-width="3"/><g stroke="#EA8C1B" stroke-width="2.6" stroke-linecap="round"><path d="M32 39.5 V46.5"/><path d="M28 42.8 A6 6 0 1 0 36 42.8"/></g><g transform="translate(31,38) scale(1.85) rotate(215) translate(-6.75,-1)"><path d="M8.5 1.75v2.716l.047-.002c.312-.012.742-.016 1.051.046.28.056.543.18.738.288.273.152.456.385.56.642l.132-.012c.312-.024.794-.038 1.158.108.37.148.689.487.88.716q.113.137.195.248h.582a2 2 0 0 1 1.99 2.199l-.272 2.715a3.5 3.5 0 0 1-.444 1.389l-1.395 2.441A1.5 1.5 0 0 1 12.42 16H6.118a1.5 1.5 0 0 1-1.342-.83l-1.215-2.43L1.07 8.589a1.517 1.517 0 0 1 2.373-1.852L5 8.293V1.75a1.75 1.75 0 0 1 3.5 0" fill="#fff" stroke="#22242A" stroke-width="0.55" stroke-linejoin="round"/><path d="M6.75 1a.75.75 0 0 1 .75.75V8a.5.5 0 0 0 1 0V5.467l.086-.004c.317-.012.637-.008.816.027.134.027.294.096.448.182.077.042.15.147.15.314V8a.5.5 0 0 0 1 0V6.435l.106-.01c.316-.024.584-.01.708.04.118.046.3.207.486.43.081.096.15.19.2.259V8.5a.5.5 0 1 0 1 0v-1h.342a1 1 0 0 1 .995 1.1l-.271 2.715a2.5 2.5 0 0 1-.317.991l-1.395 2.442a.5.5 0 0 1-.434.252H6.118a.5.5 0 0 1-.447-.276l-1.232-2.465-2.512-4.185a.517.517 0 0 1 .809-.631l2.41 2.41A.5.5 0 0 0 6 9.5V1.75A.75.75 0 0 1 6.75 1M8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v6.543L3.443 6.736A1.517 1.517 0 0 0 1.07 8.588l2.491 4.153 1.215 2.43A1.5 1.5 0 0 0 6.118 16h6.302a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5 5 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.6 2.6 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046z" fill="#22242A"/></g></svg>
+      <div class="n mono">02 · Zuschalten</div><p>Ausfall, Auftragsspitze oder Teilzeit-Lücke — ein Anruf genügt.</p>
+    </div>
+    <div class="step">
+      <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="42" r="16" fill="#26282E" stroke="#3E9E4E" stroke-width="3"/><g stroke="#3E9E4E" stroke-width="2.8" stroke-linecap="round"><path d="M32 34 V42.5"/><path d="M27.6 38 A7 7 0 1 0 36.4 38"/></g></svg>
+      <div class="n mono">03 · Betrieb</div><p>Als zusätzliche Fachkraft in deinem Team, top ausgerüstet.</p>
+    </div>
+    <div class="step">
+      <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="46" r="14" fill="#26282E" stroke="#3E9E4E" stroke-width="3"/><g stroke="#3E9E4E" stroke-width="2.6" stroke-linecap="round"><path d="M32 39.5 V46.5"/><path d="M28 42.8 A6 6 0 1 0 36 42.8"/></g><g transform="translate(31,38) scale(1.85) rotate(215) translate(-6.75,-1)"><path d="M8.5 1.75v2.716l.047-.002c.312-.012.742-.016 1.051.046.28.056.543.18.738.288.273.152.456.385.56.642l.132-.012c.312-.024.794-.038 1.158.108.37.148.689.487.88.716q.113.137.195.248h.582a2 2 0 0 1 1.99 2.199l-.272 2.715a3.5 3.5 0 0 1-.444 1.389l-1.395 2.441A1.5 1.5 0 0 1 12.42 16H6.118a1.5 1.5 0 0 1-1.342-.83l-1.215-2.43L1.07 8.589a1.517 1.517 0 0 1 2.373-1.852L5 8.293V1.75a1.75 1.75 0 0 1 3.5 0" fill="#fff" stroke="#22242A" stroke-width="0.55" stroke-linejoin="round"/><path d="M6.75 1a.75.75 0 0 1 .75.75V8a.5.5 0 0 0 1 0V5.467l.086-.004c.317-.012.637-.008.816.027.134.027.294.096.448.182.077.042.15.147.15.314V8a.5.5 0 0 0 1 0V6.435l.106-.01c.316-.024.584-.01.708.04.118.046.3.207.486.43.081.096.15.19.2.259V8.5a.5.5 0 1 0 1 0v-1h.342a1 1 0 0 1 .995 1.1l-.271 2.715a2.5 2.5 0 0 1-.317.991l-1.395 2.442a.5.5 0 0 1-.434.252H6.118a.5.5 0 0 1-.447-.276l-1.232-2.465-2.512-4.185a.517.517 0 0 1 .809-.631l2.41 2.41A.5.5 0 0 0 6 9.5V1.75A.75.75 0 0 1 6.75 1M8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v6.543L3.443 6.736A1.517 1.517 0 0 0 1.07 8.588l2.491 4.153 1.215 2.43A1.5 1.5 0 0 0 6.118 16h6.302a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5 5 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.6 2.6 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046z" fill="#22242A"/></g></svg>
+      <div class="n mono">04 · Ausschalten</div><p>Steht dein Team wieder, gehe ich — ohne schlechtes Gewissen.</p>
+    </div>
   </div>
-</header>
+</section>
 
-<div class="head">
-  <div class="head-inner">
-    <div class="kicker">Transparenz</div>
-    <h1>Was du von mir hast – und was nicht</h1>
-    <p class="intro">Damit du weisst, woran du bist: <span style="color:var(--ja);font-weight:bold">grün</span> heisst, es kommt dir als Einsatzbetrieb zugute. <span style="color:var(--nein);font-weight:bold">Rot</span> heisst, es nützt eher mir oder ist eine Grenze – damit es keine Enttäuschungen oder Überraschungen gibt.</p>
-  </div>
-</div>
-
-<section>
-  <div class="wrap">
-    <div class="block ja">
-      <h2>✓ Das kommt dir zugute</h2>
-      <p class="sub">Vorteile für deinen Betrieb</p>
+<section class="wrap sec">
+  <div class="tsec">
+    <div class="tblock ja">
+      <div class="th"><span class="tchip">✓</span><h2>Das kommt dir zugute</h2></div>
+      <div class="tsub">Vorteile für deinen Betrieb</div>
       <ul class="tlist">
-        <li><span class="ic ja">✓</span><span class="txt"><b>Kurzfristige Aushilfe</b>, wenn dir eine Fachkraft fehlt – Auftragsspitzen, Ausfälle, Termindruck.</span></li>
-        <li><span class="ic ja">✓</span><span class="txt"><b>Daraus folgt direkt: keine langfristige Verpflichtung</b> – du setzt mich nur ein, so lange der Engpass dauert.</span></li>
-        <li><span class="ic ja">✓</span><span class="txt"><b>Gelernter Elektroinstallateur EFZ</b> mit rund zehn Jahren Praxis in Service und auf dem Bau.</span></li>
-        <li><span class="ic ja">✓</span><span class="txt"><b>Ausgebildet und lizenziert</b> für Autos, Hebebühnen und Stapler sowie für Arbeiten in der Höhe.<span class="befugnisse">&bull; Auto: Kat. B<br>&bull; Hebebühnen: Kat. 1a / 1b / 3a / 3b<span class="erkl">1a senkrechte Hubarbeitsbühnen auf Stützen (statisch vertikal) &middot; 1b Ausleger-Hubarbeitsbühnen auf Fahrzeugen (statisch Boom) &middot; 3a während des Einsatzes fahrbare senkrechte Hubarbeitsbühnen (mobil vertikal) &middot; 3b während des Einsatzes fahrbare Ausleger-Hubarbeitsbühnen (mobil Boom)</span>&bull; Stapler: Kat. R1 / R3 / S2<span class="erkl">R1 Gegengewichtsstapler &middot; R3 Seitenstapler &middot; S2 Deichselgeräte (nicht SUVA-auditiert). Firmeninterne, gerätespezifische Instruktion dennoch unerlässlich.</span>&bull; Arbeiten in der Höhe: PSAgA gem. VUV Art. 5/6<br>&bull; Nothelfer-Kurs vier Mal absolviert: für den Führerschein, Ausbildungen, Rekrutenschule</span></span></li>
-        <li><span class="ic ja">✓</span><span class="txt"><b>Top ausgerüstet, sauber, pünktlich, zuverlässig</b> – und mit klaren Absprachen, ohne zusätzliche Unruhe.<span class="befugnisse">&bull; Maschinentasche: 22-V-Geräte (Hilti Nuron) für grössere Arbeiten<br>&bull; Werkzeugtasche: 12-V-Geräte (Bosch) samt Handwerkzeug – Brecheisen, Latthammer, Einzugsbänder, Distanzlaser, Schmiege usw.<br>&bull; Diverse Schraubenkisten</span></span></li>
-        <li><span class="ic ja">✓</span><span class="txt"><b>Ruhig und ausdauernd, auch wenn es drunter und drüber geht.</b> Gearbeitet wird konzentriert statt gehetzt – wer herumrennt und sich stresst, übersieht Abläufe, vergisst Details, arbeitet gefährlich und verletzt sich. Ruhiges, fokussiertes Arbeiten ist am Ende etwa gleich schnell, aber sauberer und sicherer.</span></li>
-        <li><span class="ic ja">✓</span><span class="txt"><b>In deinem Team, unter deiner Bewilligung</b> – ich arbeite unter deiner Installationsbewilligung und Aufsicht.</span></li>
-        <li><span class="ic ja">✓</span><span class="txt"><b>Passt es nicht, sage ich es</b> – und vermittle, wenn möglich, jemand anderen.</span></li>
-        <li><span class="ic ja">✓</span><span class="txt"><b>Fairer Ansatz, wenn es eng wird.</b> Steckt dein Betrieb nicht nur personell, sondern auch finanziell in einer Durststrecke, kann ich meinen Stundenansatz senken – wir können alle mal Hilfe gebrauchen und arbeiten miteinander, nicht gegeneinander. Für alle anderen gelten die normalen Ansätze.</span></li>
+        <li><span class="mk">✓</span><span class="tx"><b>Kurzfristige Aushilfe</b>, wenn dir eine Fachkraft fehlt – Auftragsspitzen, Ausfälle, Termindruck.</span></li>
+        <li><span class="mk">✓</span><span class="tx"><b>Daraus folgt direkt: keine langfristige Verpflichtung</b> – du setzt mich nur ein, so lange der Engpass dauert.</span></li>
+        <li><span class="mk">✓</span><span class="tx"><b>Gelernter Elektroinstallateur EFZ</b> mit rund zehn Jahren Praxis in Service und auf dem Bau.</span></li>
+        <li><span class="mk">✓</span><span class="tx"><b>Ausgebildet und lizenziert</b> für Autos, Hebebühnen und Stapler sowie für Arbeiten in der Höhe.<span class="detail">&bull; Auto: Kat. B<br>&bull; Hebebühnen: Kat. 1a / 1b / 3a / 3b<span class="erkl">1a senkrechte Hubarbeitsbühnen auf Stützen (statisch vertikal) &middot; 1b Ausleger-Hubarbeitsbühnen auf Fahrzeugen (statisch Boom) &middot; 3a während des Einsatzes fahrbare senkrechte Hubarbeitsbühnen (mobil vertikal) &middot; 3b während des Einsatzes fahrbare Ausleger-Hubarbeitsbühnen (mobil Boom)</span>&bull; Stapler: Kat. R1 / R3 / S2<span class="erkl">R1 Gegengewichtsstapler &middot; R3 Seitenstapler &middot; S2 Deichselgeräte (nicht SUVA-auditiert). Firmeninterne, gerätespezifische Instruktion dennoch unerlässlich.</span>&bull; Arbeiten in der Höhe: PSAgA gem. VUV Art. 5/6<br>&bull; Nothelfer-Kurs vier Mal absolviert: für den Führerschein, Ausbildungen, Rekrutenschule</span></span></li>
+        <li><span class="mk">✓</span><span class="tx"><b>Top ausgerüstet, sauber, pünktlich, zuverlässig</b> – und mit klaren Absprachen, ohne zusätzliche Unruhe.<span class="detail">&bull; Maschinentasche: 22-V-Geräte (Hilti Nuron) für grössere Arbeiten<br>&bull; Werkzeugtasche: 12-V-Geräte (Bosch) samt Handwerkzeug – Brecheisen, Latthammer, Einzugsbänder, Distanzlaser, Schmiege usw.<br>&bull; Diverse Schraubenkisten</span></span></li>
+        <li><span class="mk">✓</span><span class="tx"><b>Ruhig und ausdauernd, auch wenn es drunter und drüber geht.</b> Gearbeitet wird konzentriert statt gehetzt – wer herumrennt und sich stresst, übersieht Abläufe, vergisst Details, arbeitet gefährlich und verletzt sich. Ruhiges, fokussiertes Arbeiten ist am Ende etwa gleich schnell, aber sauberer und sicherer.</span></li>
+        <li><span class="mk">✓</span><span class="tx"><b>In deinem Team, unter deiner Bewilligung</b> – ich arbeite unter deiner Installationsbewilligung und Aufsicht.</span></li>
+        <li><span class="mk">✓</span><span class="tx"><b>Passt es nicht, sage ich es</b> – und vermittle, wenn möglich, jemand anderen.</span></li>
+        <li><span class="mk">✓</span><span class="tx"><b>Fairer Ansatz, wenn es eng wird.</b> Steckt dein Betrieb nicht nur personell, sondern auch finanziell in einer Durststrecke, kann ich meinen Stundenansatz senken – wir können alle mal Hilfe gebrauchen und arbeiten miteinander, nicht gegeneinander. Für alle anderen gelten die normalen Ansätze.</span></li>
       </ul>
     </div>
 
-    <div class="block nein">
-      <h2>✗ Was eher mir nützt oder eine Grenze ist</h2>
-      <p class="sub">Damit du es vorher weisst</p>
+    <div class="tblock nein">
+      <div class="th"><span class="tchip">✗</span><h2>Was eher mir nützt oder eine Grenze ist</h2></div>
+      <div class="tsub">Damit du es vorher weisst</div>
       <ul class="tlist">
-        <li><span class="ic nein">✗</span><span class="txt"><b>Nicht der billigste Anbieter.</b> Der Preis ist ein Qualitätssignal – günstige Dauerlösungen findest du anderswo.</span></li>
-        <li><span class="ic nein">✗</span><span class="txt"><b>Strikt B2B.</b> Naville Handwerk GmbH verleiht nur an Betriebe – keine direkte Ausleihe an Endkunden.</span></li>
-        <li><span class="ic nein">✗</span><span class="txt"><b>Keine Zusatzausbildung</b> als Teamleiter oder Sicherheitsberater – ich bin die Fachkraft vor Ort, nicht eine Führungsrolle oder Kontrollorgan.</span></li>
-        <li><span class="ic nein">✗</span><span class="txt"><b>Keine Lehrlingsbetreuung.</b> Lehrlinge sollten mit Bezugspersonen unterwegs sein, die sie kennen – nicht mit einer kurzfristig eingesetzten Aushilfe.</span></li>
-        <li><span class="ic nein">✗</span><span class="txt"><b>Kein eigenes Firmenfahrzeug.</b> Ich bringe nur Velo und Veloanhänger mit; Auto kann ich fahren (Kat. B) – für grössere Mengen Material oder weiter entfernte Baustellen braucht es also eines deiner Fahrzeuge.</span></li>
-        <li><span class="ic nein">✗</span><span class="txt"><b>Wenig Geduld für Dauer-Feilschen</b> oder laufend wechselnde Pläne – ich arbeite am besten mit klaren Abmachungen.</span></li>
-        <li><span class="ic nein">✗</span><span class="txt"><b>Ich wähle meine Einsätze bewusst.</b> Es ist nicht mein Ziel, von Einsatzfirma zu Einsatzfirma für einen möglichst hohen Preis zu werben – wichtiger ist mir eine passende, gegenseitig dankbare Zusammenarbeit, die ein Unternehmen genau dann entlastet, wenn es zählt.</span></li>
-        <li><span class="ic nein">✗</span><span class="txt"><b>Kein Ersatz für eine Festanstellung.</b> Ich bin für akute Engpässe da, nicht als Dauerlösung gedacht.</span></li>
+        <li><span class="mk">✗</span><span class="tx"><b>Nicht der billigste Anbieter.</b> Der Preis ist ein Qualitätssignal – günstige Dauerlösungen findest du anderswo.</span></li>
+        <li><span class="mk">✗</span><span class="tx"><b>Strikt B2B.</b> Naville Handwerk GmbH verleiht nur an Betriebe – keine direkte Ausleihe an Endkunden.</span></li>
+        <li><span class="mk">✗</span><span class="tx"><b>Keine Zusatzausbildung</b> als Teamleiter oder Sicherheitsberater – ich bin die Fachkraft vor Ort, nicht eine Führungsrolle oder Kontrollorgan.</span></li>
+        <li><span class="mk">✗</span><span class="tx"><b>Keine Lehrlingsbetreuung.</b> Lehrlinge sollten mit Bezugspersonen unterwegs sein, die sie kennen – nicht mit einer kurzfristig eingesetzten Aushilfe.</span></li>
+        <li><span class="mk">✗</span><span class="tx"><b>Kein eigenes Firmenfahrzeug.</b> Ich bringe nur Velo und Veloanhänger mit; Auto kann ich fahren (Kat. B) – für grössere Mengen Material oder weiter entfernte Baustellen braucht es also eines deiner Fahrzeuge.</span></li>
+        <li><span class="mk">✗</span><span class="tx"><b>Wenig Geduld für Dauer-Feilschen</b> oder laufend wechselnde Pläne – ich arbeite am besten mit klaren Abmachungen.</span></li>
+        <li><span class="mk">✗</span><span class="tx"><b>Ich wähle meine Einsätze bewusst.</b> Es ist nicht mein Ziel, von Einsatzfirma zu Einsatzfirma für einen möglichst hohen Preis zu werben – wichtiger ist mir eine passende, gegenseitig dankbare Zusammenarbeit, die ein Unternehmen genau dann entlastet, wenn es zählt.</span></li>
+        <li><span class="mk">✗</span><span class="tx"><b>Kein Ersatz für eine Festanstellung.</b> Ich bin für akute Engpässe da, nicht als Dauerlösung gedacht.</span></li>
       </ul>
     </div>
   </div>
 </section>
 
-<div class="cta">
-  <div class="wrap">
-    <p>Passt das zu deinem Bedarf? Dann melde dich.</p>
-    <a href="mailto:info@naville-handwerk.ch">info@naville-handwerk.ch</a>
-  </div>
+<section class="wrap cta">
+  <p class="disp">Passt das zu deinem Bedarf? Dann melde dich.</p>
+  <a class="mail" href="mailto:info@naville-handwerk.ch">info@naville-handwerk.ch</a>
+</section>
+
+<div class="fbrand">
+  <img src="logo/emblem-schwarzrot-transparent.png" alt="Naville Handwerk – Lastenvelo mit Anhänger und Firmenschild">
+  <p class="fc">Der <span class="red">Notstromer</span> für Berner Elektrikerfirmen</p>
 </div>
-
-<footer>
-  Naville Handwerk GmbH · 3005 Bern · <a href="mailto:info@naville-handwerk.ch">info@naville-handwerk.ch</a><br>
-  Personalverleih im Handwerk · Raum Bern · <a href="impressum.html" style="color:#fff">Impressum</a>
-</footer>
-
-</body>
-</html>
+<footer class="foot">Naville Handwerk GmbH · 3005 Bern · <a href="mailto:info@naville-handwerk.ch">info@naville-handwerk.ch</a><br>Personalverleih im Handwerk · Raum Bern · <a href="impressum.html">Impressum</a></footer>
+</body></html>

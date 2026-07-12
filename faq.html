@@ -1,51 +1,63 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html><html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <title>Häufige Fragen – Naville Handwerk GmbH</title>
 <meta name="description" content="Antworten für Einsatzbetriebe: Bewilligung, Versicherung, Abrechnung und Kosten beim Personalverleih durch Naville Handwerk GmbH, Raum Bern.">
 <style>
-:root{--blau:#1F4E79;--blau2:#2E5496;--akzent:#B9772E;--creme:#FAF6EF;--creme2:#FFFDF8;--karte:#FFFFFF;--text:#33302B;--grau:#6b6357;--linie:#e7ddcf}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;font-family:"Segoe UI",Arial,Helvetica,sans-serif;color:var(--text);line-height:1.65;background:var(--creme)}
-a{color:var(--blau)}
-header.nav{position:sticky;top:0;z-index:10;background:rgba(250,246,239,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--linie)}
-.nav-inner{max-width:980px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.brand{font-weight:bold;color:var(--blau);font-size:1.05em;text-decoration:none}
-.nav-links a{margin-left:18px;text-decoration:none;color:var(--grau);font-size:.95em}
-.nav-links a:hover{color:var(--akzent)}
-.head{padding:48px 20px 10px}
-.head-inner{max-width:820px;margin:0 auto}
-.kicker{text-transform:uppercase;letter-spacing:2px;font-size:.76em;color:var(--akzent);font-weight:bold;margin-bottom:12px}
-h1{color:var(--blau);font-size:1.9em;margin:0 0 12px}
-.intro{font-size:1.08em;max-width:680px}
-section{padding:20px 20px 8px}
-.wrap{max-width:820px;margin:0 auto}
-.qa{background:var(--karte);border:1px solid var(--linie);border-radius:14px;padding:6px 22px;margin:14px 0;box-shadow:0 4px 14px rgba(80,60,30,.05)}
-details{border-top:1px solid var(--linie);padding:4px 0}
+@font-face{font-family:'Archivo';font-weight:600;font-display:swap;src:url(fonts/archivo-600.woff2) format('woff2');}
+:root{--ink:#22242A;--ink2:#43423C;--paper:#EFEEE8;--red:#C1121C;--grey:#6E6B64;--line:#DCD6CB;--card:#fff;}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:"Segoe UI",system-ui,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(24px,5vw,52px)}
+.disp{font-family:'Archivo',sans-serif;font-weight:600;letter-spacing:-.02em}
+.mono{font-family:ui-monospace,'DejaVu Sans Mono',Consolas,monospace;font-weight:600;font-size:12px;line-height:1.4;letter-spacing:2px;text-transform:uppercase}
+.kick{font-size:14px;letter-spacing:2.6px}
+.red{color:var(--red)}
+a{color:inherit}
+.wire{height:4px;background:var(--red)}
+.nav{position:sticky;top:0;z-index:20;background:rgba(239,238,232,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:20px;flex-wrap:wrap}
+.brand{font-family:'Archivo';font-weight:600;font-size:21px;letter-spacing:-.4px;text-transform:lowercase;text-decoration:none;color:var(--ink)}
+.nav-links a{margin-left:26px;color:var(--grey);text-decoration:none;font-size:14.5px}
+.nav-links a:hover{color:var(--red)}
+.nav-links a.on{color:var(--ink)}
+.phead{padding-block:60px 8px}
+.kick{color:var(--red);margin-bottom:16px}
+.phead h1{font-size:clamp(30px,4.6vw,48px);line-height:1.05;margin:0 0 18px}
+.phead .lead{font-size:18px;color:var(--ink2);max-width:60ch}
+.sec{padding-block:44px 10px}
+.faq{max-width:840px;margin:0 auto}
+.qacard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:2px 24px;box-shadow:0 6px 18px rgba(34,36,42,.05)}
+details{border-top:1px solid var(--line);padding:2px 0}
 details:first-child{border-top:none}
-summary{cursor:pointer;list-style:none;padding:14px 0;font-weight:bold;color:var(--blau);font-size:1.04em;display:flex;align-items:flex-start;gap:10px}
+summary{cursor:pointer;list-style:none;padding:16px 0;font-family:'Archivo',sans-serif;font-weight:600;font-size:17px;line-height:1.35;color:var(--ink);display:flex;gap:13px;align-items:flex-start}
 summary::-webkit-details-marker{display:none}
-summary::before{content:"+";color:var(--akzent);font-weight:bold;font-size:1.2em;line-height:1.2;flex:0 0 auto}
+summary::before{content:"+";color:var(--red);font-weight:700;font-size:21px;line-height:1;flex:none;margin-top:2px}
 details[open] summary::before{content:"–"}
-details[open] summary{color:var(--akzent)}
-.qa .a{padding:0 0 14px 24px;color:var(--text)}
-.qa .a p{margin:0 0 8px}
-.qa .a .src{color:var(--grau);font-size:.86em}
-.note{max-width:820px;margin:18px auto 0;color:var(--grau);font-size:.86em;background:var(--creme2);border:1px solid var(--linie);border-radius:10px;padding:12px 16px}
-.cta{background:var(--creme2);border-top:1px solid var(--linie);text-align:center;padding:36px 20px;margin-top:22px}
-.cta a{display:inline-block;background:var(--blau);color:#fff;text-decoration:none;font-weight:bold;padding:13px 24px;border-radius:10px;margin-top:8px}
-footer{background:#2b2620;color:#d8cdbb;text-align:center;padding:28px 20px;font-size:.9em;margin-top:10px}
-footer a{color:#fff}
-@media(max-width:600px){h1{font-size:1.5em}.nav-links a{margin-left:12px;font-size:.9em}}
+details[open] summary{color:var(--red)}
+.a{padding:0 0 18px 27px;color:var(--ink2);font-size:15px}
+.a p{margin:0 0 8px}
+.a p:last-child{margin-bottom:0}
+.a .src{color:var(--grey);font-size:13px}
+.a a{color:var(--red);font-weight:600;text-decoration:none}
+.a a:hover{text-decoration:underline}
+.note{max-width:840px;margin:22px auto 0;color:var(--grey);font-size:13px;background:#F6F4EE;border:1px solid var(--line);border-radius:10px;padding:14px 18px;line-height:1.55}
+.cta{text-align:center;padding-block:50px 6px}
+.cta p{font-size:19px;margin-bottom:16px}
+.cta .mail{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:15px 28px;border-radius:3px}
+.fbrand{background:#F6F4EE;border-top:1px solid var(--line);text-align:center;padding:46px 20px 40px;margin-top:44px}
+.fbrand img{width:100%;max-width:380px;margin:0 auto;display:block}
+.fbrand .fc{margin-top:16px;font-family:'Archivo';font-weight:600;font-size:20px;color:var(--ink)}
+.foot{background:#22242A;color:#b9b3a7;text-align:center;padding:24px 20px;font-size:14px}
+.foot a{color:#eee}
+@media(max-width:820px){.nav-links{display:none}}
 </style>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<meta name="theme-color" content="#FAF6EF">
+<meta name="theme-color" content="#EFEEE8">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Naville Handwerk GmbH">
 <meta property="og:locale" content="de_CH">
@@ -57,35 +69,26 @@ footer a{color:#fff}
 <meta name="twitter:description" content="Antworten für Einsatzbetriebe: Bewilligung, Versicherung, Abrechnung und Kosten beim Personalverleih durch Naville Handwerk GmbH, Raum Bern.">
 </head>
 <body>
+<div class="wire"></div>
+<header class="nav"><div class="wrap nav-in">
+  <a class="brand" href="index.html">naville <span class="red">handwerk</span></a>
+  <nav class="nav-links"><a href="index.html#wann">Wann ich helfe</a><a href="leistungen.html">Was du von mir hast</a><a href="preisrechner.html">Preisrechner</a><a class="on" href="faq.html">FAQ</a></nav>
+</div></header>
 
-<header class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="index.html">Naville Handwerk GmbH</a>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="leistungen.html">Was du von mir hast</a>
-      <a href="preisrechner.html">Preisrechner</a>
-      <a href="faq.html">FAQ</a>
-    </nav>
-  </div>
-</header>
+<section class="wrap phead">
+  <div class="kick mono">Häufige Fragen</div>
+  <h1 class="disp">Was Einsatzbetriebe oft fragen</h1>
+  <p class="lead">Kurz und ehrlich beantwortet – damit du weisst, worauf du dich einlässt, bevor du anfragst.</p>
+</section>
 
-<div class="head">
-  <div class="head-inner">
-    <div class="kicker">Häufige Fragen</div>
-    <h1>Was Einsatzbetriebe oft fragen</h1>
-    <p class="intro">Kurz und ehrlich beantwortet – damit du weisst, worauf du dich einlässt, bevor du anfragst.</p>
-  </div>
-</div>
-
-<section>
-  <div class="wrap">
-    <div class="qa">
+<section class="wrap sec">
+  <div class="faq">
+    <div class="qacard">
 
       <details open>
-        <summary>Brauchst du eine Bewilligung für den Personalverleih?</summary>
+        <summary>Du (Einsatzfirma): Brauchst du eine Bewilligung für den Personalverleih?</summary>
         <div class="a">
-          <p>Nein. Als Ein-Personen-GmbH, die ausschliesslich sich selbst verleiht, bin ich bewilligungsfrei; der Kanton Bern bestätigt das auf Anfrage. Erst wenn ich weitere Personen anstellen und verleihen würde, bräuchte es eine ordentliche Bewilligung mit Kaution – das ist hier nicht der Fall.</p>
+          <p><b>Eric Naville:</b> Nein. Als Ein-Personen-GmbH, die ausschliesslich sich selbst verleiht, bin ich bewilligungsfrei; der Kanton Bern bestätigt das auf Anfrage. Erst wenn ich weitere Personen anstellen und verleihen würde, bräuchte es eine ordentliche Bewilligung mit Kaution – das ist hier nicht der Fall.</p>
           <p class="src">Grundlage: Art. 28 Abs. 2 AVV. Richtwert, keine Rechtsberatung – massgeblich ist die Bestätigung des AWI Bern.</p>
         </div>
       </details>
@@ -173,14 +176,14 @@ footer a{color:#fff}
   </div>
 </section>
 
-<div class="cta">
-  <p>Frage offen? Schreib mir kurz, was du brauchst.</p>
-  <a href="index.html#kontakt">Kontakt aufnehmen</a>
+<section class="wrap cta">
+  <p class="disp">Frage offen? Schreib mir kurz, was du brauchst.</p>
+  <a class="mail" href="index.html#kontakt">Kontakt aufnehmen</a>
+</section>
+
+<div class="fbrand">
+  <img src="logo/emblem-schwarzrot-transparent.png" alt="Naville Handwerk – Lastenvelo mit Anhänger und Firmenschild">
+  <p class="fc">Der <span class="red">Notstromer</span> für Berner Elektrikerfirmen</p>
 </div>
-
-<footer>
-  Naville Handwerk GmbH · 3005 Bern · <a href="mailto:info@naville-handwerk.ch">info@naville-handwerk.ch</a> · <a href="impressum.html">Impressum</a>
-</footer>
-
-</body>
-</html>
+<footer class="foot">Naville Handwerk GmbH · 3005 Bern · <a href="mailto:info@naville-handwerk.ch">info@naville-handwerk.ch</a> · <a href="impressum.html">Impressum</a></footer>
+</body></html>

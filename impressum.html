@@ -1,43 +1,53 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html><html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <title>Impressum – Naville Handwerk GmbH</title>
 <meta name="description" content="Impressum und rechtliche Angaben der Naville Handwerk GmbH, 3005 Bern.">
 <style>
-:root{--blau:#1F4E79;--blau2:#2E5496;--akzent:#B9772E;--creme:#FAF6EF;--creme2:#FFFDF8;--karte:#FFFFFF;--text:#33302B;--grau:#6b6357;--linie:#e7ddcf}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;font-family:"Segoe UI",Arial,Helvetica,sans-serif;color:var(--text);line-height:1.65;background:var(--creme)}
-a{color:var(--blau)}
-header.nav{position:sticky;top:0;z-index:10;background:rgba(250,246,239,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--linie)}
-.nav-inner{max-width:980px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.brand{font-weight:bold;color:var(--blau);font-size:1.05em;text-decoration:none}
-.nav-links a{margin-left:18px;text-decoration:none;color:var(--grau);font-size:.95em}
-.nav-links a:hover{color:var(--akzent)}
-.head{padding:48px 20px 10px}
-.head-inner{max-width:760px;margin:0 auto}
-.kicker{text-transform:uppercase;letter-spacing:2px;font-size:.76em;color:var(--akzent);font-weight:bold;margin-bottom:12px}
-h1{color:var(--blau);font-size:1.9em;margin:0 0 12px}
-section{padding:14px 20px}
-.wrap{max-width:760px;margin:0 auto}
-.card{background:var(--karte);border:1px solid var(--linie);border-radius:14px;padding:6px 24px 18px;margin:16px 0;box-shadow:0 4px 14px rgba(80,60,30,.05)}
-.card h2{color:var(--blau);font-size:1.15em;margin:18px 0 6px}
-.row{margin:2px 0}
-.lbl{color:var(--grau)}
-.todo{color:var(--akzent);font-style:italic}
-.card p{margin:6px 0}
-.muted{color:var(--grau);font-size:.9em}
-footer{background:#2b2620;color:#d8cdbb;text-align:center;padding:28px 20px;font-size:.9em;margin-top:18px}
-footer a{color:#fff}
-@media(max-width:600px){h1{font-size:1.5em}.nav-links a{margin-left:12px;font-size:.9em}}
+@font-face{font-family:'Archivo';font-weight:600;font-display:swap;src:url(fonts/archivo-600.woff2) format('woff2');}
+:root{--ink:#22242A;--ink2:#43423C;--paper:#EFEEE8;--red:#C1121C;--grey:#6E6B64;--line:#DCD6CB;--card:#fff;--org:#EA8C1B;}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:"Segoe UI",system-ui,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(24px,5vw,52px)}
+.disp{font-family:'Archivo',sans-serif;font-weight:600;letter-spacing:-.02em}
+.mono{font-family:ui-monospace,'DejaVu Sans Mono',Consolas,monospace;font-weight:600;font-size:12px;line-height:1.4;letter-spacing:2px;text-transform:uppercase}
+.kick{font-size:14px;letter-spacing:2.6px}
+.red{color:var(--red)}
+a{color:inherit}
+.wire{height:4px;background:var(--red)}
+.nav{position:sticky;top:0;z-index:20;background:rgba(239,238,232,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:20px;flex-wrap:wrap}
+.brand{font-family:'Archivo';font-weight:600;font-size:21px;letter-spacing:-.4px;text-transform:lowercase;text-decoration:none;color:var(--ink)}
+.nav-links a{margin-left:26px;color:var(--grey);text-decoration:none;font-size:14.5px}
+.nav-links a:hover{color:var(--red)}
+.phead{padding-block:60px 6px}
+.kick{color:var(--red);margin-bottom:16px}
+.phead h1{font-size:clamp(30px,4.6vw,48px);line-height:1.05;margin:0}
+.sec{padding-block:34px 10px}
+.narrow{max-width:760px;margin:0 auto}
+.icard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 26px 22px;margin:18px 0;box-shadow:0 6px 18px rgba(34,36,42,.05)}
+.icard h2{font-family:'Archivo',sans-serif;font-weight:600;font-size:19px;color:var(--ink);margin:20px 0 8px}
+.row{margin:5px 0;color:var(--ink2);font-size:15px}
+.row b{color:var(--ink)}
+.lbl{color:var(--grey)}
+.todo{color:var(--org);font-style:italic}
+.icard p{margin:8px 0;color:var(--ink2);font-size:15px}
+.muted{color:var(--grey);font-size:13px}
+.icard a{color:var(--red);font-weight:600;text-decoration:none}
+.icard a:hover{text-decoration:underline}
+.fbrand{background:#F6F4EE;border-top:1px solid var(--line);text-align:center;padding:46px 20px 40px;margin-top:40px}
+.fbrand img{width:100%;max-width:380px;margin:0 auto;display:block}
+.fbrand .fc{margin-top:16px;font-family:'Archivo';font-weight:600;font-size:20px;color:var(--ink)}
+.foot{background:#22242A;color:#b9b3a7;text-align:center;padding:24px 20px;font-size:14px}
+.foot a{color:#eee}
+@media(max-width:820px){.nav-links{display:none}}
 </style>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<meta name="theme-color" content="#FAF6EF">
+<meta name="theme-color" content="#EFEEE8">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Naville Handwerk GmbH">
 <meta property="og:locale" content="de_CH">
@@ -49,30 +59,21 @@ footer a{color:#fff}
 <meta name="twitter:description" content="Impressum und rechtliche Angaben der Naville Handwerk GmbH, 3005 Bern.">
 </head>
 <body>
+<div class="wire"></div>
+<header class="nav"><div class="wrap nav-in">
+  <a class="brand" href="index.html">naville <span class="red">handwerk</span></a>
+  <nav class="nav-links"><a href="index.html#wann">Wann ich helfe</a><a href="leistungen.html">Was du von mir hast</a><a href="preisrechner.html">Preisrechner</a><a href="faq.html">FAQ</a></nav>
+</div></header>
 
-<header class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="index.html">Naville Handwerk GmbH</a>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="leistungen.html">Was du von mir hast</a>
-      <a href="preisrechner.html">Preisrechner</a>
-      <a href="faq.html">FAQ</a>
-    </nav>
-  </div>
-</header>
+<section class="wrap phead">
+  <div class="kick mono">Rechtliches</div>
+  <h1 class="disp">Impressum</h1>
+</section>
 
-<div class="head">
-  <div class="head-inner">
-    <div class="kicker">Rechtliches</div>
-    <h1>Impressum</h1>
-  </div>
-</div>
+<section class="wrap sec">
+  <div class="narrow">
 
-<section>
-  <div class="wrap">
-
-    <div class="card">
+    <div class="icard">
       <h2>Verantwortlich / Firma</h2>
       <p class="row"><b>Naville Handwerk GmbH</b> <span class="todo">(in Gründung)</span></p>
       <p class="row">Eric Naville (Inhaber und Geschäftsführer)</p>
@@ -80,32 +81,32 @@ footer a{color:#fff}
       <p class="row"><span class="lbl">Strasse / Nr.:</span> <span class="todo">noch zu ergänzen</span></p>
     </div>
 
-    <div class="card">
+    <div class="icard">
       <h2>Kontakt</h2>
       <p class="row"><span class="lbl">E-Mail:</span> <a href="mailto:info@naville-handwerk.ch">info@naville-handwerk.ch</a></p>
       <p class="row"><span class="lbl">Telefon:</span> <span class="todo">noch zu ergänzen</span></p>
     </div>
 
-    <div class="card">
-      <h2>Register & Steuern</h2>
+    <div class="icard">
+      <h2>Register &amp; Steuern</h2>
       <p class="row"><span class="lbl">Handelsregister:</span> <span class="todo">UID/CHE-Nummer nach Eintrag ergänzen</span></p>
       <p class="row"><span class="lbl">MWST-Nummer:</span> <span class="todo">nach Registrierung ergänzen (CHE-… MWST)</span></p>
       <p class="row"><span class="lbl">Zweck:</span> Personalverleih im Handwerk (Raum Bern)</p>
     </div>
 
-    <div class="card">
+    <div class="icard">
       <h2>Haftungsausschluss</h2>
       <p>Die Inhalte dieser Webseite werden mit Sorgfalt erstellt. Für Richtigkeit, Vollständigkeit und Aktualität wird keine Gewähr übernommen. Werte und Erklärungen – insbesondere im Preisrechner und in den FAQ – sind Richtwerte und ersetzen keine Rechts-, Steuer- oder Versicherungsberatung.</p>
       <p>Für Inhalte externer Links sind ausschliesslich deren Betreiber verantwortlich.</p>
     </div>
 
-    <div class="card">
+    <div class="icard">
       <h2>Datenschutz</h2>
       <p>Diese Seite ist bewusst schlank gehalten und setzt keine Tracking- oder Analyse-Werkzeuge ein. Nimmst du per E-Mail Kontakt auf, werden deine Angaben ausschliesslich zur Bearbeitung deiner Anfrage verwendet und nicht an Dritte weitergegeben.</p>
       <p class="muted">Hinweis: Bei späterem Einsatz eines Kontaktformulars, von Web-Analyse oder Hosting-Logs ist dieser Abschnitt entsprechend zu ergänzen (revidiertes DSG).</p>
     </div>
 
-    <div class="card">
+    <div class="icard">
       <h2>Urheberrecht</h2>
       <p>Texte, Grafiken und der Preisrechner auf dieser Seite stammen von Naville Handwerk GmbH. Weiterverwendung nur mit Einverständnis.</p>
     </div>
@@ -113,9 +114,9 @@ footer a{color:#fff}
   </div>
 </section>
 
-<footer>
-  Naville Handwerk GmbH · 3005 Bern · <a href="mailto:info@naville-handwerk.ch">info@naville-handwerk.ch</a> · <a href="index.html">Startseite</a>
-</footer>
-
-</body>
-</html>
+<div class="fbrand">
+  <img src="logo/emblem-schwarzrot-transparent.png" alt="Naville Handwerk – Lastenvelo mit Anhänger und Firmenschild">
+  <p class="fc">Der <span class="red">Notstromer</span> für Berner Elektrikerfirmen</p>
+</div>
+<footer class="foot">Naville Handwerk GmbH · 3005 Bern · <a href="mailto:info@naville-handwerk.ch">info@naville-handwerk.ch</a> · <a href="index.html">Startseite</a></footer>
+</body></html>
