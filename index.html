@@ -40,6 +40,7 @@ header.nav{position:sticky;top:0;z-index:10;background:rgba(250,246,239,.92);bac
 .hero-side .portrait{margin:0}
 .logo-circle{width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 50% 40%,#eef2f8,#dbe5f1);border:6px solid #fff;box-shadow:0 8px 22px rgba(40,60,90,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#7e93ad;text-align:center}
 .logo-circle svg{opacity:.5}
+.hero-logo{width:100%;height:auto;display:block}
 .photo-ph{background:linear-gradient(135deg,#f1eadd,#ece1cf);border:1px dashed #cbb99c;border-radius:16px;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#a2937a;text-align:center;padding:20px}
 /* SECTIONS */
 section{padding:52px 20px}
@@ -68,6 +69,10 @@ footer a{color:#fff}
 @media(max-width:600px){.hero-text h1{font-size:1.65em}.hero-inner{gap:26px}.portrait{flex-basis:180px;width:180px;height:180px}.nav-links a{margin-left:12px;font-size:.9em}}
 </style>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#FAF6EF">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Naville Handwerk GmbH">
 <meta property="og:locale" content="de_CH">
@@ -107,10 +112,8 @@ footer a{color:#fff}
         <svg width="74" height="74" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4 0-8 2-8 5v1h16v-1c0-3-4-5-8-5Z"/></svg>
         <div class="ph-label">Porträt von mir<br>(Foto einsetzen)</div>
       </div>
-      <div class="logo-circle">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M3 21V9l9-6 9 6v12h-6v-7h-6v7Z"/></svg>
-        <div class="ph-label">Firmenlogo<br>(einsetzen)</div>
-      </div>
+      <img class="hero-logo" src="logo/emblem-schwarzrot-transparent.png" alt="Naville Handwerk – Lastenvelo mit Anhänger und Firmenschild">
+
     </div>
   </div>
 </div>
