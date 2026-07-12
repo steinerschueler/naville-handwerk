@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-120 20 1200 690" stroke-linecap="round" stroke-linejoin="round">
+
+<g fill="none">
+<!-- Rad zuerst (hinter dem Bett) -->
+<circle cx="560" cy="522" r="132" stroke="#C1121C" stroke-width="26"/>
+<line x1="560" y1="522" x2="672.0" y2="492.0" stroke="#FFFFFF" stroke-width="4"/><line x1="560" y1="522" x2="660.5" y2="580.0" stroke="#FFFFFF" stroke-width="4"/><line x1="560" y1="522" x2="590.0" y2="634.0" stroke="#FFFFFF" stroke-width="4"/><line x1="560" y1="522" x2="502.0" y2="622.5" stroke="#FFFFFF" stroke-width="4"/><line x1="560" y1="522" x2="448.0" y2="552.0" stroke="#FFFFFF" stroke-width="4"/><line x1="560" y1="522" x2="459.5" y2="464.0" stroke="#FFFFFF" stroke-width="4"/><line x1="560" y1="522" x2="530.0" y2="410.0" stroke="#FFFFFF" stroke-width="4"/><line x1="560" y1="522" x2="618.0" y2="421.5" stroke="#FFFFFF" stroke-width="4"/><circle cx="560" cy="522" r="11" fill="#C1121C" stroke="none"/>
+<!-- Bett (rote Flaeche) -->
+<rect x="150" y="372" width="830" height="40" rx="6" fill="#C1121C" stroke="none"/>
+<!-- weisse Lochleiste oben -->
+<rect x="180" y="379" width="20" height="8" rx="2" fill="#FFFFFF" stroke="none"/><rect x="244" y="379" width="20" height="8" rx="2" fill="#FFFFFF" stroke="none"/><rect x="308" y="379" width="20" height="8" rx="2" fill="#FFFFFF" stroke="none"/><rect x="372" y="379" width="20" height="8" rx="2" fill="#FFFFFF" stroke="none"/><rect x="436" y="379" width="20" height="8" rx="2" fill="#FFFFFF" stroke="none"/><rect x="500" y="379" width="20" height="8" rx="2" fill="#FFFFFF" stroke="none"/><rect x="564" y="379" width="20" height="8" rx="2" fill="#FFFFFF" stroke="none"/><rect x="628" y="379" width="20" height="8" rx="2" fill="#FFFFFF" stroke="none"/><rect x="692" y="379" width="20" height="8" rx="2" fill="#FFFFFF" stroke="none"/><rect x="756" y="379" width="20" height="8" rx="2" fill="#FFFFFF" stroke="none"/><rect x="820" y="379" width="20" height="8" rx="2" fill="#FFFFFF" stroke="none"/><rect x="884" y="379" width="20" height="8" rx="2" fill="#FFFFFF" stroke="none"/><rect x="948" y="379" width="20" height="8" rx="2" fill="#FFFFFF" stroke="none"/>
+<!-- Bordwand hinten (rechts) -->
+<line x1="980" y1="372" x2="980" y2="326" stroke="#C1121C" stroke-width="14"/>
+<!-- Deichsel nach links (zum Velo) + Kupplung -->
+<line x1="150" y1="406" x2="-70" y2="452" stroke="#C1121C" stroke-width="13"/>
+<circle cx="-84" cy="458" r="14" stroke="#C1121C" stroke-width="9"/>
+<!-- kleine Stuetze/Achse Bett->Rad -->
+<line x1="560" y1="412" x2="560" y2="514" stroke="#C1121C" stroke-width="10"/>
+</g></svg>

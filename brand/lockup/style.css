@@ -1,0 +1,6 @@
+@font-face{font-family:'Archivo';font-weight:600;src:url("archivo-600.woff2") format('woff2');}
+html,body{margin:0;padding:0;background:transparent}
+.wrap{display:inline-flex;align-items:center;gap:60px;padding:44px 48px}
+.wrap img{display:block;height:var(--h)}
+.claim{font-family:'Archivo',sans-serif;font-weight:600;color:#23252B;font-size:56px;line-height:1.14;white-space:nowrap;letter-spacing:.2px}
+.claim .hl{color:#C1121C}

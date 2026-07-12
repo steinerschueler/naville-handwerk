@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" stroke-linecap="round" stroke-linejoin="round">
+<!-- Griff -->
+<path d="M128 44 q32 -22 64 0" fill="none" stroke="#23252B" stroke-width="10"/>
+<rect x="120" y="40" width="16" height="18" rx="3" fill="#23252B"/>
+<rect x="184" y="40" width="16" height="18" rx="3" fill="#23252B"/>
+<!-- Deckel -->
+<rect x="26" y="56" width="268" height="34" rx="6" fill="#C1121C"/>
+<!-- Korpus -->
+<rect x="34" y="86" width="252" height="126" rx="6" fill="#C1121C"/>
+<!-- Deckelnaht -->
+<rect x="34" y="86" width="252" height="7" fill="#23252B"/>
+<!-- vertiefte Front-Platte (Detail) -->
+<rect x="64" y="104" width="192" height="86" rx="4" fill="none" stroke="#23252B" stroke-width="4"/>
+<!-- 2 Verschluesse -->
+<rect x="70" y="78" width="26" height="20" rx="3" fill="#23252B"/>
+<rect x="224" y="78" width="26" height="20" rx="3" fill="#23252B"/>
+<!-- Eckschoner + Fuss -->
+<rect x="34" y="204" width="252" height="10" rx="3" fill="#23252B"/>
+<rect x="40" y="150" width="12" height="60" fill="#23252B"/>
+<rect x="268" y="150" width="12" height="60" fill="#23252B"/>
+</svg>

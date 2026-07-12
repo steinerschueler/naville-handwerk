@@ -1,0 +1,8 @@
+<!-- Kategorie-Symbol: AUFTRAGSSPITZEN (final, Variante B) -->
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="#22242A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M6 50 H61"/><path d="M61 50 l-4 -3 M61 50 l-4 3"/>
+    <path d="M40 52 V7"/><path d="M40 7 l-3 4 M40 7 l3 4"/>
+  </g>
+  <path d="M 7 43 C 7.67 40.83 9.50 30.50 11.00 30.00 C 12.50 29.50 14.50 39.50 16.00 40.00 C 17.50 40.50 18.50 35.33 20.00 33.00 C 21.50 30.67 23.50 25.17 25.00 26.00 C 26.50 26.83 27.50 37.00 29.00 38.00 C 30.50 39.00 32.50 31.00 34.00 32.00 C 35.50 33.00 36.33 47.33 38.00 44.00 C 39.67 40.67 42.17 14.33 44.00 12.00 C 45.83 9.67 47.33 25.17 49.00 30.00 C 50.67 34.83 52.50 38.50 54.00 41.00 C 55.50 43.50 57.33 44.33 58.00 45.00" fill="none" stroke="#C1121C" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

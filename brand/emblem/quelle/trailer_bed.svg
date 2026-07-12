@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-160 60 1400 380" stroke-linecap="round" stroke-linejoin="round">
+<!-- Rad separat im Vordergrund -->
+<!-- Anthrazit-Fahrwerk unter dem Bett + Achsstrebe -->
+<rect x="120" y="190" width="1030" height="10" fill="#23252B"/>
+<path d="M530 196 L600 250 L670 196 Z" fill="#23252B"/>
+<!-- rotes Bett (satter Balken) -->
+<rect x="120" y="150" width="1030" height="46" rx="4" fill="#C1121C"/>
+<!-- Bordwand hinten -->
+<rect x="1136" y="110" width="14" height="46" fill="#C1121C"/>
+<!-- Zurr-Schlitze auf der Bettkante (anthrazit) -->
+<rect x="160" y="158" width="22" height="7" rx="2" fill="#23252B"/><rect x="234" y="158" width="22" height="7" rx="2" fill="#23252B"/><rect x="308" y="158" width="22" height="7" rx="2" fill="#23252B"/><rect x="382" y="158" width="22" height="7" rx="2" fill="#23252B"/><rect x="456" y="158" width="22" height="7" rx="2" fill="#23252B"/><rect x="530" y="158" width="22" height="7" rx="2" fill="#23252B"/><rect x="604" y="158" width="22" height="7" rx="2" fill="#23252B"/><rect x="678" y="158" width="22" height="7" rx="2" fill="#23252B"/><rect x="752" y="158" width="22" height="7" rx="2" fill="#23252B"/><rect x="826" y="158" width="22" height="7" rx="2" fill="#23252B"/><rect x="900" y="158" width="22" height="7" rx="2" fill="#23252B"/><rect x="974" y="158" width="22" height="7" rx="2" fill="#23252B"/><rect x="1048" y="158" width="22" height="7" rx="2" fill="#23252B"/>
+<!-- (Deichsel wird in der Komposition gezeichnet) -->
+</svg>
