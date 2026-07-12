@@ -224,7 +224,7 @@ Diesen Rechner habe ich selbst erstellt – bewusst <strong>berufsneutral</stron
 
 <div class="out"><span>Deckungsbeitrag pro Jahr (vor Steuern/Risiko)</span><span id="r_gewinn"></span></div>
 <div class="out"><span>Jahres-Bruttolohn</span><span id="r_jahrlohn"></span></div>
-<div class="out"><span>Spanne des Einsatzbetriebs (Endkunde − Ansatz)</span><span id="r_spanne"></span></div>
+<div class="out"><span>Betrag an den Endkunden / Std<sup class="fn"><a href="#r23">23</a></sup></span><span id="r_spanne"></span></div>
 
 <button id="pdfbtn" type="button">📄 Vereinbarung als PDF erstellen</button>
 <div class="disc">Die PDF ist eine Stundenansatz-Vereinbarung zwischen GmbH (Verleiher) und Einsatzbetrieb. Zweifach ausdrucken, beide unterschreiben – je ein Exemplar pro Partei. GAV-Mindestlöhne sind Referenzwerte (Stand 2025/2026); FAK-, BVG-, Feiertagswerte sind Richtwerte. Kein Rechts-/Steuerrat.</div>
@@ -437,7 +437,7 @@ function calc(){
   setF('ansatz','');setF('db_chf','');setF('db_pct','');setF('rechnung','');
   document.getElementById('r_gewinn').textContent='–';
   document.getElementById('r_jahrlohn').textContent=chf0(brutto*vstd);
-  document.getElementById('r_spanne').textContent='–';
+  document.getElementById('r_spanne').textContent=chf(v('endk'))+' /h';
   w.className='hint';w.textContent='Nicht ausrechenbar: '+hard;
   LAST={brutto:brutto,selbst:S,ansatz:NaN,mwsth:NaN,mwst:v('mwst')};return;
  }
@@ -445,7 +445,7 @@ function calc(){
  setF('ansatz',r2(A));setF('db_chf',r2(marge));setF('db_pct',isFinite(margep)?r1(margep):'');setF('rechnung',r2(rechnung));
  document.getElementById('r_gewinn').textContent=chf0(marge*vstd);
  document.getElementById('r_jahrlohn').textContent=chf0(brutto*vstd);
- document.getElementById('r_spanne').textContent=chf(v('endk')-A)+' /h';
+ document.getElementById('r_spanne').textContent=chf(v('endk'))+' /h';
  if(S<=0){w.className='hint';w.textContent='Hinweis: Selbstkosten sind 0 – der Deckungsbeitrag % ist nicht definiert. Bitte Kostenfelder (A–E) ausfüllen.';}
  else if(marge<0){w.className='hint';w.textContent='Achtung: Der Ansatz liegt unter den Selbstkosten – die GmbH zahlt drauf.';}
  else if(A>v('endk')){w.className='hint';w.textContent='Hinweis: Der Ansatz liegt über dem Endkundensatz – dem Einsatzbetrieb bleibt keine Spanne.';}
