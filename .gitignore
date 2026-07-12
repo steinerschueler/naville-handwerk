@@ -1,0 +1,5 @@
+# Arbeitsordner für Dateien zur Ansicht / Reviews – nie deployen oder committen
+tmp/
+
+# Interne Arbeitsnotiz – gehört laut README nicht ins öffentliche Repo
+CLAUDE.md
