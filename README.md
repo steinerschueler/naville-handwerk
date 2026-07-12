@@ -7,10 +7,26 @@ Reines HTML/CSS/JS, kein Server nötig.
 
 - `index.html` — Startseite
 - `leistungen.html` — Was du von mir hast (✓/✗)
-- `preisrechner.html` — Stundenansatz-Rechner (erzeugt eine PDF-Vereinbarung; jsPDF lokal in `vendor/`)
+- `preisrechner.html` — Stundenansatz-Rechner (Felder verlinkt/rückwärts rechenbar; erzeugt eine
+  PDF-Vereinbarung; jsPDF lokal in `vendor/`)
 - `faq.html` — Häufige Fragen
 - `impressum.html` — Impressum / Datenschutz
-- `favicon.svg`, `404.html`, `robots.txt`, `sitemap.xml`, `CNAME`
+- `verfuegbarkeit.js` — **hier das Verfügbarkeits-Datum pflegen** (siehe unten); `banner.js` rendert die Anzeige
+- `logo/` — grosse Embleme + Claim-Lockups
+- `fonts/archivo-600.woff2` (+ `OFL.txt`) — Display-Schrift (self-hosted)
+- Icons: `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, `site.webmanifest`
+- `404.html`, `robots.txt`, `sitemap.xml`, `CNAME`
+
+## Verfügbarkeit ändern (rote/grüne Anzeige oben)
+
+In **`verfuegbarkeit.js`** die eine Zeile anpassen — das Datum, ab dem du wieder buchbar bist:
+
+```js
+window.VERFUEGBAR_AB = "2026-09-01";   // Format JJJJ-MM-TT;  "" = sofort verfügbar (grün)
+```
+
+Bis zu diesem Datum zeigt die Seite oben einen roten Balken „ausgebucht · ab … buchbar", danach
+automatisch grün „jetzt verfügbar". Nach dem Ändern committen und `main` pushen (Deploy).
 
 ## Deployment (GitHub Pages)
 
