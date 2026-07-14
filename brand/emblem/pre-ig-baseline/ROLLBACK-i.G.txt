@@ -1,0 +1,78 @@
+RÜCKBAU „i.G." — Anleitung für die spätere Entfernung
+=====================================================
+Stand: 2026-07-14. Angelegt, als der Zusatz „i.G." (in Gründung) überall ergänzt
+wurde. Sobald die Naville Handwerk GmbH im HANDELSREGISTER EINGETRAGEN ist, muss
+„i.G." wieder VOLLSTÄNDIG entfernt werden. Diese Datei listet ALLE Stellen.
+
+PRE-i.G.-BASELINE (Zustand OHNE i.G.)
+------------------------------------
+- Git-Commit auf main VOR der i.G.-Aktion: f413946
+  (enthält alle 10 logo/-PNGs + alle Texte ohne i.G.)
+- Physische Kopien in DIESEM Ordner (brand/emblem/pre-ig-baseline/):
+  die 10 alten logo/-PNGs, sign_pre-ig.png, sign_pre-ig.html
+  → Schnellster Rückbau der Bilder: diese 10 PNGs nach logo/ (auf main) zurückkopieren.
+
+A) WEBSITE-TEXT (Branch main)
+-----------------------------
+Firmenname „Naville Handwerk GmbH i.G." → zurück zu „Naville Handwerk GmbH".
+Nur der FIRMENNAME; generische „GmbH" NIE anfassen.
+Dateien: index.html, leistungen.html, faq.html, 404.html, impressum.html,
+         preisrechner.html, site.webmanifest, README.md
+Finden:  grep -rn "Naville Handwerk GmbH i.G." .
+Tun:     das " i.G." direkt nach „Naville Handwerk GmbH" löschen.
+
+Sonderfälle (nicht per Suchen/Ersetzen erschlagbar):
+- impressum.html: aus
+    <b>Naville Handwerk GmbH i.G.</b>
+    <span class="lbl">(in Gründung – Handelsregister-Eintrag ausstehend)</span>
+  wieder machen:
+    <b>Naville Handwerk GmbH</b>
+  (den in-Gründung-Hinweis ganz entfernen).
+- index.html (Hero-Einleitung): die EINGEFÜGTE Zeile komplett löschen:
+    <p class="lead" style="font-size:15px;color:var(--grey);margin-top:-4px">Mein
+    Betrieb, die <b>Naville Handwerk GmbH</b>, befindet sich aktuell noch in
+    Gründung <b>(i.G.)</b>.</p>
+
+NIEMALS ändern (kein Firmenname!): „Ein-Personen-GmbH", „meine GmbH", „der GmbH",
+„Umsatz GmbH", „yWorks GmbH" (Fremd-Library in vendor/jspdf.umd.min.js).
+
+B) EMBLEM-SCHILD + logo/-DELIVERABLES (Branch main)
+---------------------------------------------------
+Schild auf dem Anhänger zeigt „GMBH i.G." → zurück zu „GMBH".
+Betroffen sind ALLE 10 logo/-PNGs:
+  emblem-schwarzrot-auf-creme, emblem-rot-auf-creme,
+  emblem-schwarzrot-auf-rot, emblem-rot-weiss-umrandet-auf-rot,
+  emblem-schwarzrot-transparent, emblem-rot-transparent,
+  lockup-logo-auf-creme, lockup-logo-transparent,
+  lockup-emblem-auf-creme, lockup-emblem-transparent
+
+Weg 1 — EINFACH (Bilder zurückkopieren):
+  die 10 PNGs aus diesem Ordner (pre-ig-baseline/) nach logo/ kopieren. Fertig.
+
+Weg 2 — SAUBER (neu rendern, für spätere Pflege):
+  1. brand/emblem/quelle/sign.html, GMBH-Zeile zurücksetzen:
+       <text x="465.5" y="408" font-size="69" letter-spacing="6">GMBH i.G.</text>
+     →  <text x="465.5" y="408" font-size="69" letter-spacing="8">GMBH</text>
+  2. sign.png neu rendern (Chromium headless, DSF1, 931×480, transparenter BG),
+     nach tmp/_render/sign.png (Font muss unter dem in sign.html referenzierten
+     Pfad liegen: tmp/_render/archivo-600.woff2).
+  3. Restliche 2x-Assets (bike2x_blk/red, bed2x_blk/red, wheel2x_blk/red) aus
+     brand/emblem/render/ nach tmp/_render/ kopieren; _gen.py nach tmp/_gen.py.
+  4. 6 Embleme bauen: python3 build_emblem.py logo   (Logik = _gen_final.py,
+     GEO trshift=90,wshift=55,trdy=12,presign=False).
+  5. Lockups: in brand/lockup/ emblem_full.png (= neues emblem-schwarzrot-
+     transparent) und emblem_sign.png (= neues sign.png) ersetzen, dann a.html
+     (DSF2, window 1750×400) und b.html (DSF2, window 1450×380) rendern,
+     transparent trimmen, Creme-Variante auf (250,246,239) compositen.
+
+WICHTIG NACH RÜCKBAU
+--------------------
+- Auch die QUELLE auf brand-assets zurücksetzen (sign.html, quelle/sign.png,
+  render/sign.png), sonst reproduziert die Pipeline wieder „i.G.".
+- Alles neu deployen (main → Pages, ~1–2 Min).
+- Diese Datei + pre-ig-baseline/ dürfen nach vollständigem Rückbau gelöscht werden.
+
+REPRODUZIERBARKEIT (geprüft am 2026-07-14)
+------------------------------------------
+Pipeline mit Original-Schild reproduziert die committeten Embleme zu 0.000 %
+Pixel-Abweichung; die einzige Differenz zur Baseline ist die Schild-Textzeile.
