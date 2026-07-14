@@ -6,7 +6,7 @@ alle drei Räder auf gleicher Bodenlinie, Veloständer steht auf, Anhänger-Rad
 näher am Velo.
 
 Farben:  Rot #C1121C  ·  Schwarz #000000  ·  Anthrazit #23252B  ·  Creme #FAF6EF
-Claim:   „Der Notstromer für Berner Elektrofirmen" ("Notstromer" in Rot)
+Claim:   „Der Notstromer für Berner Elektrikerfirmen" ("Notstromer" in Rot)
 
 Emblem – nur Velo + Anhänger (je 1500×700 bzw. transparent beschnitten)
 ----------------------------------------------------------------------
@@ -32,7 +32,7 @@ Verwendung
 
 Einbau (Beispiel Website):
 <img src="logo/lockup-logo-transparent.png"
-     alt="Naville Handwerk – Der Notstromer für Berner Elektrofirmen"
+     alt="Naville Handwerk – Der Notstromer für Berner Elektrikerfirmen"
      style="max-width:100%;height:auto">
 
 Hinweis: Noch nicht in die HTML eingebunden – die Dateien liegen bereit.
