@@ -1,0 +1,47 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:'Archivo';font-weight:600;src:url('archivo-600.woff2') format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{margin:0}
+:root{--ink:#22242A;--red:#C1121C;--grey:#6E6B64;--line:#DCD6CB;--creme:#FAF6EF}
+/* 1075x720 px = 91x61 mm @ 300dpi (85x55 mm + 3 mm Beschnitt) */
+.card{width:1075px;height:720px;background:var(--creme);position:relative;overflow:hidden;
+      font-family:'Archivo',sans-serif;color:var(--ink)}
+.wire{position:absolute;top:0;left:0;right:0;height:14px;background:var(--red)}
+.inner{position:absolute;top:60px;left:60px;right:60px;bottom:56px;display:flex;flex-direction:column}
+/* Kopf: naville handwerk GmbH, volle Breite, dominiert oberes Drittel */
+.logotype{font-weight:600;font-size:103px;letter-spacing:-1.2px;line-height:.98;white-space:nowrap}
+.logotype .r{color:var(--red)}
+.logotype .g{font-size:55px;color:var(--grey);letter-spacing:-.5px}
+.divider{height:3px;background:var(--line);margin-top:26px}
+/* Kontakt: nach rechts eingerueckt, mit Symbolen, groessere Nebenschriften */
+.contact{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-left:150px}
+.name{font-weight:600;font-size:62px;letter-spacing:-.4px;line-height:1}
+.title{font-family:Arial,"Helvetica Neue",sans-serif;font-size:32px;color:var(--grey);margin-top:16px}
+.tel{display:flex;align-items:center;gap:22px;margin-top:40px}
+.tel svg{width:50px;height:50px;flex:none}
+.telnum{font-weight:600;font-size:56px;color:var(--red);letter-spacing:.5px;line-height:1}
+.lines{display:flex;flex-direction:column;gap:22px;margin-top:28px}
+.line{display:flex;align-items:center;gap:20px;font-family:Arial,"Helvetica Neue",sans-serif;font-size:36px}
+.line svg{width:36px;height:36px;flex:none;color:var(--red)}
+</style></head><body>
+<div class="card">
+  <div class="wire"></div>
+  <div class="inner">
+    <div class="logotype">naville <span class="r">handwerk</span> <span class="g">GmbH</span></div>
+    <div class="divider"></div>
+    <div class="contact">
+      <div class="name">Eric Naville</div>
+      <div class="title">Elektroinstallateur EFZ&nbsp;&nbsp;·&nbsp;&nbsp;Inhaber</div>
+      <div class="tel">
+        <svg viewBox="0 0 24 24" fill="#C1121C"><path d="M6.62 10.79a15.53 15.53 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24 11.36 11.36 0 0 0 3.57.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.57 1 1 0 0 1-.24 1.02l-2.21 2.2z"/></svg>
+        <span class="telnum">+41&nbsp;XX&nbsp;XXX&nbsp;XX&nbsp;XX</span>
+      </div>
+      <div class="lines">
+        <div class="line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg><span>info@naville-handwerk.ch</span></div>
+        <div class="line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span>naville-handwerk.ch</span></div>
+        <div class="line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Bernastrasse 48, 3005 Bern</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>
