@@ -1,0 +1,42 @@
+DRUCKDATEN — Visitenkarte Naville Handwerk GmbH
+================================================
+Datei: naville-handwerk-visitenkarte.pdf  (2 Seiten: 1 = Vorderseite/Werbung, 2 = Rückseite/Kontakt)
+Gebaut aus front-print.html / back-print.html (siehe build.sh).
+
+WICHTIG — DATENSCHUTZ
+--------------------
+Die hier eingecheckten Quellen tragen die Telefonnummer NUR ALS PLATZHALTER „+41 XX XXX XX XX“.
+Das Repo ist öffentlich → die private Handynummer gehört NICHT in Git. Die druckfertige PDF mit
+der echten Nummer wird lokal gebaut (build.sh nach Einsetzen der Nummer) und NICHT committet.
+
+FORMAT
+------
+- Endformat (Trim):   85 × 55 mm  (CH-/EU-Standard Visitenkarte)
+- Beschnitt (Bleed):  3 mm ringsum  → Datenformat mit Beschnitt 91 × 61 mm
+- Seitengrösse PDF:   97 × 67 mm (Endformat + Beschnitt + Schnittmarken-Zone)
+- Schnittmarken:      an allen vier Endformat-Ecken (Haarlinie 0,25 mm)
+- PDF-Boxen gesetzt:  TrimBox 85 × 55 mm, BleedBox 91 × 61 mm
+- Auflösung:          Text/Icons/Schnittmarken = Vektor; Emblem (Velo) = 300 dpi Raster
+- Schriften:          vollständig eingebettet (Archivo SemiBold als Subset; Arimo für Nebentext)
+
+FARBEN
+------
+- Dokument liegt in RGB vor. Verbindliche Marken-Farbwerte für die CMYK-Ausgabe:
+  * Verkehrsrot   RAL 3020  →  CMYK 0 / 100 / 100 / 10   (Pantone ~485 C, am Muster bestätigen)
+  * Anthrazit/Ink #22242A   →  CMYK 70 / 62 / 55 / 62   (Richtwert; „so dunkel wie möglich, nicht 100 % K“)
+  * Creme (Grund) #FAF6EF   →  CMYK  2 /  2 /  6 /  0   (heller Papierton, vollflächig randabfallend)
+  * Grau (GmbH/Nebentext) #6E6B64 → CMYK 55 / 50 / 55 / 20
+- Bitte das Rot exakt auf CMYK 0/100/100/10 setzen (nicht der Auto-Konvertierung überlassen).
+- Falls die Druckerei zwingend eine CMYK-/PDF-X-Datei verlangt: mit den obigen Zielwerten konvertieren.
+
+SICHERHEITSABSTAND
+------------------
+- Wichtige Inhalte (Text, Kontakt) liegen ≥ 3 mm innerhalb der Endformatkante.
+- Hintergrund (Creme) und der rote Draht (Rückseite oben) laufen bewusst randabfallend in den Beschnitt.
+
+VOR DEM DRUCK ERGÄNZEN
+----------------------
+- [ ] TELEFONNUMMER in back-print.html einsetzen (Platzhalter „+41 XX XXX XX XX“ ersetzen), dann build.sh.
+- Adresse „Bernastrasse 48, 3005 Bern“ ist bestätigt.
+- Emblem trägt „GMBH“ OHNE i.G. — korrekt für die Zeit NACH dem Handelsregister-Eintrag.
+      Wird die Karte früher gebraucht, i.G.-Emblem verwenden (brand/emblem/newdesign/sign_box_ig.html).

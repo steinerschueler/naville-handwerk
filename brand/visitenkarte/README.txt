@@ -28,11 +28,21 @@ PLATZHALTER / VOR DEM DRUCK ERGAENZEN
 - Emblem traegt „GMBH" ohne i.G. — passt fuer die Zeit NACH dem HR-Eintrag. Falls
   frueher gebraucht: i.G.-Emblem aus brand/emblem/newdesign/ (sign_box_ig.html) bauen.
 
-DRUCKFERTIG (NOCH OFFEN / TODO)
--------------------------------
-- Noch KEINE druckfertige PDF mit Schnittmarken/CMYK. Naechster Schritt:
-  HTML -> Chromium-PDF bei 91x61 mm, Schnittmarken ergaenzen, Marken-Rot als
-  CMYK 0/100/100/10 fuer die Druckerei anmerken.
+DRUCKFERTIGE PDF (erledigt — Pipeline im Ordner)
+------------------------------------------------
+- front-print.html / back-print.html : Druck-Bogen je Seite (97x67 mm) mit der auf
+  91x61 mm skalierten Karte + Schnittmarken; Text bleibt vektoriell.
+- build.sh : rendert beide Seiten (Chromium --print-to-pdf), fuehrt sie zusammen und
+  setzt TrimBox 85x55 / BleedBox 91x61 (pikepdf) -> naville-handwerk-visitenkarte.pdf.
+- DRUCK-INFO.txt : Format-/Farb-/Beschnitt-Spez fuer die Druckerei (Marken-Rot CMYK
+  0/100/100/10 vermerkt; PDF selbst liegt in RGB).
+- OFFEN nur: echte CMYK-/PDF-X-Datei nur auf Druckerei-Wunsch (Zielwerte in DRUCK-INFO).
+
+DATENSCHUTZ — TELEFONNUMMER NICHT COMMITTEN
+-------------------------------------------
+- Repo ist OEFFENTLICH. back-print.html traegt die Nummer nur als Platzhalter
+  „+41 XX XXX XX XX“. Fuer den Druck die echte Nummer lokal einsetzen und build.sh
+  laufen lassen; die PDF mit echter Nummer NICHT committen (bleibt lokal / geht an die Druckerei).
 
 REPRODUKTION DES KARTEN-EMBLEMS
 -------------------------------

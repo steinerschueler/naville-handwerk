@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:'Archivo';font-weight:600;src:url('archivo-600.woff2') format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+@page{size:97mm 67mm;margin:0}
+html,body{margin:0}
+/* Druckbogen 97x61 -> 97x67 mm: Trim 85x55, Beschnitt 3 mm (Bleed 91x61), Marken-Zone 3 mm */
+.sheet{position:relative;width:97mm;height:67mm;background:#FAF6EF;overflow:hidden}
+.art{position:absolute;left:3mm;top:3mm;width:91mm;height:61mm;overflow:hidden}
+/* Original-Karte 1075x720 px, formatfuellend auf 91x61 mm skaliert */
+.card{width:1075px;height:720px;background:#FAF6EF;overflow:hidden;position:relative;
+      font-family:'Archivo',sans-serif;
+      transform-origin:top left;transform:scale(0.319941,0.320210)}
+.inner{position:absolute;top:46px;left:42px;right:42px;bottom:50px;
+       display:flex;flex-direction:column;align-items:center;justify-content:center;gap:46px}
+.emblem{width:1000px;height:auto;display:block}
+.claim{color:#22242A;font-weight:600;font-size:57px;line-height:1.12;text-align:center;letter-spacing:.3px}
+.claim .hl{color:#C1121C}
+/* Schnittmarken ueber den ganzen Bogen */
+.marks{position:absolute;left:0;top:0;width:97mm;height:67mm;pointer-events:none}
+</style></head><body>
+<div class="sheet">
+  <div class="art"><div class="card"><div class="inner">
+    <img class="emblem" src="emblem-velo-card.png" alt="">
+    <div class="claim">Der <span class="hl">Notstromer</span> für<br>Berner Elektrikerfirmen</div>
+  </div></div></div>
+  <svg class="marks" viewBox="0 0 97 67" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#000" stroke-width="0.25">
+      <line x1="6" y1="0" x2="6" y2="3"/>   <line x1="0" y1="6" x2="3" y2="6"/>
+      <line x1="91" y1="0" x2="91" y2="3"/> <line x1="94" y1="6" x2="97" y2="6"/>
+      <line x1="6" y1="64" x2="6" y2="67"/> <line x1="0" y1="61" x2="3" y2="61"/>
+      <line x1="91" y1="64" x2="91" y2="67"/><line x1="94" y1="61" x2="97" y2="61"/>
+    </g>
+  </svg>
+</div>
+</body></html>
