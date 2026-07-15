@@ -1,9 +1,10 @@
 Naville Handwerk – Grosses Logo (Emblem + Claim-Lockups)
 ========================================================
 
-Stand: 2026-07-12. Blech-Schild mit echten gekappten Ecken (45° o.r./u.l.),
-alle drei Räder auf gleicher Bodenlinie, Veloständer steht auf, Anhänger-Rad
-näher am Velo.
+Stand: 2026-07-15. Comic-Werkzeugkasten-Schild (3D, schwarze Fassung; für die
+einfarbig-roten Versionen rote Fassung mit Creme-Details), laced-Speichenrad,
+Comic-Umriss (bei den schwarzrot-Fassungen). Alle drei Räder auf gleicher
+Bodenlinie, Veloständer steht auf, Anhänger-Rad näher am Velo.
 
 Farben:  Rot #C1121C  ·  Schwarz #000000  ·  Anthrazit #23252B  ·  Creme #FAF6EF
 Claim:   „Der Notstromer für Berner Elektrikerfirmen" ("Notstromer" in Rot)
