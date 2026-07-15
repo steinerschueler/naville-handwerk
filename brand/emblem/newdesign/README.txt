@@ -47,12 +47,26 @@ RÜCKBAU auf das ALTE flache Schild
   logo/emblem-schwarzrot-transparent.png (auf main), committen, deployen.
 - Baseline-Commit auf main VOR dem Neudesign: 950d901 (dort die alte Fassung).
 
-NOCH OFFEN (nicht website-relevant, Folgeschritt)
--------------------------------------------------
-- Übrige logo/-Fassungen (auf-creme, auf-rot, rot-Varianten) + die 4 Lockups
-  tragen noch das alte flache Schild. Für volle Marken-Konsistenz mit dem neuen
-  Design nachziehen (Comic-Umriss muss für nicht-transparente Fassungen angepasst
-  werden — Alpha-Trick greift dort nicht direkt).
+ALLE logo/-FASSUNGEN NACHGEZOGEN (2026-07-15, erledigt)
+-------------------------------------------------------
+- build_comic.py baut alle 6 Emblem-Fassungen (Ausgabe-Ordner als Argument):
+  * schwarzrot (auf-creme/auf-rot/transparent): schwarzes Schild (sign_box_ig.html)
+    + Comic-Umriss. Der Umriss wird auf der TRANSPARENTEN Fassung (Vollcanvas)
+    berechnet und dann auf Creme/Rot gesetzt -> loest das "Alpha-Trick greift nur
+    transparent"-Problem der nicht-transparenten Fassungen.
+  * rot einfarbig (auf-creme/transparent/weiss-umrandet-auf-rot): ROTES Schild
+    (sign_box_ig_red.html: rote Flaechen, Creme-Details = Papier-Aussparung),
+    KEIN schwarzer Umriss. Der schwarze 3D-Kasten reduziert nicht auf eine Farbe,
+    daher eigenes rotes Schild.
+- Schild-Renders: sign_box_ig.html -> sign_blk.png, sign_box_ig_red.html ->
+  sign_red.png (Chromium DSF1, 931x580, transparent) nach tmp/_render/;
+  build_comic.py schaltet per use_sign("blk"/"red") um.
+- 4 Lockups: ../../lockup/a.html (Vollemblem) + b.html (Schild). Bilder ersetzt:
+  ../../lockup/emblem_full.png (Comic-Vollemblem) + emblem_sign.png (Comic-Kasten).
+- RAD-FIX: das laced-Rad (274x274) ist kleiner/hoeher zentriert als das alte
+  radiale -> Anhaengerrad lag 11px zu hoch. In build_comic.py GEO trdy 12->23
+  (ganzen Anhaenger runter) -> alle drei Raeder auf einer Bodenlinie. Auch das
+  live Website-Emblem wurde damit neu gebaut (main-Commit).
 - i.G.: sobald Handelsregister-Eintrag durch -> auf dem Web-Schild "i.G." raus
   (sign_box_ig.html -> sign_box.html-Variante) und neu bauen. Siehe auch
   ../pre-ig-baseline/ROLLBACK-i.G.txt.
