@@ -22,7 +22,7 @@
 
   if (off) {
     bar.className = "availbar av-off";
-    txt.innerHTML = "Momentan ausgebucht · <b>ab " + dateStr + "</b> wieder buchbar";
+    txt.innerHTML = "Momentan nicht verfügbar · <b>ab " + dateStr + "</b> buchbar";
   } else {
     bar.className = "availbar av-on";
     txt.innerHTML = "<b>Jetzt verfügbar</b> · kurzfristige Einsätze möglich";
