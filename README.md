@@ -27,7 +27,7 @@ In **`verfuegbarkeit.js`** die eine Zeile anpassen — das Datum, ab dem du wied
 window.VERFUEGBAR_AB = "2026-09-01";   // Format JJJJ-MM-TT;  "" = sofort verfügbar (grün)
 ```
 
-Bis zu diesem Datum zeigt die Seite oben einen roten Balken „ausgebucht · ab … buchbar", danach
+Bis zu diesem Datum zeigt die Seite oben einen roten Balken „nicht verfügbar · ab … buchbar", danach
 automatisch grün „jetzt verfügbar". Nach dem Ändern committen und `main` pushen (Deploy).
 
 Der **Jahreskalender** (`kalender.html`) liest dasselbe Datum: alle Tage **vor** `VERFUEGBAR_AB`
