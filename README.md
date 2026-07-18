@@ -9,9 +9,11 @@ Reines HTML/CSS/JS, kein Server nötig.
 - `leistungen.html` — Was du von mir hast (✓/✗)
 - `preisrechner.html` — Stundenansatz-Rechner (Felder verlinkt/rückwärts rechenbar; erzeugt eine
   PDF-Vereinbarung; jsPDF lokal in `vendor/`)
-- `faq.html` — Häufige Fragen
+- `faq.html` — Häufige Fragen (nach Themen gegliedert; Kapitel „Normaltarif & Notstromer")
+- `kalender.html` — Jahreskalender (Verfügbarkeit; freie Tage per E-Mail anfragen, kein Backend)
 - `impressum.html` — Impressum / Datenschutz
 - `verfuegbarkeit.js` — **hier das Verfügbarkeits-Datum pflegen** (siehe unten); `banner.js` rendert die Anzeige
+- `kalender.js` — **hier die belegten Tage pflegen** (Format wie `verfuegbarkeit.js`); die Logik liegt in `kalender.html`
 - `logo/` — grosse Embleme + Claim-Lockups
 - `fonts/archivo-600.woff2` (+ `OFL.txt`) — Display-Schrift (self-hosted)
 - Icons: `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, `site.webmanifest`
@@ -27,6 +29,9 @@ window.VERFUEGBAR_AB = "2026-09-01";   // Format JJJJ-MM-TT;  "" = sofort verfü
 
 Bis zu diesem Datum zeigt die Seite oben einen roten Balken „ausgebucht · ab … buchbar", danach
 automatisch grün „jetzt verfügbar". Nach dem Ändern committen und `main` pushen (Deploy).
+
+Der **Jahreskalender** (`kalender.html`) liest dasselbe Datum: alle Tage **vor** `VERFUEGBAR_AB`
+erscheinen grau (noch nicht buchbar). Die belegten Einsatztage selbst stehen in `kalender.js`.
 
 ## Deployment (GitHub Pages)
 

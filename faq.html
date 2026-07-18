@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <title>Häufige Fragen – Naville Handwerk GmbH i.G.</title>
-<meta name="description" content="Antworten für Einsatzbetriebe: Bewilligung, Versicherung, Abrechnung und Kosten beim Personalverleih durch Naville Handwerk GmbH i.G., Raum Bern.">
+<meta name="description" content="Antworten für Einsatzbetriebe: Versicherung, Abrechnung, Kosten, Steuern und was der Notstromer-Tarif ist – beim Personalverleih durch Naville Handwerk GmbH i.G., Raum Bern.">
 <style>
 @font-face{font-family:'Archivo';font-weight:600;font-display:swap;src:url(fonts/archivo-600.woff2) format('woff2');}
 :root{--ink:#22242A;--ink2:#43423C;--paper:#EFEEE8;--red:#C1121C;--grey:#6E6B64;--line:#DCD6CB;--card:#fff;}
@@ -28,6 +28,10 @@ a{color:inherit}
 .phead .lead{font-size:18px;color:var(--ink2);max-width:60ch}
 .sec{padding-block:44px 10px}
 .faq{max-width:840px;margin:0 auto}
+.chap-block{margin-top:40px}
+.chap-block:first-child{margin-top:0}
+.chap-title{font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(19px,2.4vw,24px);line-height:1.15;letter-spacing:-.01em;margin-bottom:16px;display:flex;align-items:center;gap:13px}
+.chap-title .num{flex:none;display:inline-flex;align-items:center;justify-content:center;width:31px;height:31px;border-radius:50%;background:var(--red);color:#fff;font-size:15px;font-weight:700}
 .qacard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:2px 24px;box-shadow:0 6px 18px rgba(34,36,42,.05)}
 details{border-top:1px solid var(--line);padding:2px 0}
 details:first-child{border-top:none}
@@ -39,10 +43,13 @@ details[open] summary{color:var(--red)}
 .a{padding:0 0 18px 27px;color:var(--ink2);font-size:15px}
 .a p{margin:0 0 8px}
 .a p:last-child{margin-bottom:0}
+.a ul{margin:2px 0 10px;padding-left:20px}
+.a li{margin-bottom:6px}
+.a li:last-child{margin-bottom:0}
 .a .src{color:var(--grey);font-size:13px}
 .a a{color:var(--red);font-weight:600;text-decoration:none}
 .a a:hover{text-decoration:underline}
-.note{max-width:840px;margin:22px auto 0;color:var(--grey);font-size:13px;background:#F6F4EE;border:1px solid var(--line);border-radius:10px;padding:14px 18px;line-height:1.55}
+.note{max-width:840px;margin:30px auto 0;color:var(--grey);font-size:13px;background:#F6F4EE;border:1px solid var(--line);border-radius:10px;padding:14px 18px;line-height:1.55}
 .cta{text-align:center;padding-block:50px 6px}
 .cta p{font-size:19px;margin-bottom:16px}
 .cta .mail{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:15px 28px;border-radius:3px}
@@ -81,11 +88,11 @@ details[open] summary{color:var(--red)}
 <meta property="og:site_name" content="Naville Handwerk GmbH i.G.">
 <meta property="og:locale" content="de_CH">
 <meta property="og:title" content="Häufige Fragen – Naville Handwerk GmbH i.G.">
-<meta property="og:description" content="Antworten für Einsatzbetriebe: Bewilligung, Versicherung, Abrechnung und Kosten beim Personalverleih durch Naville Handwerk GmbH i.G., Raum Bern.">
+<meta property="og:description" content="Antworten für Einsatzbetriebe: Versicherung, Abrechnung, Kosten, Steuern und was der Notstromer-Tarif ist – Personalverleih, Raum Bern.">
 <meta property="og:url" content="https://naville-handwerk.ch/faq.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Häufige Fragen – Naville Handwerk GmbH i.G.">
-<meta name="twitter:description" content="Antworten für Einsatzbetriebe: Bewilligung, Versicherung, Abrechnung und Kosten beim Personalverleih durch Naville Handwerk GmbH i.G., Raum Bern.">
+<meta name="twitter:description" content="Antworten für Einsatzbetriebe: Versicherung, Abrechnung, Kosten, Steuern und was der Notstromer-Tarif ist – Personalverleih, Raum Bern.">
 </head>
 <body>
 <div class="availbar" id="availbar" hidden>
@@ -105,96 +112,159 @@ details[open] summary{color:var(--red)}
 <section class="wrap phead">
   <div class="kick mono">Häufige Fragen</div>
   <h1 class="disp">Was Einsatzbetriebe oft fragen</h1>
-  <p class="lead">Kurz und ehrlich beantwortet – damit du weisst, worauf du dich einlässt, bevor du anfragst.</p>
+  <p class="lead">Kurz und ehrlich beantwortet – nach Themen geordnet, damit du schnell findest, was dich interessiert.</p>
 </section>
 
 <section class="wrap sec">
   <div class="faq">
-    <div class="qacard">
 
-      <details open>
-        <summary>Du (Einsatzfirma): Brauchst du eine Bewilligung für den Personalverleih?</summary>
-        <div class="a">
-          <p><b>Eric Naville:</b> Nein. Als Ein-Personen-GmbH, die ausschliesslich sich selbst verleiht, bin ich bewilligungsfrei; der Kanton Bern bestätigt das auf Anfrage. Erst wenn ich weitere Personen anstellen und verleihen würde, bräuchte es eine ordentliche Bewilligung mit Kaution – das ist hier nicht der Fall.</p>
-          <p class="src">Grundlage: Art. 28 Abs. 2 AVV. Richtwert, keine Rechtsberatung – massgeblich ist die Bestätigung des AWI Bern.</p>
-        </div>
-      </details>
+    <div class="chap-block">
+      <h2 class="chap-title"><span class="num">1</span>Versicherung, Haftung &amp; Bewilligung</h2>
+      <div class="qacard">
 
-      <details>
-        <summary>Muss ich mich als Einsatzbetrieb um Sozialabgaben oder Lohn kümmern?</summary>
-        <div class="a">
-          <p>Nein. Ich bin über meine GmbH mein eigener Arbeitgeber und trage alle Arbeitgeberpflichten und Sozialabgaben (AHV/IV/EO, ALV, Pensionskasse, SUVA). Du zahlst nur das vereinbarte Honorar pro Stunde plus MWST – kein Lohnausweis, keine Abrechnung über dich.</p>
-          <p class="src">Grundlage: Art. 19 AVG (Verleiher = Arbeitgeber).</p>
-        </div>
-      </details>
+        <details open>
+          <summary>Du (Einsatzfirma): Wie bist du versichert? Wer haftet, wenn etwas passiert?</summary>
+          <div class="a">
+            <p><b>Eric Naville:</b> Gegen Berufs- und Nichtberufsunfall bin ich über die SUVA versichert. Im Einsatz arbeite ich in deinem Team, unter deiner Aufsicht und Installationsbewilligung – ähnlich wie ein Temporär-Mitarbeiter. Den konkreten Rahmen für Haftung und Versicherung halten wir vor dem Einsatz schriftlich fest, damit es keine offenen Fragen gibt.</p>
+          </div>
+        </details>
 
-      <details>
-        <summary>Wie bist du versichert? Wer haftet, wenn etwas passiert?</summary>
-        <div class="a">
-          <p>Gegen Berufs- und Nichtberufsunfall bin ich über die SUVA versichert. Im Einsatz arbeite ich in deinem Team, unter deiner Aufsicht und Installationsbewilligung – ähnlich wie ein Temporär-Mitarbeiter. Den konkreten Rahmen für Haftung und Versicherung halten wir vor dem Einsatz schriftlich fest, damit es keine offenen Fragen gibt.</p>
-        </div>
-      </details>
+        <details>
+          <summary>Brauchst du eine Bewilligung für den Personalverleih?</summary>
+          <div class="a">
+            <p>Nein. Als Ein-Personen-GmbH, die ausschliesslich sich selbst verleiht, bin ich bewilligungsfrei; der Kanton Bern bestätigt das auf Anfrage. Erst wenn ich weitere Personen anstellen und verleihen würde, bräuchte es eine ordentliche Bewilligung mit Kaution – das ist hier nicht der Fall.</p>
+            <p class="src">Grundlage: Art. 28 Abs. 2 AVV. Richtwert, keine Rechtsberatung – massgeblich ist die Bestätigung des AWI Bern.</p>
+          </div>
+        </details>
 
-      <details>
-        <summary>Unter wessen Installationsbewilligung arbeitest du?</summary>
-        <div class="a">
-          <p>Unter deiner. Ich bin gelernter Elektroinstallateur EFZ, habe aber keine eigene Installationsbewilligung – im Einsatz arbeite ich in deinem Betrieb, unter deiner Bewilligung (NIV/ESTI) und Aufsicht. Genau dafür ist der Personalverleih da.</p>
-        </div>
-      </details>
+        <details>
+          <summary>Unter wessen Installationsbewilligung arbeitest du?</summary>
+          <div class="a">
+            <p>Unter deiner. Ich bin gelernter Elektroinstallateur EFZ, habe aber keine eigene Installationsbewilligung – im Einsatz arbeite ich in deinem Betrieb, unter deiner Bewilligung (NIV/ESTI) und Aufsicht. Genau dafür ist der Personalverleih da.</p>
+          </div>
+        </details>
 
-      <details>
-        <summary>Wie lange muss ich dich mindestens einsetzen?</summary>
-        <div class="a">
-          <p>Keine langfristige Verpflichtung – du setzt mich ein, solange der Engpass dauert. Den genauen Rahmen (Mindestdauer, Beenden des Einsatzes) halten wir im Verleihvertrag kurz und fair fest. Gesetzlich gelten für Temporärarbeit gestaffelte Fristen, die sich nach der Einsatzdauer richten. Sollte ein Einsatz womöglich mehr als drei Monate dauern, machen wir einen neuen Vertrag vor dem Beginn des dritten Monats, um die Kündigungsfrist rechtlich auf dem Minimum zu halten.</p>
-          <p class="src">Grundlage: Art. 19 Abs. 4 AVG. Details klären wir vorab.</p>
-        </div>
-      </details>
+      </div>
+    </div>
 
-      <details>
-        <summary>Was kostet das – und warum bist du eher teuer?</summary>
-        <div class="a">
-          <p>Mein Stundenansatz ist offen kalkuliert: Lohn, Sozialabgaben, Betriebskosten und eine überschaubare Marge. Im unten verlinkten Preisrechner kannst du jede Zahl selbst durchspielen und siehst, wofür genau du zahlst. Günstige Dauerlösungen sind nicht mein Angebot – ich bin die verlässliche Aushilfe für den akuten Engpass.</p>
-          <p class="src">→ <a href="preisrechner.html">Zum Preisrechner</a></p>
-        </div>
-      </details>
+    <div class="chap-block">
+      <h2 class="chap-title"><span class="num">2</span>Abrechnung, Kosten &amp; Steuern</h2>
+      <div class="qacard">
 
-      <details>
-        <summary>Wie läuft die Abrechnung?</summary>
-        <div class="a">
-          <p>Du bestätigst mir den Wochen-Stundenrapport mit Unterschrift. Daraus stelle ich eine Rechnung: Stunden × Ansatz plus MWST, mit vereinbarter Zahlungsfrist. Einfach und nachvollziehbar.</p>
-        </div>
-      </details>
+        <details>
+          <summary>Muss ich mich als Einsatzbetrieb um Sozialabgaben oder Lohn kümmern?</summary>
+          <div class="a">
+            <p>Nein. Ich bin über meine GmbH mein eigener Arbeitgeber und trage alle Arbeitgeberpflichten und Sozialabgaben (AHV/IV/EO, ALV, Pensionskasse, SUVA). Du zahlst nur das vereinbarte Honorar pro Stunde plus MWST – kein Lohnausweis, keine Abrechnung über dich.</p>
+            <p class="src">Grundlage: Art. 19 AVG (Verleiher = Arbeitgeber).</p>
+          </div>
+        </details>
 
-      <details>
-        <summary>Fällt MWST an?</summary>
-        <div class="a">
-          <p>Ja, sobald meine GmbH MWST-pflichtig ist (Personalverleih, Normalsatz 8,1 %). Für dich als Betrieb ist sie in der Regel neutral – du ziehst sie als Vorsteuer wieder ab.</p>
-          <p class="src">Richtwert, keine Steuerberatung.</p>
-        </div>
-      </details>
+        <details>
+          <summary>Wie läuft die Abrechnung?</summary>
+          <div class="a">
+            <p>Du bestätigst mir den Wochen-Stundenrapport mit Unterschrift. Daraus stelle ich eine Rechnung: Stunden × Ansatz plus MWST, mit vereinbarter Zahlungsfrist. Einfach und nachvollziehbar.</p>
+          </div>
+        </details>
 
-      <details>
-        <summary>Welche Arbeiten machst du – und welche nicht?</summary>
-        <div class="a">
-          <p>Elektro-Installationsarbeiten im Team sowie allgemeine Handwerks- und Bauhilfe (ich habe für drei Jahre als Hilfsarbeiter in einer Zimmerei gearbeitet). Was ich bewusst nicht übernehme: Lehrlings- oder Schnupperlehrlingsbetreuung sowie Führungs- oder Sicherheitsberater-Rollen. Zu Ersterem hafte ich nicht für die Sicherheit Dritter, wenn der Fokus erstmal das Vorankommen einer Baustelle ist, und zu Zweiterem habe ich nicht die notwendigen Ausbildungen.</p>
-          <p class="src">→ <a href="leistungen.html">Was du von mir hast – und was nicht</a></p>
-        </div>
-      </details>
+        <details>
+          <summary>Was kostet das – und warum bist du eher teuer?</summary>
+          <div class="a">
+            <p>Mein Stundenansatz ist offen kalkuliert: Lohn, Sozialabgaben, Betriebskosten und eine überschaubare Marge. Im unten verlinkten Preisrechner kannst du jede Zahl selbst durchspielen und siehst, wofür genau du zahlst. Günstige Dauerlösungen sind nicht mein Angebot – ich bin die verlässliche Aushilfe für den akuten Engpass.</p>
+            <p class="src">→ <a href="preisrechner.html">Zum Preisrechner</a></p>
+          </div>
+        </details>
 
-      <details>
-        <summary>Wie läuft das, wenn wir uns noch nicht kennen?</summary>
-        <div class="a">
-          <p>Bei Betrieben, die ich noch nicht kenne, mache ich zuerst einen kurzen Besuch: Wir stellen uns vor, du erklärst mir, wo es klemmt, wie ich helfen kann, was es dazu von mir braucht und für wie lange. Wenn es passt, gehen wir anschliessend kurz auf die dringlichste Baustelle – damit ich sehe, mit wem ich zusammenarbeiten soll und was ansteht. Wenn alles passt, erstellen wir zwei Kopien vom Vertrag und unterschreiben beide.</p>
-        </div>
-      </details>
+        <details>
+          <summary>Fällt MWST an?</summary>
+          <div class="a">
+            <p>Ja, sobald meine GmbH MWST-pflichtig ist (Personalverleih, Normalsatz 8,1 %). Für dich als Betrieb ist sie in der Regel neutral – du ziehst sie als Vorsteuer wieder ab.</p>
+            <p class="src">Richtwert, keine Steuerberatung.</p>
+          </div>
+        </details>
 
-      <details>
-        <summary>Wie schnell bist du verfügbar – und wie kommst du zum Einsatz?</summary>
-        <div class="a">
-          <p>Wenn wir uns bereits kennen und eine Vertrauensbasis da ist: kurzfristig nach Absprache, im Raum Bern. Ich habe kein eigenes Firmenfahrzeug (ich komme mit Velo und Veloanhänger); für Material oder grössere Anfahrten fahre ich dein Fahrzeug oder werde von einem deiner Mitarbeiter gefahren. In Bern ist es zunehmend von Vorteil, nicht einen Parkplatz suchen zu müssen. Weiter ist es zeitlich von Vorteil, nicht über den Umweg deines Unternehmens auf die Baustelle zu gehen. Material kann direkt auf die Baustelle geliefert werden, anderes kannst du persönlich liefern, wenn du z. B. für eine Bausitzung auf die Baustelle kommst.</p>
-        </div>
-      </details>
+      </div>
+    </div>
 
+    <div class="chap-block">
+      <h2 class="chap-title"><span class="num">3</span>Normaltarif &amp; Notstromer</h2>
+      <div class="qacard">
+
+        <details open>
+          <summary>Was ist der „Notstromer“ – und wann brauche ich ihn?</summary>
+          <div class="a">
+            <p>Der Notstromer ist mein Einsatz zum höheren Satz von 75.–/Std für den akuten Engpass. Ich springe ein, wenn es bei dir kurzfristig eng wird – bei <b>Auftragsüberlast, Absenzen (Ferien, Krankheit, Unfall), Unterbesetzung oder Zeitdruck</b>.</p>
+            <p>Entscheidend ist die Situation bei dir, nicht die Art der Baustelle: Ich arbeite genauso gern auf ganz normalen Baustellen. Der Name kommt vom Notstromaggregat – ich bin die Reserve, die anspringt, wenn deine reguläre Mannschaft gerade nicht reicht.</p>
+            <p>Der höhere Satz bringt dir dafür auch mehr Leistung – Vorrang und Verfügbarkeit auch ausserhalb der regulären Zeiten. Was genau, steht in den nächsten Abschnitten.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Warum kostet der Notstromer mehr (75.– statt 65.–)?</summary>
+          <div class="a">
+            <p>Weil du kurzfristig und flexibel eine Fachkraft bekommst. Die 65.– sind mein normaler Satz für geplante Arbeit. Die 75.– sind ein Aufschlag für die Knappheit: Ich halte mich verfügbar und kann einen Notstromer-Einsatz sogar vor schon zugesagte Normaltarif-Tage ziehen.</p>
+            <p>Der Aufpreis steht also für die kurzfristige Verfügbarkeit – nicht für eine „schwierigere“ oder „bessere“ Arbeit.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Welche Bedingungen gelten für den Notstromer?</summary>
+          <div class="a">
+            <ul>
+              <li><b>Vorrang mit Vorlauf:</b> Einen freien Tag kann ein Notstromer kurzfristig belegen. Einen schon zum Normaltarif zugesagten Tag verdrängt er nur mit mindestens drei Arbeitstagen Vorlauf – so bleibt es fair gegenüber der Firma, bei der ich zum Normaltarif arbeite (auf sie bin ich angewiesen, solange meine Tarife noch tief sind). <b>Nicht</b> verdrängen kann er eingetragene Ferien, Kurse/Weiterbildungen oder einen Ausfall wegen Krankheit oder Unfall – die sind fix.</li>
+              <li><b>Jederzeit am Tag:</b> Der Notstromer ist nicht ans reguläre Fenster (Mo–Fr, 06:45–18:00) gebunden – auf Anfrage auch nachts, sonntags oder an Feiertagen.</li>
+              <li><b>Zuschläge transparent:</b> Solche Stunden laufen zum selben 75.–-Satz; der gesetzliche GAV-Zuschlag erscheint als zusätzliche Zeit auf dem Rapport, nicht als versteckter Extratarif. Du siehst genau, was anfällt.</li>
+            </ul>
+            <p class="src">Grundlage: gesetzliche Lohnzuschläge für Nacht-, Sonntags- und Feiertagsarbeit nach GAV Elektrobranche.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Wo sehe ich, wann du frei bist?</summary>
+          <div class="a">
+            <p>Im Jahreskalender: <b>grün</b> = frei, <b>orange</b> = zum Normaltarif (65.–) belegt, <b>rot</b> = Notstromer-Einsatz (75.–), <b>grau</b> = nicht verfügbar. Du kannst freie Tage direkt antippen und mir daraus mit einem Klick eine Anfrage schicken. Reserviert wird nichts – du fragst, ich sage zu oder ab.</p>
+            <p>Gebucht wird immer für ganze Arbeitstage, mindestens acht Stunden.</p>
+            <p class="src">→ <a href="kalender.html">Zum Jahreskalender</a></p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+
+    <div class="chap-block">
+      <h2 class="chap-title"><span class="num">4</span>Zusammenarbeit &amp; Ablauf</h2>
+      <div class="qacard">
+
+        <details>
+          <summary>Welche Arbeiten machst du – und welche nicht?</summary>
+          <div class="a">
+            <p>Elektro-Installationsarbeiten im Team sowie allgemeine Handwerks- und Bauhilfe (ich habe für drei Jahre als Hilfsarbeiter in einer Zimmerei gearbeitet). Was ich bewusst nicht übernehme: Lehrlings- oder Schnupperlehrlingsbetreuung sowie Führungs- oder Sicherheitsberater-Rollen. Zu Ersterem hafte ich nicht für die Sicherheit Dritter, wenn der Fokus erstmal das Vorankommen einer Baustelle ist, und zu Zweiterem habe ich nicht die notwendigen Ausbildungen.</p>
+            <p class="src">→ <a href="leistungen.html">Was du von mir hast – und was nicht</a></p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Wie lange muss ich dich mindestens einsetzen?</summary>
+          <div class="a">
+            <p>Keine langfristige Verpflichtung – du setzt mich ein, solange der Engpass dauert. Den genauen Rahmen (Mindestdauer, Beenden des Einsatzes) halten wir im Verleihvertrag kurz und fair fest. Gesetzlich gelten für Temporärarbeit gestaffelte Fristen, die sich nach der Einsatzdauer richten. Sollte ein Einsatz womöglich mehr als drei Monate dauern, machen wir einen neuen Vertrag vor dem Beginn des dritten Monats, um die Kündigungsfrist rechtlich auf dem Minimum zu halten.</p>
+            <p class="src">Grundlage: Art. 19 Abs. 4 AVG. Details klären wir vorab.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Wie läuft das, wenn wir uns noch nicht kennen?</summary>
+          <div class="a">
+            <p>Bei Betrieben, die ich noch nicht kenne, mache ich zuerst einen kurzen Besuch: Wir stellen uns vor, du erklärst mir, wo es klemmt, wie ich helfen kann, was es dazu von mir braucht und für wie lange. Wenn es passt, gehen wir anschliessend kurz auf die dringlichste Baustelle – damit ich sehe, mit wem ich zusammenarbeiten soll und was ansteht. Wenn alles passt, erstellen wir zwei Kopien vom Vertrag und unterschreiben beide.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Wie schnell bist du verfügbar – und wie kommst du zum Einsatz?</summary>
+          <div class="a">
+            <p>Wenn wir uns bereits kennen und eine Vertrauensbasis da ist: kurzfristig nach Absprache, im Raum Bern. Ich habe kein eigenes Firmenfahrzeug (ich komme mit Velo und Veloanhänger); für Material oder grössere Anfahrten fahre ich dein Fahrzeug oder werde von einem deiner Mitarbeiter gefahren. In Bern ist es zunehmend von Vorteil, nicht einen Parkplatz suchen zu müssen. Weiter ist es zeitlich von Vorteil, nicht über den Umweg deines Unternehmens auf die Baustelle zu gehen. Material kann direkt auf die Baustelle geliefert werden, anderes kannst du persönlich liefern, wenn du z. B. für eine Bausitzung auf die Baustelle kommst.</p>
+          </div>
+        </details>
+
+      </div>
     </div>
 
     <div class="note">
