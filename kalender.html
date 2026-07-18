@@ -177,7 +177,7 @@ a{color:inherit}
     <span class="lg"><span class="sw sw-grey"></span>nicht verfügbar</span>
   </div>
   <div class="cal-select">
-    <span class="cal-selsum" id="selsum">Tippe freie (grüne) Tage an, die du brauchst</span>
+    <span class="cal-selsum" id="selsum">Freie (grüne) Tage antippen – oder mit gedrückter Maustaste darüberfahren</span>
     <a class="cal-btn is-disabled" id="anfrage" role="button" aria-disabled="true">Anfrage per E-Mail</a>
     <button class="cal-link" id="showtext" type="button" hidden>Text kopieren</button>
   </div>
@@ -339,10 +339,9 @@ a{color:inherit}
         cell.setAttribute("tabindex","0");
         cell.setAttribute("aria-pressed","false");
         cell.dataset.iso = k;
-        cell.addEventListener("click", function(){ toggle(this); });
-        cell.addEventListener("keydown", function(ev){
-          if(ev.key===" "||ev.key==="Enter"){ ev.preventDefault(); toggle(this); }
-        });
+        cell.addEventListener("pointerdown", onDown);
+        cell.addEventListener("pointerenter", onEnter);
+        cell.addEventListener("keydown", onKey);
       }
       grid.appendChild(cell);
     }
@@ -350,12 +349,41 @@ a{color:inherit}
     return m;
   }
 
-  function toggle(cell){
-    var k = cell.dataset.iso;
-    if(selection[k]){ delete selection[k]; cell.classList.remove("d-sel"); cell.setAttribute("aria-pressed","false"); }
-    else { selection[k]=true; cell.classList.add("d-sel"); cell.setAttribute("aria-pressed","true"); }
-    updateBar();
+  /* ---- Auswahl per Klick ODER Ziehen (Maustaste gedrückt halten) ----
+     Ziehen "malt": startet man auf einem freien Tag, werden die überfahrenen
+     Tage hinzugefügt; startet man auf einem gewählten, werden sie entfernt.
+     Touch: normales Tippen schaltet um; Wischen scrollt (kein Malen). */
+  var drag = { on:false, val:false, type:null, anchor:null, moved:false };
+  function setSel(cell, val){
+    var k = cell.dataset.iso, has = !!selection[k];
+    if(val === has) return false;
+    if(val){ selection[k]=true; cell.classList.add("d-sel"); cell.setAttribute("aria-pressed","true"); }
+    else   { delete selection[k]; cell.classList.remove("d-sel"); cell.setAttribute("aria-pressed","false"); }
+    return true;
   }
+  function onDown(e){
+    drag.on=true; drag.type=e.pointerType; drag.anchor=this; drag.moved=false;
+    drag.val = !selection[this.dataset.iso];
+    if(e.pointerType!=="touch"){          // Maus/Pen: sofort malen, Text-Markieren unterdrücken
+      e.preventDefault();
+      if(setSel(this, drag.val)) updateBar();
+    }                                     // Touch: erst bei pointerup entscheiden (Tippen vs. Scrollen)
+  }
+  function onEnter(){
+    if(!drag.on || drag.type==="touch") return;
+    drag.moved=true;
+    if(setSel(this, drag.val)) updateBar();
+  }
+  function onKey(e){
+    if(e.key===" "||e.key==="Enter"){ e.preventDefault(); if(setSel(this, !selection[this.dataset.iso])) updateBar(); }
+  }
+  document.addEventListener("pointerup", function(){
+    if(drag.on && drag.type==="touch" && !drag.moved && drag.anchor){
+      if(setSel(drag.anchor, drag.val)) updateBar();   // reines Tippen = umschalten
+    }
+    drag.on=false; drag.anchor=null;
+  });
+  document.addEventListener("pointercancel", function(){ drag.on=false; drag.anchor=null; });
 
   /* ---- Auswahl -> zusammengefasste Bereiche ---- */
   function ranges(){
@@ -416,7 +444,7 @@ a{color:inherit}
   function updateBar(){
     var total = selCount();
     if(total===0){
-      selsum.textContent = "Tippe freie (grüne) Tage an, die du brauchst";
+      selsum.textContent = "Freie (grüne) Tage antippen – oder mit gedrückter Maustaste darüberfahren";
       anfrage.classList.add("is-disabled");
       anfrage.setAttribute("aria-disabled","true");
       anfrage.removeAttribute("href");
