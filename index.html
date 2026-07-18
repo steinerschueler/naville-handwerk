@@ -21,6 +21,7 @@ a{color:inherit}
 .brand{font-family:'Archivo';font-weight:600;font-size:21px;letter-spacing:-.4px;text-transform:lowercase;text-decoration:none;color:var(--ink)}
 .nav-links a{margin-left:26px;color:var(--grey);text-decoration:none;font-size:14.5px}
 .nav-links a:hover{color:var(--red)}
+.nav-links a.on{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-color:var(--red);text-underline-offset:7px;text-decoration-thickness:2.5px}
 .hero{display:grid;grid-template-columns:1.06fr .94fr;gap:52px;align-items:center;padding-block:74px 66px}
 .hero>*{min-width:0}
 .kick{color:var(--red);margin-bottom:16px}
@@ -145,7 +146,7 @@ a{color:inherit}
   <a class="brand" href="index.html">naville <span class="red">handwerk</span></a>
   <input type="checkbox" id="navtoggle" class="navtoggle" hidden>
   <label for="navtoggle" class="burger" aria-label="Menü"><span></span><span></span><span></span></label>
-  <nav class="nav-links"><a href="#wann">Wann ich helfe</a><a href="kalender.html">Kalender</a><a href="leistungen.html">Was du von mir hast</a><a href="preisrechner.html">Preisrechner</a><a href="faq.html">FAQ</a></nav>
+  <nav class="nav-links"><a class="on" href="#wann">Wann ich helfe</a><a href="kalender.html">Kalender</a><a href="leistungen.html">Was du von mir hast</a><a href="preisrechner.html">Preisrechner</a><a href="faq.html">FAQ</a></nav>
 </div></header>
 
 <section class="wrap hero">
