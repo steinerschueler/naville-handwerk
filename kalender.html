@@ -1,0 +1,486 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>Jahreskalender – Naville Handwerk GmbH i.G.</title>
+<meta name="description" content="Wann Eric Naville frei ist: freie Tage antippen und mit einem Klick per E-Mail anfragen. Kein Buchungssystem – du fragst, ich sage zu oder ab. Raum Bern.">
+<style>
+@font-face{font-family:'Archivo';font-weight:600;font-display:swap;src:url(fonts/archivo-600.woff2) format('woff2');}
+:root{--ink:#22242A;--ink2:#43423C;--paper:#EFEEE8;--red:#C1121C;--green:#127A3C;--orange:#EA8C1B;--grey:#6E6B64;--line:#DCD6CB;--card:#fff;--navh:62px;}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:"Segoe UI",system-ui,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(24px,5vw,52px)}
+.disp{font-family:'Archivo',sans-serif;font-weight:600;letter-spacing:-.02em}
+.mono{font-family:ui-monospace,'DejaVu Sans Mono',Consolas,monospace;font-weight:600;font-size:12px;line-height:1.4;letter-spacing:2px;text-transform:uppercase}
+.kick{font-size:14px;letter-spacing:2.6px}
+.red{color:var(--red)}
+a{color:inherit}
+.wire{height:4px;background:var(--red)}
+.nav{position:sticky;top:0;z-index:20;background:rgba(239,238,232,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:20px;flex-wrap:wrap}
+.brand{font-family:'Archivo';font-weight:600;font-size:21px;letter-spacing:-.4px;text-transform:lowercase;text-decoration:none;color:var(--ink)}
+.nav-links a{margin-left:26px;color:var(--grey);text-decoration:none;font-size:14.5px}
+.nav-links a:hover{color:var(--red)}
+.nav-links a.on{color:var(--ink)}
+.phead{padding-block:56px 6px}
+.kick{color:var(--red);margin-bottom:16px}
+.phead h1{font-size:clamp(30px,4.6vw,48px);line-height:1.05;margin:0 0 18px}
+.phead .lead{font-size:18px;color:var(--ink2);max-width:64ch}
+
+/* ---- Erklärkärtchen ---- */
+.cal-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr));gap:14px;padding-block:22px 4px}
+.cal-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 17px;box-shadow:0 6px 18px rgba(34,36,42,.05)}
+.cal-card h3{font-family:'Archivo',sans-serif;font-weight:600;font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+.cal-card p{font-size:13.5px;color:var(--ink2);margin:0}
+.cc-sw{display:inline-block;width:12px;height:12px;border-radius:3px;flex:none}
+
+/* ---- Sticky-Leiste: Legende + Auswahl ---- */
+.cal-toolbar{position:sticky;top:var(--navh);z-index:15;background:rgba(239,238,232,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);border-top:1px solid var(--line);margin-top:24px}
+.cal-toolbar-in{display:flex;justify-content:space-between;align-items:center;gap:10px 22px;padding-block:11px;flex-wrap:wrap}
+.cal-legend{display:flex;flex-wrap:wrap;gap:9px 15px;align-items:center}
+.lg{display:inline-flex;align-items:center;font-size:13px;color:var(--ink2);white-space:nowrap}
+.sw{display:inline-block;width:13px;height:13px;border-radius:4px;margin-right:6px;flex:none}
+.sw-green{background:var(--green)}.sw-orange{background:var(--orange)}.sw-red{background:var(--red)}.sw-grey{background:var(--grey)}
+.cal-select{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+.cal-selsum{font-size:13.5px;color:var(--ink)}
+.cal-selsum b{font-weight:700}
+.cal-btn{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-family:inherit;font-weight:700;font-size:14px;padding:10px 18px;border-radius:3px;border:none;cursor:pointer}
+.cal-btn:hover{filter:brightness(1.07)}
+.cal-btn.is-disabled{background:var(--grey);opacity:.5;cursor:not-allowed;pointer-events:none}
+.cal-link{background:none;border:none;color:var(--red);font-family:inherit;font-weight:600;font-size:13px;cursor:pointer;text-decoration:underline;padding:4px 2px}
+
+/* ---- Fallback (kein Mailprogramm) ---- */
+.cal-fallback{padding-block:16px 0}
+.fb-card{background:#F6F4EE;border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.fb-card .fb-h{font-size:13.5px;color:var(--ink2);margin-bottom:10px}
+.fb-card textarea{width:100%;font-family:ui-monospace,'DejaVu Sans Mono',Consolas,monospace;font-size:12.5px;line-height:1.5;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:8px;padding:11px 13px;resize:vertical}
+.fb-actions{display:flex;align-items:center;gap:12px;margin-top:10px}
+.fb-ok{font-size:13px;color:var(--green);font-weight:600}
+
+/* ---- Kalender ---- */
+.cal-main{padding-block:8px 10px}
+.cal-year{font-family:'Archivo',sans-serif;font-weight:600;font-size:22px;margin:30px 0 12px;padding-top:10px;border-top:2px solid var(--line);letter-spacing:-.01em}
+.cal-year:first-child{border-top:none;padding-top:0;margin-top:8px}
+.cal-months{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:18px}
+.cal-month{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 12px 14px;box-shadow:0 6px 18px rgba(34,36,42,.05);scroll-margin-top:150px}
+.cal-month h4{font-family:'Archivo',sans-serif;font-weight:600;font-size:15px;margin-bottom:9px;display:flex;justify-content:space-between;align-items:baseline}
+.cal-month h4 .yr{font-size:11px;color:var(--grey);font-weight:600}
+.cal-dow{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:4px}
+.cal-dow span{text-align:center;font-size:10px;font-weight:700;color:var(--grey);text-transform:uppercase;letter-spacing:.4px}
+.cal-dow span.we{color:#B7B2A6}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-day{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:2.35rem;border-radius:6px;padding:3px 1px;overflow:hidden;user-select:none}
+.dnum{font-size:12.5px;font-weight:700;line-height:1}
+.dcap{font-size:8px;font-weight:700;line-height:1.05;margin-top:1px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-transform:uppercase;letter-spacing:.2px;opacity:.95}
+.d-empty{background:transparent}
+.d-free{background:var(--green);color:#fff;cursor:pointer}
+.d-free:hover{filter:brightness(1.13)}
+.d-free:focus-visible{outline:2.5px solid var(--ink);outline-offset:1px}
+.d-normal{background:var(--orange);color:#22242A}
+.d-notstromer{background:var(--red);color:#fff}
+.d-grey{background:var(--grey);color:#fff}
+.d-muted{background:#ECEAE1;color:#AEA99D}
+.is-past{opacity:.4;filter:grayscale(.5);cursor:default!important}
+.is-past.d-free:hover{filter:grayscale(.5)}
+.is-today{outline:2.5px solid var(--ink);outline-offset:1px;z-index:2}
+.d-sel{box-shadow:inset 0 0 0 3px var(--ink)}
+.d-sel .dnum{text-decoration:none}
+
+.fbrand{background:#F6F4EE;border-top:1px solid var(--line);text-align:center;padding:46px 20px 40px;margin-top:44px}
+.fbrand img{width:100%;max-width:380px;margin:0 auto;display:block}
+.fbrand .fc{margin-top:16px;font-family:'Archivo';font-weight:600;font-size:20px;color:var(--ink)}
+.foot{background:#22242A;color:#b9b3a7;text-align:center;padding:24px 20px;font-size:14px}
+.foot a{color:#eee}
+
+.availbar{background:var(--paper);padding:11px 16px 3px;text-align:center}
+.availbar[hidden]{display:none}
+.availpill{display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:8px 18px;font-size:14px;line-height:1.3;color:#fff;text-decoration:none;font-weight:500;max-width:100%}
+.availbar.av-off .availpill{background:var(--red)}
+.availbar.av-on .availpill{background:#127A3C}
+.availpill .av-ic{flex:none;width:18px;height:18px}
+.availpill b{font-weight:700}
+.availpill:hover{filter:brightness(1.07)}
+
+.burger{display:none}
+@media(max-width:820px){
+.nav-links{display:none}
+.burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:38px;height:34px;padding:6px 4px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.burger span{display:block;height:2.5px;width:100%;background:var(--ink);border-radius:2px;transition:transform .2s,opacity .2s}
+.nav-links{display:none;width:100%;flex-direction:column;gap:0}
+#navtoggle:checked ~ .nav-links{display:flex}
+.nav-links a{margin-left:0;padding:12px 2px;border-top:1px solid var(--line);font-size:16px}
+#navtoggle:checked ~ .burger span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+#navtoggle:checked ~ .burger span:nth-child(2){opacity:0}
+#navtoggle:checked ~ .burger span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+.cal-toolbar-in{justify-content:center}
+.cal-select{justify-content:center}
+}
+</style>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="design/favicon-32.png">
+<link rel="apple-touch-icon" href="design/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#EFEEE8">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Naville Handwerk GmbH i.G.">
+<meta property="og:locale" content="de_CH">
+<meta property="og:title" content="Jahreskalender – Naville Handwerk GmbH i.G.">
+<meta property="og:description" content="Wann Eric Naville frei ist: freie Tage antippen und per E-Mail anfragen. Kein Buchungssystem, Raum Bern.">
+<meta property="og:url" content="https://naville-handwerk.ch/kalender.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jahreskalender – Naville Handwerk GmbH i.G.">
+<meta name="twitter:description" content="Wann Eric Naville frei ist: freie Tage antippen und per E-Mail anfragen. Kein Buchungssystem, Raum Bern.">
+</head>
+<body>
+<div class="availbar" id="availbar" hidden>
+  <a class="availpill" href="index.html#kontakt">
+    <svg class="av-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="3.2" stroke="#fff" stroke-width="2"/><path d="M3 9.5H21M8 2.5V6M16 2.5V6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+    <span id="availtext">Verfügbarkeit wird geladen …</span>
+  </a>
+</div>
+<div class="wire"></div>
+<header class="nav"><div class="wrap nav-in">
+  <a class="brand" href="index.html">naville <span class="red">handwerk</span></a>
+  <input type="checkbox" id="navtoggle" class="navtoggle" hidden>
+  <label for="navtoggle" class="burger" aria-label="Menü"><span></span><span></span><span></span></label>
+  <nav class="nav-links"><a href="index.html#wann">Wann ich helfe</a><a class="on" href="kalender.html">Kalender</a><a href="leistungen.html">Was du von mir hast</a><a href="preisrechner.html">Preisrechner</a><a href="faq.html">FAQ</a></nav>
+</div></header>
+
+<section class="wrap phead">
+  <div class="kick mono">Jahreskalender</div>
+  <h1 class="disp">Wann ich frei bin</h1>
+  <p class="lead">Grün ist frei. Tippe die Tage an, die du brauchst, und schick mir daraus mit einem Klick eine Anfrage per E-Mail. Reserviert wird dabei nichts – du fragst, ich sage zu oder ab.</p>
+</section>
+
+<section class="wrap">
+  <div class="cal-cards">
+    <div class="cal-card">
+      <h3><span class="cc-sw sw-orange"></span>Was Orange dir zusichert</h3>
+      <p>Ein oranger Tag ist ein zugesagter Einsatz zu 65.–. Die Zusage gilt. Verschieben kann sie einzig ein echter Notstromer-Notfall bei einem anderen Betrieb – selten, und mit sofortiger Meldung an dich.</p>
+    </div>
+    <div class="cal-card">
+      <h3><span class="cc-sw sw-red"></span>Zwei Tarife</h3>
+      <p>Normal 65.–/Std, Mo–Fr – ein üblicher Arbeitstag rund 8 Std (Zeitfenster 06:45–18:00). Notstromer 75.–/Std für kurzfristige Einsätze – auch nachts oder am Wochenende, dann auf Anfrage ausserhalb des Kalenders. Nacht-, Sonntags- und Feiertagsstunden laufen zum höheren Notstromer-Ansatz (75.–); der GAV-Zuschlag kommt als zusätzliche Zeit auf den Rapport, nicht als eigener Tarif.</p>
+    </div>
+    <div class="cal-card">
+      <h3><span class="cc-sw sw-grey"></span>Graue Tage</h3>
+      <p>Grau heisst aus persönlichem Grund belegt (Ferien, Kurs, Termin, Feiertag oder krank) – das Wort steht auf dem Tag. Krank/Unfall ist fix; bei den übrigen entscheide ich von Fall zu Fall, eine Anfrage lohnt sich also trotzdem.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cal-toolbar"><div class="wrap cal-toolbar-in">
+  <div class="cal-legend" aria-label="Legende">
+    <span class="lg"><span class="sw sw-green"></span>frei</span>
+    <span class="lg"><span class="sw sw-orange"></span>Einsatz 65.–</span>
+    <span class="lg"><span class="sw sw-red"></span>Notstromer 75.–</span>
+    <span class="lg"><span class="sw sw-grey"></span>nicht verfügbar</span>
+  </div>
+  <div class="cal-select">
+    <span class="cal-selsum" id="selsum">Tippe freie (grüne) Tage an, die du brauchst</span>
+    <a class="cal-btn is-disabled" id="anfrage" role="button" aria-disabled="true">Anfrage per E-Mail</a>
+    <button class="cal-link" id="showtext" type="button" hidden>Text kopieren</button>
+  </div>
+</div></div>
+
+<section class="wrap cal-fallback" id="fallback" hidden>
+  <div class="fb-card">
+    <p class="fb-h">Kein Mailprogramm? Kopier den Text und schick ihn an <a href="mailto:info@naville-handwerk.ch">info@naville-handwerk.ch</a>.</p>
+    <textarea id="fbtext" readonly rows="13" aria-label="Anfrage-Text zum Kopieren"></textarea>
+    <div class="fb-actions">
+      <button type="button" class="cal-btn" id="fbcopy">In die Zwischenablage kopieren</button>
+      <span class="fb-ok" id="fbok" hidden>Text kopiert.</span>
+    </div>
+  </div>
+</section>
+
+<main class="wrap cal-main" id="calmain" aria-label="Jahreskalender"></main>
+
+<div class="fbrand">
+  <img src="design/logo/emblem-schwarzrot-transparent.png" alt="Naville Handwerk – Lastenvelo mit Anhänger und Firmenschild">
+  <p class="fc">Der <span class="red">Notstromer</span> für Berner Elektrikerfirmen</p>
+</div>
+<footer class="foot">Naville Handwerk GmbH i.G. · 3005 Bern · <a href="mailto:info@naville-handwerk.ch">info@naville-handwerk.ch</a> · <a href="impressum.html">Impressum</a></footer>
+
+<script src="kalender.js"></script>
+<script src="verfuegbarkeit.js"></script>
+<script src="banner.js"></script>
+<script>
+/* ================================================================
+   JAHRESKALENDER — Logik. Nicht bearbeiten.
+   Die Daten stehen in kalender.js, die Feiertage werden gerechnet.
+   ================================================================ */
+(function(){
+  "use strict";
+  var K = window.KALENDER || {};
+  var MAIL = "info@naville-handwerk.ch";
+  var RATE = 65;                           // Normaltarif 65.-/Std
+  var HOURS = 8;                           // Richtwert Std/Tag für die CHF-Schätzung:
+                                           // normale Arbeitszeit = 40-Std-Woche = Ø 8 h/Tag
+                                           // (GAV Art. 20.2). Die 10 h/Tag = 50-Std-Woche sind
+                                           // das Maximal-Fenster, nicht der Normalfall.
+  var MONTHS = ["Januar","Februar","März","April","Mai","Juni","Juli",
+                "August","September","Oktober","November","Dezember"];
+  var DOW = ["Mo","Di","Mi","Do","Fr","Sa","So"];
+
+  /* ---- Datums-Helfer (alles lokale Mitternacht) ---- */
+  function pad(n){ return (n<10?"0":"")+n; }
+  function iso(d){ return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); }
+  function parseISO(s){ var p=s.split("-"); return new Date(+p[0],+p[1]-1,+p[2]); }
+  function addDays(d,n){ var x=new Date(d.getFullYear(),d.getMonth(),d.getDate()); x.setDate(x.getDate()+n); return x; }
+  function dayCount(s,e){ return Math.round((Date.UTC(e.getFullYear(),e.getMonth(),e.getDate())
+                        - Date.UTC(s.getFullYear(),s.getMonth(),s.getDate()))/864e5)+1; }
+  function fmtDate(d){ return pad(d.getDate())+"."+pad(d.getMonth()+1)+"."+d.getFullYear(); }
+  function fmtChf(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,"'"); }
+  function fmtH(h){ return String(h).replace(".",","); }   // 8.5 -> "8,5"
+
+  var today = new Date(); today.setHours(0,0,0,0);
+  var todayISO = iso(today);
+
+  /* ---- Eric-Daten in Nachschlage-Sets aufbereiten ---- */
+  function toSet(list){
+    var set = {};
+    (list||[]).forEach(function(entry){
+      var slash = entry.indexOf("/");
+      if(slash<0){ set[entry.trim()] = true; return; }
+      var a = parseISO(entry.slice(0,slash).trim());
+      var b = parseISO(entry.slice(slash+1).trim());
+      if(b < a){ var t=a; a=b; b=t; }
+      for(var d=a; d<=b; d=addDays(d,1)){ set[iso(d)] = true; }
+    });
+    return set;
+  }
+  var NOTST = toSet(K.notstromer), NORM = toSet(K.normal),
+      FER = toSet(K.ferien), WEIT = toSet(K.weiterbildung),
+      TERM = toSet(K.termin), AUSF = toSet(K.ausfall);
+
+  /* ---- Feiertage Kanton Bern (gerechnet, nicht gepflegt) ---- */
+  function easter(y){                         // Meeus/Jones/Butcher
+    var a=y%19, b=Math.floor(y/100), c=y%100, d=Math.floor(b/4), e=b%4,
+        f=Math.floor((b+8)/25), g=Math.floor((b-f+1)/3),
+        h=(19*a+b-d-g+15)%30, i=Math.floor(c/4), k=c%4,
+        l=(32+2*e+2*i-h-k)%7, m=Math.floor((a+11*h+22*l)/451),
+        mo=Math.floor((h+l-7*m+114)/31), da=((h+l-7*m+114)%31)+1;
+    return new Date(y,mo-1,da);
+  }
+  function feiertage(y){
+    var f={};
+    function add(d,name){ f[iso(d)]=name; }
+    add(new Date(y,0,1),"Neujahr");
+    add(new Date(y,0,2),"Berchtoldstag");
+    add(new Date(y,7,1),"Bundesfeier");
+    add(new Date(y,11,25),"Weihnachten");
+    add(new Date(y,11,26),"Stephanstag");
+    var e=easter(y);
+    add(addDays(e,-2),"Karfreitag");
+    add(addDays(e,1),"Ostermontag");
+    add(addDays(e,39),"Auffahrt");
+    add(addDays(e,50),"Pfingstmontag");
+    return f;
+  }
+  var Y0 = today.getFullYear(), Y1 = Y0+1;
+  var FEIER = {}; [Y0,Y1].forEach(function(y){ var f=feiertage(y); for(var k in f) FEIER[k]=f[k]; });
+
+  /* ---- Startdatum (aus verfuegbarkeit.js): alle Tage davor sind grau ----
+     Dieselbe Quelle wie die Pille oben. Vor dem 1. September 2026 nimmt die
+     Firma noch nicht auf; leeres VERFUEGBAR_AB = keine Sperre. */
+  var VAB = (window.VERFUEGBAR_AB||"").trim();
+  var START = /^\d{4}-\d{1,2}-\d{1,2}$/.test(VAB) ? parseISO(VAB) : null;
+  var STARTISO = START ? iso(START) : null;
+  var STARTTXT = START ? (START.getDate()+". "+MONTHS[START.getMonth()]+" "+START.getFullYear()) : "";
+
+  /* ---- Zustand eines Tages bestimmen (Reihenfolge = Vorrang) ---- */
+  function stateFor(d){
+    var k = iso(d);
+    if(NOTST[k]) return {cls:"d-notstromer",cap:"Notstromer",title:"Notstromer-Einsatz · 75.–/Std",st:"notstromer"};
+    if(NORM[k])  return {cls:"d-normal",cap:"Einsatz",title:"Einsatz · Normaltarif 65.–/Std",st:"normal"};
+    if(AUSF[k])  return {cls:"d-grey",cap:"krank",title:"krank / Unfall — nicht verfügbar",st:"grey"};
+    if(FER[k])   return {cls:"d-grey",cap:"Ferien",title:"Ferien — nicht verfügbar",st:"grey"};
+    if(WEIT[k])  return {cls:"d-grey",cap:"Kurs/Messe",title:"Weiterbildung / Messe — nicht verfügbar",st:"grey"};
+    if(TERM[k])  return {cls:"d-grey",cap:"Termin",title:"Termin — nicht verfügbar",st:"grey"};
+    if(STARTISO && k < STARTISO) return {cls:"d-grey",cap:"",title:"Noch nicht verfügbar – buchbar ab "+STARTTXT,st:"grey"};
+    if(FEIER[k]) return {cls:"d-grey",cap:"Feiertag",title:"Feiertag: "+FEIER[k]+" — nicht verfügbar",st:"grey"};
+    var wd = d.getDay();
+    if(wd===0||wd===6) return {cls:"d-muted",cap:"",title:"Wochenende — ausserhalb Regelfenster; Notstromer auf Anfrage",st:"muted"};
+    return {cls:"d-free",cap:"",title:"frei — antippen und anfragen",st:"free"};
+  }
+
+  /* ---- Auswahl ---- */
+  var selection = {};            // iso -> true
+  function selCount(){ var n=0; for(var k in selection) n++; return n; }
+
+  function el(tag,cls,txt){ var e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e; }
+
+  function buildMonth(year,month){
+    var m = el("div","cal-month"); m.id = "m-"+year+"-"+month;
+    var h = el("h4"); h.appendChild(el("span",null,MONTHS[month])); h.appendChild(el("span","yr",String(year)));
+    m.appendChild(h);
+    var dow = el("div","cal-dow");
+    DOW.forEach(function(w,idx){ dow.appendChild(el("span",idx>4?"we":null,w)); });
+    m.appendChild(dow);
+    var grid = el("div","cal-grid");
+    var first = new Date(year,month,1);
+    var lead = (first.getDay()+6)%7;                 // Montag = 0
+    for(var i=0;i<lead;i++) grid.appendChild(el("div","cal-day d-empty"));
+    var dim = new Date(year,month+1,0).getDate();
+    for(var day=1;day<=dim;day++){
+      var d = new Date(year,month,day);
+      var k = iso(d);
+      var s = stateFor(d);
+      var past = k < todayISO;
+      var cell = el("div","cal-day "+s.cls+(past?" is-past":"")+(k===todayISO?" is-today":""));
+      cell.appendChild(el("span","dnum",String(day)));
+      if(s.cap) cell.appendChild(el("span","dcap",s.cap));
+      cell.title = (past?"vergangen · ":"")+s.title;
+      cell.setAttribute("aria-label", fmtDate(d)+" — "+(past?"vergangen, ":"")+s.title);
+      var selectable = (s.st==="free") && !past;
+      if(selectable){
+        cell.setAttribute("role","button");
+        cell.setAttribute("tabindex","0");
+        cell.setAttribute("aria-pressed","false");
+        cell.dataset.iso = k;
+        cell.addEventListener("click", function(){ toggle(this); });
+        cell.addEventListener("keydown", function(ev){
+          if(ev.key===" "||ev.key==="Enter"){ ev.preventDefault(); toggle(this); }
+        });
+      }
+      grid.appendChild(cell);
+    }
+    m.appendChild(grid);
+    return m;
+  }
+
+  function toggle(cell){
+    var k = cell.dataset.iso;
+    if(selection[k]){ delete selection[k]; cell.classList.remove("d-sel"); cell.setAttribute("aria-pressed","false"); }
+    else { selection[k]=true; cell.classList.add("d-sel"); cell.setAttribute("aria-pressed","true"); }
+    updateBar();
+  }
+
+  /* ---- Auswahl -> zusammengefasste Bereiche ---- */
+  function ranges(){
+    var arr=[]; for(var k in selection) arr.push(parseISO(k));
+    arr.sort(function(a,b){ return a-b; });
+    var out=[], i=0;
+    while(i<arr.length){
+      var s=arr[i], e=arr[i];
+      while(i+1<arr.length && iso(addDays(e,1))===iso(arr[i+1])){ e=arr[i+1]; i++; }
+      out.push({s:s,e:e}); i++;
+    }
+    return out;
+  }
+  function fmtRange(r){
+    if(iso(r.s)===iso(r.e)) return fmtDate(r.s);
+    if(r.s.getFullYear()===r.e.getFullYear() && r.s.getMonth()===r.e.getMonth())
+      return pad(r.s.getDate())+".–"+fmtDate(r.e);
+    return fmtDate(r.s)+" – "+fmtDate(r.e);
+  }
+
+  /* ---- Anfrage-Text + mailto bauen (mit Längen-Schutz) ---- */
+  var SUBJECT = "Einsatz-Anfrage über naville-handwerk.ch";
+  function makeBody(lines, total, chf){
+    return "Hallo Eric\n\n"+
+      "ich möchte dich für folgende Tage anfragen:\n\n"+
+      lines.join("\n")+"\n\n"+
+      "Umfang: "+total+" Tag"+(total>1?"e":"")+", Richtwert ca. "+fmtH(HOURS)+" Std/Tag · Normaltarif "+RATE+".–/Std\n"+
+      "Geschätzter Betrag: ca. CHF "+fmtChf(chf)+" (zzgl. MWST)\n\n"+
+      "Firma:\nAnsprechperson:\nTelefon:\nGewünschte Arbeit / Bemerkung:\n\n"+
+      "Freundliche Grüsse";
+  }
+  function makeURL(body){
+    return "mailto:"+MAIL+"?subject="+encodeURIComponent(SUBJECT)+
+           "&body="+encodeURIComponent(body.replace(/\n/g,"\r\n"));
+  }
+  function buildRequest(){
+    var rs = ranges();
+    var total = selCount(), chf = Math.round(total*HOURS*RATE/10)*10;   // auf 10.- gerundet (Richtwert)
+    var lines = rs.map(function(r){ var c=dayCount(r.s,r.e); return "- "+fmtRange(r)+(c>1?" ("+c+" Tage)":""); });
+    var body = makeBody(lines,total,chf), url = makeURL(body);
+    // mailto-Längenlimit (~2000): notfalls Liste kürzen, aber sichtbar sagen
+    while(url.length>1900 && lines.length>1){
+      lines = lines.slice(0,-1);
+      lines.push("- … weitere Tage gekürzt — bitte im Text ergänzen");
+      body = makeBody(lines,total,chf); url = makeURL(body);
+      lines.pop();
+    }
+    return {url:url, body:body, total:total, chf:chf};
+  }
+
+  /* ---- Sticky-Leiste aktualisieren ---- */
+  var selsum=document.getElementById("selsum"),
+      anfrage=document.getElementById("anfrage"),
+      showtext=document.getElementById("showtext"),
+      fallback=document.getElementById("fallback"),
+      fbtext=document.getElementById("fbtext");
+
+  function updateBar(){
+    var total = selCount();
+    if(total===0){
+      selsum.textContent = "Tippe freie (grüne) Tage an, die du brauchst";
+      anfrage.classList.add("is-disabled");
+      anfrage.setAttribute("aria-disabled","true");
+      anfrage.removeAttribute("href");
+      showtext.hidden = true;
+      fallback.hidden = true;
+      return;
+    }
+    var req = buildRequest();
+    selsum.innerHTML = total+" Tag"+(total>1?"e":"")+" · ca. "+fmtH(HOURS)+" Std/Tag · "+RATE+".–/Std · <b>ca. CHF "+fmtChf(req.chf)+"</b>";
+    anfrage.href = req.url;
+    anfrage.classList.remove("is-disabled");
+    anfrage.setAttribute("aria-disabled","false");
+    showtext.hidden = false;
+    fbtext.value = req.body;
+  }
+
+  showtext.addEventListener("click", function(){
+    fallback.hidden = !fallback.hidden;
+    if(!fallback.hidden){
+      fallback.scrollIntoView({behavior: reduce()?"auto":"smooth", block:"center"});
+    }
+  });
+  document.getElementById("fbcopy").addEventListener("click", function(){
+    var ok = document.getElementById("fbok");
+    function done(){ ok.hidden=false; setTimeout(function(){ ok.hidden=true; }, 2500); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(fbtext.value).then(done, function(){ fbtext.select(); try{document.execCommand("copy");}catch(e){} done(); });
+    } else { fbtext.select(); try{document.execCommand("copy");}catch(e){} done(); }
+  });
+
+  function reduce(){ return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
+
+  /* ---- Aufbau: laufendes + nächstes Jahr (24 Monate) ---- */
+  var main = document.getElementById("calmain");
+  [Y0,Y1].forEach(function(y){
+    main.appendChild(el("div","cal-year",String(y)));
+    var wrap = el("div","cal-months");
+    for(var mo=0;mo<12;mo++) wrap.appendChild(buildMonth(y,mo));
+    main.appendChild(wrap);
+  });
+
+  /* ---- Sticky-Offset der Leiste an die Nav-Höhe koppeln ---- */
+  var nav = document.querySelector(".nav");
+  function syncNav(){ if(nav) document.documentElement.style.setProperty("--navh", nav.offsetHeight+"px"); }
+  syncNav();
+  if(window.ResizeObserver && nav){ new ResizeObserver(syncNav).observe(nav); }
+  window.addEventListener("resize", syncNav);
+
+  /* ---- Auto-Scroll zum aktuellen Monat (nur wenn nötig) ---- */
+  function scrollToCurrent(){
+    var t = document.getElementById("m-"+today.getFullYear()+"-"+today.getMonth());
+    if(!t) return;
+    var toolbar = document.querySelector(".cal-toolbar");
+    var off = (nav?nav.offsetHeight:0) + (toolbar?toolbar.offsetHeight:0) + 16;
+    var r = t.getBoundingClientRect();
+    if(r.top < off || r.bottom > window.innerHeight){
+      window.scrollTo({ top: window.pageYOffset + r.top - off, behavior: reduce()?"auto":"smooth" });
+    }
+  }
+  // nach Layout scrollen
+  if("requestAnimationFrame" in window){ requestAnimationFrame(function(){ requestAnimationFrame(scrollToCurrent); }); }
+  else { scrollToCurrent(); }
+
+  updateBar();
+})();
+</script>
+</body></html>
