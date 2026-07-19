@@ -28,7 +28,7 @@ a{color:inherit}
 .phead .lead{font-size:18px;color:var(--ink2);max-width:64ch}
 
 /* ---- Erklärkärtchen ---- */
-.cal-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr));gap:14px;padding-block:22px 4px}
+.cal-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:16px;padding-block:22px 4px}
 .cal-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 17px;box-shadow:0 6px 18px rgba(34,36,42,.05)}
 .cal-card h3{font-family:'Archivo',sans-serif;font-weight:600;font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px}
 .cal-card p{font-size:13.5px;color:var(--ink2);margin:0}
@@ -44,6 +44,8 @@ a{color:inherit}
 .cal-select{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
 .cal-selsum{font-size:13.5px;color:var(--ink)}
 .cal-selsum b{font-weight:700}
+.cal-selsum .t-normal{text-decoration:underline;text-decoration-color:var(--orange);text-decoration-thickness:2px;text-underline-offset:2px}
+.cal-selsum .t-notstromer{text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:2px}
 .cal-btn{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-family:inherit;font-weight:700;font-size:14px;padding:10px 18px;border-radius:3px;border:none;cursor:pointer}
 .cal-btn:hover{filter:brightness(1.07)}
 .cal-btn.is-disabled{background:var(--grey);opacity:.5;cursor:not-allowed;pointer-events:none}
@@ -61,7 +63,7 @@ a{color:inherit}
 .cal-main{padding-block:8px 10px}
 .cal-year{font-family:'Archivo',sans-serif;font-weight:600;font-size:22px;margin:30px 0 12px;padding-top:10px;border-top:2px solid var(--line);letter-spacing:-.01em}
 .cal-year:first-child{border-top:none;padding-top:0;margin-top:8px}
-.cal-months{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:18px}
+.cal-months{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:16px}
 .cal-month{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 12px 14px;box-shadow:0 6px 18px rgba(34,36,42,.05);scroll-margin-top:150px}
 .cal-month h4{font-family:'Archivo',sans-serif;font-weight:600;font-size:15px;margin-bottom:9px;display:flex;justify-content:space-between;align-items:baseline}
 .cal-month h4 .yr{font-size:11px;color:var(--grey);font-weight:600}
@@ -83,8 +85,11 @@ a{color:inherit}
 .is-past{opacity:.4;filter:grayscale(.5);cursor:default!important}
 .is-past.d-free:hover{filter:grayscale(.5)}
 .is-today{outline:2.5px solid var(--ink);outline-offset:1px;z-index:2}
-.d-sel{box-shadow:inset 0 0 0 3px var(--ink)}
-.d-sel .dnum{text-decoration:none}
+/* Auswahl-Ringe INNEN im grünen Feld: farbiger Ring aussen + feiner weisser Ring innen
+   als Abgrenzung zum Grün. 1x Klick/Zug = Normal (orange), 2x = Notstromer (rot), 3x = frei. */
+.d-pick-normal{box-shadow:inset 0 0 0 3px var(--orange),inset 0 0 0 4.5px #fff}
+.d-pick-notstromer{box-shadow:inset 0 0 0 3px var(--red),inset 0 0 0 4.5px #fff}
+.d-pick-normal .dnum,.d-pick-notstromer .dnum{text-decoration:none}
 
 .fbrand{background:#F6F4EE;border-top:1px solid var(--line);text-align:center;padding:46px 20px 40px;margin-top:44px}
 .fbrand img{width:100%;max-width:380px;margin:0 auto;display:block}
@@ -149,7 +154,7 @@ a{color:inherit}
 <section class="wrap phead">
   <div class="kick mono">Jahreskalender</div>
   <h1 class="disp">Wann ich frei bin</h1>
-  <p class="lead">Grün ist frei. Tippe die Tage an, die du brauchst, und schick mir daraus mit einem Klick eine Anfrage per E-Mail. Reserviert wird dabei nichts – du fragst, ich sage zu oder ab.</p>
+  <p class="lead">Grün ist frei. Tippe die Tage an, die du brauchst – <b>einmal</b> für den Normaltarif (65.–), <b>zweimal</b> für den Notstromer (75.–), ein drittes Mal hebt die Wahl wieder auf. Daraus schickst du mir mit einem Klick eine Anfrage per E-Mail. Reserviert wird dabei nichts – du fragst, ich sage zu oder ab.</p>
 </section>
 
 <section class="wrap">
@@ -177,7 +182,7 @@ a{color:inherit}
     <span class="lg"><span class="sw sw-grey"></span>nicht verfügbar</span>
   </div>
   <div class="cal-select">
-    <span class="cal-selsum" id="selsum">Freie (grüne) Tage antippen – oder mit gedrückter Maustaste darüberfahren</span>
+    <span class="cal-selsum" id="selsum">Grüne Tage antippen: 1× <span class="t-normal">Normal</span> 65.– · 2× <span class="t-notstromer">Notstromer</span> 75.– · 3× frei — Ziehen malt</span>
     <a class="cal-btn is-disabled" id="anfrage" role="button" aria-disabled="true">Anfrage per E-Mail</a>
     <button class="cal-link" id="showtext" type="button" hidden>Text kopieren</button>
   </div>
@@ -214,7 +219,11 @@ a{color:inherit}
   "use strict";
   var K = window.KALENDER || {};
   var MAIL = "info@naville-handwerk.ch";
-  var RATE = 65;                           // Normaltarif 65.-/Std
+  var RATE_NORMAL = 65;                    // Normaltarif  65.-/Std (orange)
+  var RATE_NOTST  = 75;                    // Notstromer   75.-/Std (rot)
+  var LBL_N = '<span class="t-normal">Normal</span>';         // orange unterstrichen
+  var LBL_S = '<span class="t-notstromer">Notstromer</span>'; // rot unterstrichen
+  var HINT = 'Grüne Tage antippen: 1× '+LBL_N+' 65.– · 2× '+LBL_S+' 75.– · 3× frei — Ziehen malt';
   var HOURS = 8;                           // Richtwert Std/Tag für die CHF-Schätzung:
                                            // normale Arbeitszeit = 40-Std-Woche = Ø 8 h/Tag
                                            // (GAV Art. 20.2). Die 10 h/Tag = 50-Std-Woche sind
@@ -306,8 +315,8 @@ a{color:inherit}
   }
 
   /* ---- Auswahl ---- */
-  var selection = {};            // iso -> true
-  function selCount(){ var n=0; for(var k in selection) n++; return n; }
+  var selection = {};            // iso -> "normal" | "notstromer"  (fehlt = nicht gewählt)
+  function countFor(type){ var n=0; for(var k in selection) if(selection[k]===type) n++; return n; }
 
   function el(tag,cls,txt){ var e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e; }
 
@@ -350,44 +359,55 @@ a{color:inherit}
   }
 
   /* ---- Auswahl per Klick ODER Ziehen (Maustaste gedrückt halten) ----
-     Ziehen "malt": startet man auf einem freien Tag, werden die überfahrenen
-     Tage hinzugefügt; startet man auf einem gewählten, werden sie entfernt.
-     Touch: normales Tippen schaltet um; Wischen scrollt (kein Malen). */
-  var drag = { on:false, val:false, type:null, anchor:null, moved:false };
-  function setSel(cell, val){
-    var k = cell.dataset.iso, has = !!selection[k];
-    if(val === has) return false;
-    if(val){ selection[k]=true; cell.classList.add("d-sel"); cell.setAttribute("aria-pressed","true"); }
-    else   { delete selection[k]; cell.classList.remove("d-sel"); cell.setAttribute("aria-pressed","false"); }
-    return true;
+     Jeder Klick schaltet einen Schritt weiter:
+       frei -> Normaltarif (orange) -> Notstromer (rot) -> wieder frei.
+     Ziehen "malt": der Startklick bestimmt den Zielzustand (ein Schritt vom
+     Anker-Tag aus); alle überfahrenen Tage bekommen denselben Zustand – jeder
+     Tag nur einmal pro Zug (drag.painted).
+     Touch: normales Tippen schaltet einen Schritt weiter; Wischen scrollt. */
+  var STEP = { free:"normal", normal:"notstromer", notstromer:null };
+  function nextState(cur){ return STEP[cur||"free"]; }   // fehlt -> "normal", ... , "notstromer" -> null
+
+  function applyState(cell, state){
+    var k = cell.dataset.iso;
+    cell.classList.remove("d-pick-normal","d-pick-notstromer");
+    if(state==="normal"){ selection[k]="normal"; cell.classList.add("d-pick-normal"); }
+    else if(state==="notstromer"){ selection[k]="notstromer"; cell.classList.add("d-pick-notstromer"); }
+    else { delete selection[k]; }
+    cell.setAttribute("aria-pressed", state ? "true" : "false");
   }
+
+  var drag = { on:false, paint:null, type:null, anchor:null, moved:false, painted:null };
   function onDown(e){
-    drag.on=true; drag.type=e.pointerType; drag.anchor=this; drag.moved=false;
-    drag.val = !selection[this.dataset.iso];
+    drag.on=true; drag.type=e.pointerType; drag.anchor=this; drag.moved=false; drag.painted={};
+    drag.paint = nextState(selection[this.dataset.iso]);   // ein Schritt weiter als der Anker-Tag
+    drag.painted[this.dataset.iso]=true;
     if(e.pointerType!=="touch"){          // Maus/Pen: sofort malen, Text-Markieren unterdrücken
       e.preventDefault();
-      if(setSel(this, drag.val)) updateBar();
+      applyState(this, drag.paint); updateBar();
     }                                     // Touch: erst bei pointerup entscheiden (Tippen vs. Scrollen)
   }
   function onEnter(){
     if(!drag.on || drag.type==="touch") return;
-    drag.moved=true;
-    if(setSel(this, drag.val)) updateBar();
+    var k = this.dataset.iso;
+    if(drag.painted[k]) return;           // jeder Tag nur einmal pro Zug
+    drag.painted[k]=true; drag.moved=true;
+    applyState(this, drag.paint); updateBar();
   }
   function onKey(e){
-    if(e.key===" "||e.key==="Enter"){ e.preventDefault(); if(setSel(this, !selection[this.dataset.iso])) updateBar(); }
+    if(e.key===" "||e.key==="Enter"){ e.preventDefault(); applyState(this, nextState(selection[this.dataset.iso])); updateBar(); }
   }
   document.addEventListener("pointerup", function(){
     if(drag.on && drag.type==="touch" && !drag.moved && drag.anchor){
-      if(setSel(drag.anchor, drag.val)) updateBar();   // reines Tippen = umschalten
+      applyState(drag.anchor, drag.paint); updateBar();   // reines Tippen = ein Schritt weiter
     }
     drag.on=false; drag.anchor=null;
   });
   document.addEventListener("pointercancel", function(){ drag.on=false; drag.anchor=null; });
 
-  /* ---- Auswahl -> zusammengefasste Bereiche ---- */
-  function ranges(){
-    var arr=[]; for(var k in selection) arr.push(parseISO(k));
+  /* ---- Auswahl eines Tarifs -> zusammengefasste Bereiche ---- */
+  function rangesFor(type){
+    var arr=[]; for(var k in selection) if(selection[k]===type) arr.push(parseISO(k));
     arr.sort(function(a,b){ return a-b; });
     var out=[], i=0;
     while(i<arr.length){
@@ -406,11 +426,16 @@ a{color:inherit}
 
   /* ---- Anfrage-Text + mailto bauen (mit Längen-Schutz) ---- */
   var SUBJECT = "Einsatz-Anfrage über naville-handwerk.ch";
-  function makeBody(lines, total, chf){
+  function tarifLine(nCount,sCount){
+    if(nCount && sCount) return "Normaltarif "+RATE_NORMAL+".– / Notstromer "+RATE_NOTST+".– je Std";
+    if(sCount)           return "Notstromer "+RATE_NOTST+".–/Std";
+    return "Normaltarif "+RATE_NORMAL+".–/Std";
+  }
+  function makeBody(lines, nCount, sCount, total, chf){
     return "Hallo Eric\n\n"+
       "ich möchte dich für folgende Tage anfragen:\n\n"+
       lines.join("\n")+"\n\n"+
-      "Umfang: "+total+" Tag"+(total>1?"e":"")+", Richtwert ca. "+fmtH(HOURS)+" Std/Tag · Normaltarif "+RATE+".–/Std\n"+
+      "Umfang: "+total+" Tag"+(total>1?"e":"")+" total · Richtwert ca. "+fmtH(HOURS)+" Std/Tag · "+tarifLine(nCount,sCount)+"\n"+
       "Geschätzter Betrag: ca. CHF "+fmtChf(chf)+" (zzgl. MWST)\n\n"+
       "Firma:\nAnsprechperson:\nTelefon:\nGewünschte Arbeit / Bemerkung:\n\n"+
       "Freundliche Grüsse";
@@ -419,19 +444,27 @@ a{color:inherit}
     return "mailto:"+MAIL+"?subject="+encodeURIComponent(SUBJECT)+
            "&body="+encodeURIComponent(body.replace(/\n/g,"\r\n"));
   }
+  function groupLines(title, rs){
+    var out=[title];
+    rs.forEach(function(r){ var c=dayCount(r.s,r.e); out.push("- "+fmtRange(r)+(c>1?" ("+c+" Tage)":"")); });
+    return out;
+  }
   function buildRequest(){
-    var rs = ranges();
-    var total = selCount(), chf = Math.round(total*HOURS*RATE/10)*10;   // auf 10.- gerundet (Richtwert)
-    var lines = rs.map(function(r){ var c=dayCount(r.s,r.e); return "- "+fmtRange(r)+(c>1?" ("+c+" Tage)":""); });
-    var body = makeBody(lines,total,chf), url = makeURL(body);
-    // mailto-Längenlimit (~2000): notfalls Liste kürzen, aber sichtbar sagen
-    while(url.length>1900 && lines.length>1){
-      lines = lines.slice(0,-1);
-      lines.push("- … weitere Tage gekürzt — bitte im Text ergänzen");
-      body = makeBody(lines,total,chf); url = makeURL(body);
-      lines.pop();
+    var nCount=countFor("normal"), sCount=countFor("notstromer"), total=nCount+sCount;
+    var chf = Math.round((nCount*HOURS*RATE_NORMAL + sCount*HOURS*RATE_NOTST)/10)*10;   // auf 10.- gerundet
+    var lines=[];
+    if(nCount) lines = lines.concat(groupLines("Normaltarif ("+RATE_NORMAL+".–/Std):", rangesFor("normal")));
+    if(nCount && sCount) lines.push("");
+    if(sCount) lines = lines.concat(groupLines("Notstromer ("+RATE_NOTST+".–/Std):", rangesFor("notstromer")));
+    var body = makeBody(lines, nCount, sCount, total, chf);   // voller Text (Fallback-Feld, ohne Limit)
+    // mailto-Längenlimit (~2000): nur die URL notfalls kürzen, der Fallback-Text bleibt vollständig
+    var urlLines = lines.slice(), url = makeURL(body);
+    while(url.length>1900 && urlLines.length>2){
+      urlLines.pop();
+      var trimmed = urlLines.concat(["- … weitere Tage gekürzt — bitte im Text unten ergänzen"]);
+      url = makeURL(makeBody(trimmed, nCount, sCount, total, chf));
     }
-    return {url:url, body:body, total:total, chf:chf};
+    return {url:url, body:body, total:total, nCount:nCount, sCount:sCount, chf:chf};
   }
 
   /* ---- Sticky-Leiste aktualisieren ---- */
@@ -442,9 +475,9 @@ a{color:inherit}
       fbtext=document.getElementById("fbtext");
 
   function updateBar(){
-    var total = selCount();
+    var nCount=countFor("normal"), sCount=countFor("notstromer"), total=nCount+sCount;
     if(total===0){
-      selsum.textContent = "Freie (grüne) Tage antippen – oder mit gedrückter Maustaste darüberfahren";
+      selsum.innerHTML = HINT;
       anfrage.classList.add("is-disabled");
       anfrage.setAttribute("aria-disabled","true");
       anfrage.removeAttribute("href");
@@ -453,7 +486,10 @@ a{color:inherit}
       return;
     }
     var req = buildRequest();
-    selsum.innerHTML = total+" Tag"+(total>1?"e":"")+" · ca. "+fmtH(HOURS)+" Std/Tag · "+RATE+".–/Std · <b>ca. CHF "+fmtChf(req.chf)+"</b>";
+    var H = fmtH(HOURS), parts=[];
+    if(nCount) parts.push(LBL_N+" ("+nCount+" Tag"+(nCount>1?"e":"")+" × "+H+" Std/Tag × "+RATE_NORMAL+".–)");
+    if(sCount) parts.push(LBL_S+" ("+sCount+" Tag"+(sCount>1?"e":"")+" × "+H+" Std/Tag × "+RATE_NOTST+".–)");
+    selsum.innerHTML = parts.join(" + ")+" = <b>ca. CHF "+fmtChf(req.chf)+"</b>";
     anfrage.href = req.url;
     anfrage.classList.remove("is-disabled");
     anfrage.setAttribute("aria-disabled","false");
